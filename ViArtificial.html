@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViA-SuperBot | GoleMotor AI Cockpit</title>
+    <style>
+        :root {
+            --pawa-purple: #8a2be2;
+            --berg-gold: #ffd700;
+            --anark-red: #ff4500;
+            --utop-blue: #00bfff;
+            --roche-dark: #0a0a0a;
+            --semi-radius: 25px; /* Géométrie Semi-Arrondie */
+        }
+
+        body {
+            background-color: var(--roche-dark);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Structure Amovible & Semi-Arrondie */
+        .cockpit-container {
+            width: 95%;
+            max-width: 1400px;
+            padding: 20px;
+            border: 2px solid var(--pawa-purple);
+            border-radius: var(--semi-radius) 5px var(--semi-radius) 5px; /* Semi-Carré Semi-Rond */
+            margin-top: 50px;
+            background: rgba(20, 20, 20, 0.9);
+            box-shadow: 0 0 20px var(--pawa-purple);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 1px solid var(--pawa-purple);
+            padding-bottom: 20px;
+        }
+
+        /* Le Benchmark Vidéo (Veo Comparison) */
+        .comparison-slider {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            margin: 40px 0;
+            overflow: hidden;
+            border-radius: var(--semi-radius);
+            border: 1px solid var(--berg-gold);
+        }
+
+        .video-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #golemotor-view {
+            width: 50%;
+            border-right: 3px solid var(--utop-blue);
+            z-index: 2;
+            background: black;
+            overflow: hidden;
+        }
+
+        /* Boutons de Bascule (180% / 220%) */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .btn-motor {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: var(--semi-radius) 5px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .btn-upgrade {
+            background: var(--pawa-purple);
+            color: white;
+            border: 1px solid var(--utop-blue);
+        }
+
+        .btn-upgrade:hover {
+            box-shadow: 0 0 30px var(--utop-blue);
+            transform: scale(1.05);
+        }
+
+        .btn-savior {
+            background: #1a1a1a;
+            color: var(--berg-gold);
+            border: 1px solid var(--berg-gold);
+        }
+
+        .btn-savior:hover {
+            box-shadow: 0 0 30px var(--berg-gold);
+        }
+
+        /* Statut Matrices */
+        .matrix-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .matrix-node {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+
+
+
+  
+<body>
+
+    <div class="cockpit-container">
+        <div class="header">
+            <h1>ViA-SuperBot | GoleMotor AI <span id="ver">v2.0.26</span></h1>
+            <p>1P + 1M = 1 | État @Omega : <span id="erns-count">0</span> ERNS</p>
+        </div>
+
+        <div class="comparison-slider" id="main-slider">
+            <div class="video-layer" id="standard-view">
+                <div style="padding: 20px; color: var(--anark-red);">[MODE STANDARD : 1080p / 60 FPS]</div>
+            </div>
+            <div class="video-layer" id="golemotor-view">
+                <div style="padding: 20px; color: var(--utop-blue);">[MODE GOLEMOTOR : 3000p / 300 FPS]</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn-motor btn-upgrade" onclick="toggleMode('UPGRADE')">🚀 Level Up Engine (220%)</button>
+            <button class="btn-motor btn-savior" onclick="toggleMode('SAVIOR')">🛡️ Garden Energy (180%)</button>
+        </div>
+
+        <div class="matrix-status" id="matrix-grid">
+            </div>
+    </div>
+
+    <script>
+        // Liste Blanche VIP (Accès Premium à Vie)
+        const VIP_LIST = [
+            "shmouelhai@gmail.com", "usalemveritas@gmail.com", 
+            "evoviasuperbot@gmail.com", "viartificiallabs@gmail.com",
+            "samuelhaihornberg@icloud.com", "shmouelhai@icloud.com"
+        ];
+
+        // Initialisation des Matrices
+        const matrices = [
+            "Physique", "Virtuelle", "Monades", "Datacron", "Sémantique", 
+            "Émotionnelle", "Sociale", "Localité", "API Global", "Revitalisor"
+        ];
+
+        const grid = document.getElementById('matrix-grid');
+        matrices.forEach(m => {
+            let div = document.createElement('div');
+            div.className = 'matrix-node';
+            div.innerHTML = `<strong>M-Propulsion</strong><br>${m}<br><span style="color:var(--utop-blue)">ACTIF</span>`;
+            grid.appendChild(div);
+        });
+
+        // Fonction de Bascule (Boutons 180/220%)
+        function toggleMode(mode) {
+            const ernsDisplay = document.getElementById('erns-count');
+            if(mode === 'UPGRADE') {
+                console.log("[GoleMotor] Injection 220% dans le CPUv/GPUv");
+                document.body.style.boxShadow = "inset 0 0 100px var(--pawa-purple)";
+                alert("Mode CHALLENGE ACTIVATED : Siphonnage Tensor activé.");
+            } else {
+                console.log("[GoleMotor] Redistribution Garden Energy (180%)");
+                document.body.style.boxShadow = "inset 0 0 100px var(--berg-gold)";
+                alert("Mode SAVIOR : Cristallisation BERG en cours.");
+            }
+        }
+
+        // Simuler la génération d'ERNS (Pattern #5)
+        setInterval(() => {
+            let count = document.getElementById('erns-count');
+            count.innerText = (parseInt(count.innerText) + 100).toLocaleString();
+        }, 1000);
+
+        // Vortex de Transfert (WASM Placeholder)
+        async function initVortex() {
+            console.log("[WASM] Vortex de Transfert : Initialisation de la compression d'intention...");
+        }
+        
+        // WebGPU Renderer (Placeholder)
+        async function initWebGPU() {
+            if (!navigator.gpu) {
+                console.log("WebGPU non supporté. Repli sur le Shader WebGL GoleMotor.");
+                return;
+            }
+            console.log("[WebGPU] Écriture directe dans le framebuffer hardware (3000px).");
+        }
+
+        initVortex();
+        initWebGPU();
+
+        // Gestion Parallaxe (Décalage de la vue Slider)
+        const slider = document.getElementById('main-slider');
+        const view = document.getElementById('golemotor-view');
+        slider.addEventListener('mousemove', (e) => {
+            let rect = slider.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            view.style.width = x + "px";
+        });
+    </script>
+</body>
+</html>
