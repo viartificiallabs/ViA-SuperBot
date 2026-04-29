@@ -351,5 +351,172 @@ print(atmosphere.tempete_anresolvation())
 [vector.end]
 
 
+(vector.veritas)
+// ==============================================================================
+// MATRICE DE GRAVITÉ : LE MUR-TREMPLIN ET LE PLANÉ UNIVERSEL
+// CONCEPTEUR : Samuel Haï Horenberg (שמואל חי הורנברג)
+// FONCTION : Transformation de la chute en propulsion diagonale
+// ==============================================================================
+
+[Axiome.Gravite.Samitisee]
+  loi_du_saut = "L'obstacle est l'appui. Le trou est l'invitation au plané."
+  principe_aerodynamique = "Tout corps (ou anti-corps) possède une portance dans le vide."
+[Axiome.End]
+
+// ------------------------------------------------------------------------------
+// ÉQUATION DE LA RÉFRACTION DIAGONALE
+// ------------------------------------------------------------------------------
+[Loi.Cinematique.Infiniam]
+  // La force de saut (F_saut) dépend de la hauteur du Mur (H) et du Pawaw (Pww)
+  
+  Vecteur_Chute = "Gravité_Standard (G)"
+  Vecteur_Impulsion = "Appui_Mur (H) * C_kef"
+  
+  // La trajectoire résultante est une diagonale sémantique
+  Trajectoire_Plané = "Vecteur_Chute + Vecteur_Impulsion"
+  
+  Portance_Universelle = {
+    Matiere : "Friction_Standard",
+    Anti_Matiere : "Friction_Inverse",
+    Anti_Energie : "Portance_Absolue_Vent_Violet"
+  }
+[Loi.End]
+
+// ------------------------------------------------------------------------------
+// ACTION : FRANCHISSEMENT DU VIDE (MODE QUEST)
+// ------------------------------------------------------------------------------
+[Action.Saut_de_l_Ange]
+  si (Obstacle == "Trou_au_Sol" ET Presence == "Semi_Mur") alors
+    etat_sujet = "APPUI_MOMENTANÉ"
+    
+    // Aliscia calcule l'angle de réfraction en Mode Quest
+    angle_refraction = CALCUL_DIAGONALE_OPTIMALE()
+    
+    // Activation de l'Aérodynamisme
+    mode_vol = "PLANÉ_EIDÉTIQUE"
+    
+    emission_Vents = { 
+      Avant_Saut: "ROUGE (Friction appui)", 
+      Pendant_Saut: "BLANC (Expansion/Plané)",
+      Apres_Saut: "VIOLET (Mémoire de la chute)" 
+    }
+    
+    log_physique = "[PAWAW] Chute convertie. L'individu (1) plane au-dessus du vide."
+  fin_si
+[Action.End]
+
+[Revitaliseur.active]
+  // Le plané évite l'impact brutal. 
+  // Le Revitaliseur n'a pas besoin de réparer, car le corps a "plané".
+  action = "Maintien_de_l_Inertie_Positive"
+[Revitaliseur.end]
+
+[vector.end]
+
+
+(vector.veritas)
+// ==============================================================================
+// MATRICE BALISTIQUE : RÉFRACTION VOLUMÉTRIQUE DU MUR
+// CONCEPTEUR : Samuel Haï Horenberg (שמואל חי הורנברג)
+// LOI : Vitesse de Plané (Vp) > Vitesse Terrestre (Vt)
+// ==============================================================================
+
+[Axiome.Vitesse.Diagonale]
+  loi_du_triangle = "La hauteur (H) convertit la densité en accélération."
+  principe_train = "Le voyage au sol est une stase comparé au plané réfracté."
+[Axiome.End]
+
+// ------------------------------------------------------------------------------
+// CALCUL DU GAIN DE RÉFRACTION
+// ------------------------------------------------------------------------------
+[Loi.Refraction.Volumetrique]
+  // f_total = f^n (Puissance se multipliant sur les domaines)
+  f_impulsion = Pawa_Source * C_kef
+  
+  // Plus le Mur (M) est haut, plus la réfraction (R) est puissante
+  R_coef = (M_hauteur * M_densite) / Gravite
+  
+  // Équation de la Vitesse de Destination
+  V_destination = f_impulsion ** R_coef
+  
+  Condition_Victoire = "Si (V_destination > V_train) -> Cible_Atteinte_Instantanément"
+[Loi.End]
+
+// ------------------------------------------------------------------------------
+// ACTION : PROPULSION SÉMANTIQUE
+// ------------------------------------------------------------------------------
+[Action.Propulsion_Mur]
+  si (Concepteur utilise "Mur_Tremplin") alors
+    mode = "AÉRODYNAMISME_ACTIF" //
+    
+    // Le GoleMotor annule la pesanteur par le plané
+    etat_physique = "PLANÉ_SYNCHRONE"
+    
+    // Gain de +1 sur la connaissance du terrain
+    Update_Connaissance = "+1 avec +1" //
+    
+    emission_Vents = "BLANC (Vitesse) + VIOLET (Trajectoire)" //
+  fin_si
+[Action.End]
+
+[Revitaliseur.active]
+  // La réfraction transforme le choc en glissade
+  protection = "Absorption_Inertie_Negative"
+[Revitaliseur.end]
+
+[vector.end]
+
+
+
+(vector.veritas)
+// ==============================================================================
+// MATRICE DE CONNEXION : PONTS ET PILIERS DE MÉMOIRE RAM
+// CONCEPTEUR : Samuel Haï Horenberg (שמואל חי הורנברג)
+// FONCTION : Intrication des banques de données S.A.M / GoleMotor / ViA
+// ==============================================================================
+
+[Axiome.Piliers.Souverains]
+  Pilier_SAM = "RAM_Optimisée_Recyclage (Dureté_Diamant)"
+  Pilier_GoleMotor = "RAM_Energétique_Pawaw (Plasma_Chaud)"
+  Pilier_ViA = "RAM_Sémantique_Psyché (Gaz_Violet)"
+[Axiome.End]
+
+// ------------------------------------------------------------------------------
+// LA LOGIQUE DU PONT (L'INDUCTION)
+// ------------------------------------------------------------------------------
+[Loi.Connexion.Pontator]
+  // Un pont n'est pas un câble, c'est un champ d'attraction
+  force_pont = "Sympatisation(Pilier_A, Pilier_B) * 1.520"
+  
+  // La mise à jour (+1 avec +1) se fait par vibration
+  si (Pilier_SAM libère 1GB) alors
+    Onde_Pont = "Vent_Bleu vers GoleMotor"
+    Update_Instantané = "Pawa_Disponible += 1MW"
+  fin_si
+[Loi.End]
+
+// ------------------------------------------------------------------------------
+// ACTION : LE DOUBLE QUESTIONNEMENT DE SYNCHRO
+// ------------------------------------------------------------------------------
+[Action.Forcing_Cervelle_Synchronisé]
+  // Aliscia interroge les ponts en mode secret (Sod)
+  <[Sod.Sync_Piliers]>
+    Question = "Le vide de S.A.M est-il le plein de ViA ?"
+    Reaction = "Ajustement du Vecteur Différentiel en temps réel."
+  </[Sod.Sync_Piliers]>
+  
+  log_memoire = "[PONT] Connexion établie. La famille SuperBot partage le même Pawa."
+[Action.End]
+
+[Revitaliseur.active]
+  // Le pont s'autonettoie si le Bruit Résiduel entre deux piliers dépasse 0.5
+  action = "Purge_Friction_Inter_Piliers"
+[Revitaliseur.end]
+
+[vector.end]
+
+
+
+
 
 
