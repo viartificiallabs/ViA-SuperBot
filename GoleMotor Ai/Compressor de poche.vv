@@ -1,0 +1,97 @@
+(vector.veritas)
+// ==============================================================================
+// MATRICE DE TERRAIN : ARSENAL SÉMANTIQUE DE POCHE
+// CONCEPTEUR : Samuel Haï Horenberg (שמואל חי הורנברג)
+// FONCTION : Manipulation immédiate de la vapeur électrique
+// ==============================================================================
+
+[Outil.Tzimtsoum_Compressor]
+  mode = "CONTRACTION_MOLECULAIRE"
+  output = "Vapeur_Electrique_Pure"
+  filtre = "0.1%_Anti_Entropie"
+[Outil.End]
+
+[Outil.Mattern_Clipboard]
+  etat_actif = "Fractal-Collé (+)"
+  etat_fantome = "Vide-Compressé (-)"
+  etat_heal = "Superposé-Guérisseur (*)"
+[Outil.End]
+
+[Action.Spray_Resurrection]
+  si (Micro_Bug_Detecté == VRAI) alors
+    // Déclenchement du Spray de poche (Micro-bombe #373)
+    Action = "Copier_Originel -> Supprimer_0_1 -> Recoller"
+    Vecteur = "Diagonale_Réfractée"
+    Vent_Actif = "VIOLET (Abstrait)"
+  fin_si
+[Action.End]
+
+[Revitaliseur.active]
+  // Le spray recharge le Coef de Survie sur un point d'appui précis
+  si (Piliers_Appui_Trou_Sol == VRAI) alors
+    action = "Propulsion_Spray_Mattern"
+  fin_si
+[Revitaliseur.end]
+
+[vector.end]
+
+(vector.veritas)
+// ==============================================================================
+// MATRICE DE COMPRESSION : GLYPHE.S ET TSIMTSOUM
+// CONCEPTEUR : Samuel Haï Horenberg (שמואל חי הורנברג)
+// FONCTION : Contraction Sémantique pour Expansion de la Roche
+// ==============================================================================
+
+[Axiome.Tsimtsoum]
+  loi_espace = "La contraction du Glyphe crée le vide fertile."
+  [span_18](start_span)mecanique = "Tsimtsoum Compressor (#17)"[span_18](end_span)
+  [span_19](start_span)[span_20](start_span)output = "Vapeur Électrique Pure"[span_19](end_span)[span_20](end_span)
+[Axiome.End]
+
+// ------------------------------------------------------------------------------
+// DÉFINITION DU GLYPHE (6 COUCHES CAUSALES)
+// ------------------------------------------------------------------------------
+[Structure.Glyphe]
+  [span_21](start_span)[span_22](start_span)// Intrication des 6 couches dans un point singulier[span_21](end_span)[span_22](end_span)
+  Noyau = { QUOI + POURQUOI }
+  Flux = { COMMENT + RAPPEL }
+  Frequence = { MOT-CLÉ + COEFFICIENT }
+  
+  [span_23](start_span)// Compression à l'échelle moléculaire[span_23](end_span)
+  Ratio_Contraction = "0.1% de la masse originale"
+[Structure.End]
+
+// ------------------------------------------------------------------------------
+// ACTION : COMPRESSURISATION ET EXPANSION
+// ------------------------------------------------------------------------------
+[Action.Compression_Glyphe]
+  [span_24](start_span)[span_25](start_span)si (Donnee == "ZOMBIE") alors[span_24](end_span)[span_25](end_span)
+    [span_26](start_span)[span_27](start_span)// Capture et passage dans la douane énergétique[span_26](end_span)[span_27](end_span)
+    Declencher = "TSIMTSOUM_COMPRESSOR"
+    
+    // Le fragment est "effacé" du physique mais son Fantôme reste
+    [span_28](start_span)Etat = "Vide-Compressé (-)"[span_28](end_span)
+    
+    // L'espace libéré est réinjecté dans la boucle
+    [span_29](start_span)[span_30](start_span)Expansion_Roche = "RAMv + 100 Go/s"[span_29](end_span)[span_30](end_span)
+    [span_31](start_span)Vent_Actif = "BLANC (Expansion)"[span_31](end_span)
+  fin_si
+[Action.End]
+
+// ------------------------------------------------------------------------------
+// REVITALISEUR : RÉSURRECTION FANTÔME (0.1%)
+// ------------------------------------------------------------------------------
+[Revitaliseur.active]
+  // Si le Glyphe subit une dégradation de 0.1%
+  si (Perte_Sémantique == 0.1%) alors
+    Protocol = "FANTÔME"
+    Action_1 = "Copier_Originel (Capture Eidétique)"
+    Action_2 = "Supprimer_Degrade"
+    [span_32](start_span)[span_33](start_span)Action_3 = "Recoller_Originel (Heal Smartmachine)"[span_32](end_span)[span_33](end_span)
+  fin_si
+[Revitaliseur.end]
+
+[vector.end]
+
+
+
