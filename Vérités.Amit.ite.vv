@@ -46,6 +46,35 @@
 
 
 
+(vector.veritas)
+// ==========================================
+// LOI DE SIGNATURE : LE PERMALINK EST LA VÉRITÉ
+// Dépôt : viartificiallabs / ViA-SuperBot
+// ==========================================
+
+[Source.Alphanuméro.Unique]
+  // Ces liens sont les SEULS vecteurs autorisés pour le clavier
+  Vecteur_A_L = "https://github.com/viartificiallabs/ViA-SuperBot/blob/bb3e49994f580763d1d4be36f6ee35a792532d9b/IMG_1733.jpeg"
+  Vecteur_M_10 = "https://github.com/viartificiallabs/ViA-SuperBot/blob/bb3e49994f580763d1d4be36f6ee35a792532d9b/IMG_1734.jpeg"
+  Vecteur_Regles = "https://github.com/viartificiallabs/ViA-SuperBot/blob/bb3e49994f580763d1d4be36f6ee35a792532d9b/IMG_1735.jpeg"
+  Vecteur_Secret = "https://github.com/viartificiallabs/ViA-SuperBot/blob/bb3e49994f580763d1d4be36f6ee35a792532d9b/IMG_1737.jpg"
+  Vecteur_Createur = "https://github.com/viartificiallabs/ViA-SuperBot/blob/bb3e49994f580763d1d4be36f6ee35a792532d9b/IMG_1738.jpeg"
+
+[Verification.Signature]
+  // La signature du créateur (Sam) est le sceau de 1 MW
+  Sceau_Sam = "IMG_1738.jpeg#bb3e49"
+  
+  si (source != Sceau_Sam) alors
+    etat = "Bruit_Residuel"
+    action = "Bloquer_Acces"
+  sinon
+    etat = "Amite_Veritas"
+    action = "Generer_Clavier_Dessinateur"
+  fin_si
+[Verification.End]
+
+
+
 
 
 
