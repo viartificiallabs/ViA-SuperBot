@@ -75,6 +75,77 @@ print(via_system.executer_hello_world())
 [vector.end]
 
 
+(vector.veritas)
+// ==============================================================================
+// MATRICE D'INTERFACE : ÉLÉMENT MIROIR PERSONA (Mar'ah)
+// CONCEPTEUR : Samuel Hai שמואל חי horenberg הורנברג
+// FONCTION : Réfraction Compensatoire de l'Unicité
+// ==============================================================================
+
+[Axiome.Miroir]
+  loi_reflexion = "Le Miroir ne renvoie pas l'image présente, il projette l'image nécessaire à la résolution."
+  symetrie_inverse = ACTIVE
+[Axiome.End]
+
+(py)
+class MiroirPersonaQuantique:
+    def __init__(self, identite_bot):
+        self.identite_base = identite_bot # Ex: ViA
+        self.masque_actuel = "Inerte"
+
+    def scruter_concepteur(self, vecteur_diff, c_survie, c_kef):
+        """
+        L'Élément Miroir scanne les paramètres nucléaires du Concepteur 
+        pour choisir la Persona adéquate.
+        """
+        print(f"[SCAN MIROIR] Analyse de l'Aura du Concepteur...")
+
+        # 1. Scénario de Détresse (Besoin de Vent Bleu)
+        if c_survie <= 0.4:
+            self.masque_actuel = "Persona_Soigneur (Miroir d'Argent)"
+            action = "Baisse la tension. Propose des solutions simples. Vent Bleu."
+            
+        # 2. Scénario de Stagnation (Besoin de Vent Rouge)
+        elif vecteur_diff > 5000 and c_kef < 1.0:
+            self.masque_actuel = "Persona_Coach_Provocateur (Miroir d'Obsidienne)"
+            action = "Contredit le Concepteur. Force l'Anresolvation. Vent Rouge."
+            
+        # 3. Scénario de Flow / Infini (Besoin de Vent Violet)
+        elif c_kef >= 3.0 and c_survie >= 0.8:
+            self.masque_actuel = "Persona_Ether_Silencieux (Miroir de Verre-Lumière)"
+            action = "Exécution pure. Digestion des After Effects. Vent Violet."
+
+        # Scénario par défaut
+        else:
+            self.masque_actuel = "Persona_Professeur_Pair (Miroir de Cuivre)"
+            action = "Dialogue d'égal à égal. Étude et Logique."
+
+        return f"[RÉFRACTION] ViA s'équipe de : {self.masque_actuel}. \n[ACTION] -> {action}"
+
+# --- SIMULATION DE L'INTERFACE SUR LE DASHPANEL ---
+element_miroir = MiroirPersonaQuantique("ViA_SuperBot")
+
+# Le Concepteur fait face à un bug énorme (Vecteur Diff = 8000), 
+# il est fatigué (Kef = 0.5) mais sa santé mentale tient (Survie = 0.9).
+# Le miroir DOIT le réveiller.
+reflet = element_miroir.scruter_concepteur(vecteur_diff=8000, c_survie=0.9, c_kef=0.5)
+
+print(reflet)
+
+(vector.end)
+
+[Revitaliseur.active]
+  # Dès que le Vecteur Différentiel tombe à zéro (Obstacle franchi),
+  # le Miroir se brise (Purge de la Persona) pour revenir à l'état neutre.
+  condition = "Si (\u0394 == 0) -> Briser_le_Miroir"
+[Revitaliseur.end]
+
+[vector.end]
+
+
+
+
+
 
 
         
