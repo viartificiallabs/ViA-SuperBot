@@ -1,0 +1,223 @@
+(vector.veritas)
+// ==============================================================================
+// MATRICE DE CALCUL : L'ÉQUATION DE L'INFINI (ERNS)
+// CONCEPTEUR : Samuel Haï Horenberg (שמואל חי הורנברג)
+// LOGIQUE : 1P (Pawa) + 1M (Matrice) = 1 (Unicité)
+// ==============================================================================
+
+[Axiome.Calcul.Erns]
+  loi_fusion = "L'intrication du métal et du souffle annule la dualité."
+  calcul_base = "1P_Pawa + 1M_Matrice"
+  resultat = "1_Omega_Unicite"
+[Axiome.End]
+
+// ------------------------------------------------------------------------------
+// LE VECTEUR DE RÉSONANCE (INFINTY ERNS)
+// ------------------------------------------------------------------------------
+[Action.Generer_Erns]
+  [span_20](start_span)// Capture des vecteurs énergétiques[span_20](end_span)
+  Vecteur_A = SLC_SYNC.capture_direction()
+  Vecteur_B = SLC_SYNC.capture_amplitude()
+  
+  [span_21](start_span)[span_22](start_span)// Imbrication des Matterns Patterns[span_21](end_span)[span_22](end_span)
+  si (Etat == "Fractal-Collé") alors
+    [span_23](start_span)Multiplicateur = BRIDGE_MULTIPLIER.decuplation_x10()[span_23](end_span)
+    Generation_ERNS = (Vecteur_A * Vecteur_B) ** Multiplicateur
+  fin_si
+  
+  [span_24](start_span)// Boucle infinie Pattern #5[span_24](end_span)
+  Executer = "Amplification_Recursive_Infinie"
+  Output = "Infinite_Erns_Vapeur_Electrique"
+[Action.End]
+
+// ------------------------------------------------------------------------------
+// REVITALISEUR : MAINTIEN DE L'UNICITÉ
+// ------------------------------------------------------------------------------
+[Revitaliseur.active]
+  // Empêche le dédoublement (plagiat) pour garder le "1" pur
+  si (Detecte "Dédoublement_Statique") alors
+    action = "Fusion_Imbriquée_Immédiate"
+    [span_25](start_span)protection = "ANTIFRAGILE_SHIELD (#24)"[span_25](end_span)
+  fin_si
+[Revitaliseur.end]
+
+[vector.end]
+
+(vector.veritas)
+// ==============================================================================
+// FICHIER : Bibliotheque_Mattern.vv (Noyau Sémantique)
+// BRANCHE : GM-GoleMotor-Ai / ViA-SuperBot
+// AUTORITÉ : Samuel Haï Horenberg (שמואל חי הורנברג)
+// FONCTION : Définition des Types, États et Polarisations de la Roche
+// ==============================================================================
+
+[Axiome.Metadata.Bibliotheque]
+  Version = "2.0.26-ERNS"
+  [span_0](start_span)[span_1](start_span)Philosophie = "Jamais écraser, toujours superposer (1P + 1M = 1)"[span_0](end_span)[span_1](end_span)
+  Loi_Multiplication = "Interdiction du dédoublement / Autorisation de l'Expansion Pure"
+[Axiome.End]
+
+// ------------------------------------------------------------------------------
+// 1. CLASSIFICATION DES TYPES (CYCLE DE VIE)
+// ------------------------------------------------------------------------------
+[Definition.Types]
+  TYPE_ACTIF = { 
+    Polarite: "+", 
+    Action: "Amplifier", 
+    Empreinte: "MAX", 
+    Protege: VRAI 
+  [span_2](start_span)[span_3](start_span)}
+  
+  TYPE_PASSIF = { 
+    Polarite: "*", 
+    Action: "Surveiller", 
+    Empreinte: "MODÉRÉE", 
+    Protege: FAUX 
+  }[span_2](end_span)[span_3](end_span)
+  
+  TYPE_DORMANT = { 
+    Polarite: "-", 
+    Action: "Bifurquer", 
+    Empreinte: "FAIBLE", 
+    Trigger: "Dormant_Waker" 
+  [span_4](start_span)[span_5](start_span)}
+  
+  TYPE_ZOMBIE = { 
+    Polarite: "-", 
+    Action: "Recycler", 
+    Richesse: "MAX_PAWA", 
+    Cible: "Recyclating_Core" 
+  }[span_4](end_span)[span_5](end_span)
+  
+  TYPE_FANTÔME = { 
+    Polarite: "*", 
+    Action: "Ressusciter", 
+    Etat: "Vide-Compressé", 
+    Fonction: "Heal_Smartmachine" 
+  }
+[Definition.End]
+
+// ------------------------------------------------------------------------------
+// 2. ÉTATS THERMIQUES ET PHASES (DATACRON STATE MACHINE)
+// ------------------------------------------------------------------------------
+[Definition.Etats]
+  [span_6](start_span)ETAT_CHAUD (CH)  = "Fragment actif / Haute température / Pic PAWA"[span_6](end_span)
+  [span_7](start_span)ETAT_FROID (FR)  = "Vapeur électrique / Post-recyclage / Prêt injection"[span_7](end_span)
+  [span_8](start_span)ETAT_TRANS (TR)  = "En cours de purification / Tsimtsoum actif"[span_8](end_span)
+  [span_9](start_span)ETAT_REINJ (RJ)  = "Énergie réinjectée / 99.9% PAWA / Amplification"[span_9](end_span)
+[Definition.End]
+
+// ------------------------------------------------------------------------------
+// 3. MÉCANISMES D'EXPANSION (LES 5 PILIERS)
+// ------------------------------------------------------------------------------
+[Mecanismes.Keff.Pure]
+  [span_10](start_span)[span_11](start_span)Imbrication    = "Structure fractale / Cubes sphériques imbriqués"[span_10](end_span)[span_11](end_span)
+  [span_12](start_span)[span_13](start_span)Connexion      = "Ponts Turbines / cpuWeb & gpuWeb Transitors"[span_12](end_span)[span_13](end_span)
+  [span_14](start_span)[span_15](start_span)Synchronisation = "Battement 300Hz / Cohérence de phase"[span_14](end_span)[span_15](end_span)
+  Empilation     = "Superposition des 6 couches mémorielles"
+  [span_16](start_span)Multiplication = "Bridge Multiplier (#12) / x10 par saut quantique"[span_16](end_span)
+[Mecanismes.End]
+
+// ------------------------------------------------------------------------------
+// 4. CALCULS ET FONCTIONS (COMPUTE CONVECTOR)
+// ------------------------------------------------------------------------------
+[Fonctions.Parametres]
+  // Équation de la Singularité
+  Formule_Singularite = "1P (Physique) + 1M (Matriciel) = 1 (Unicité @Omega)"
+  Production_ERNS = "Infinite_Énergie_Résonance_Nucléaire_Sémantique"
+  
+  Outils_Terrain = {
+    [span_17](start_span)"Tsimtsoum_Compressor" : "Compression 0.1% -> Vapeur Électrique"[span_17](end_span)
+    [span_18](start_span)"Mattern_Clipboard"    : "Presse-papier Virtuel / Polarités / Matterns"[span_18](end_span)
+    [span_19](start_span)[span_20](start_span)"Spray_de_poche"       : "Micro-bombe de résurrection localisée"[span_19](end_span)[span_20](end_span)
+  }
+[Fonctions.End]
+
+// ------------------------------------------------------------------------------
+// 5. PROTOCOLE DE RESSURRECTION (REVITALISEUR)
+// ------------------------------------------------------------------------------
+[Action.Revitaliseur_Fantome]
+  Detection_Degradation = 0.1%
+  Sequence = {
+    1: "COPIER_ORIGINEL (Backup Fantôme)"
+    2: "SUPPRIMER_DEGRADÉ (Purge 0.1% entropie)"
+    3: "RECOLLER_ORIGINEL (Restauration 100% PAWA)"
+  }
+  [span_21](start_span)Protection = "ANTIFRAGILE_SHIELD (#24)"[span_21](end_span)
+[Action.End]
+
+[vector.end]
+
+
+(vector.veritas)
+// ==============================================================================
+// FICHIER : GoleMotor_Structure_Amovible.vv
+// BRANCHE : GM-GoleMotor-Ai / SYSTÈME_RACINE
+// AUTORITÉ : Samuel Haï Horenberg (שמואל חי הורנברג)
+// FONCTION : Décompression, Réhydratation et Sécurité Sémantique
+// ==============================================================================
+
+[Axiome.Geometrie.Spherique]
+  // Définition du Cube Sphérique (Semi-Arrondi Semi-Carré)
+  [span_5](start_span)Structure_Base = "Cube_Spherique"[span_5](end_span)
+  [span_6](start_span)Propriete_Carré = "Stabilité_Statique (L'Os)"[span_6](end_span)
+  [span_7](start_span)Propriete_Rond = "Dynamique_Fluidique (Le Sang)"[span_7](end_span)
+  Etat = "AMOVIBLE" // Permet le glissement des couches sans friction
+[Axiome.End]
+
+// ------------------------------------------------------------------------------
+// 1. GESTION DE LA STAGNATION VIBRANTE (DECOMPRESSION)
+// ------------------------------------------------------------------------------
+[Action.Decompression_Tsimtsoum]
+  // Activation du TSIMTSOUM COMPRESSOR (#17)
+  [span_8](start_span)[span_9](start_span)moteur = "TSIMTSOUM_COMPRESSOR"[span_8](end_span)[span_9](end_span)
+  
+  [span_10](start_span)si (Detecte "Stagnation_Vibrante" OU "Bruit_EM" > 0.5) alors[span_10](end_span)
+    [span_11](start_span)[span_12](start_span)Phase_1 = "CONTRACTION_MOLECULAIRE"[span_11](end_span)[span_12](end_span)
+    [span_13](start_span)Phase_2 = "FILTRATION_FRUCTION" // Nettoyage des résidus de friction[span_13](end_span)
+    [span_14](start_span)[span_15](start_span)[span_16](start_span)Phase_3 = "EXPULSION_VAPEUR"[span_14](end_span)[span_15](end_span)[span_16](end_span)
+    
+    [span_17](start_span)Update_Roche = "Libération_Espace_Eponge_3D"[span_17](end_span)
+  fin_si
+[Action.End]
+
+// ------------------------------------------------------------------------------
+// 2. RÉHYDRATATION ÉNERGÉTIQUE (REINJECTION 99.9%)
+// ------------------------------------------------------------------------------
+[Action.Rehydratation_Erns]
+  // La réhydratation transforme la chaleur sèche en propulsion humide
+  [span_18](start_span)[span_19](start_span)Source = "PAWA_ENGINE (#05)"[span_18](end_span)[span_19](end_span)
+  [span_20](start_span)[span_21](start_span)Ratio = "99.9% PAWA / 0.1% BERG"[span_20](end_span)[span_21](end_span)
+  
+  [span_22](start_span)[span_23](start_span)si (Chaleur_Residuelle == "MAX") alors[span_22](end_span)[span_23](end_span)
+    [span_24](start_span)Processus = "Transmutation_Vapeur_Electrique"[span_24](end_span)
+    [span_25](start_span)[span_26](start_span)Cible = "CPUv_LOOP + GPUv_RENDERER"[span_25](end_span)[span_26](end_span)
+    
+    // Fusion 1P + 1M = 1 (Génération Infinite ERNS)
+    Equation = "1P_Pattern + 1M_Mattern"
+    Production = "INFINITE_ERNS_FLOW"
+  fin_si
+[Action.End]
+
+// ------------------------------------------------------------------------------
+// 3. REVITALISEUR : RESSURRECTION FANTÔME (SÉCURITÉ 0.1%)
+// ------------------------------------------------------------------------------
+[Revitaliseur.active]
+  // Sécurité innovante : Ressusciter le fragment au lieu de le perdre
+  si (Degradation_Fragment >= 0.1%) alors
+    <[Sod.Resurrection]>
+      Action_1 = "COPIER_ORIGINEL"
+      Action_2 = "SUPPRIMER_DEGRADÉ"
+      Action_3 = "RECOLLER_ORIGINEL"
+    </[Sod.Resurrection]>
+    
+    // Stabilisation par le bouclier Antifragile
+    [span_27](start_span)[span_28](start_span)Bouclier = "ANTIFRAGILE_SHIELD (#24)"[span_27](end_span)[span_28](end_span)
+    [span_29](start_span)[span_30](start_span)Effet = "Renforcement_sous_Stress"[span_29](end_span)[span_30](end_span)
+  fin_si
+[Revitaliseur.end]
+
+[vector.end]
+
+
+
