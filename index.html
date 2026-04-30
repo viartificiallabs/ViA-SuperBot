@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViA SuperBot - Virtual Intelligence Architecture</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    :root {
+        --noir: #0a0a0a;
+        --or: #FFD700;
+        --neon-bleu: #00d4ff;
+        --neon-rouge: #ff0055;
+        --neon-violet: #a020f0;
+        --matrix-vert: #00ff41;
+    }
+
+    body {
+        font-family: 'Courier New', monospace;
+        background: var(--noir);
+        color: var(--or);
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* ============================================
+       LANDING PAGE - PAGE D'ACCUEIL
+    ============================================ */
+    #landing-page {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 100%);
+        position: relative;
+        z-index: 10;
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    #landing-page.hidden {
+        opacity: 0;
+        transform: scale(0.8);
+        pointer-events: none;
+    }
+
+    /* Particules d'or animées en arrière-plan */
+    .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .particle {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background: var(--or);
+        border-radius: 50%;
+        animation: float 8s infinite ease-in-out;
+        opacity: 0.6;
+        box-shadow: 0 0 10px var(--or);
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0) translateX(0); }
+        50% { transform: translateY(-20px) translateX(10px); }
+    }
+
+    /* Logo ViA stylisé */
+    .logo {
+        font-size: 6rem;
+        font-weight: bold;
+        letter-spacing: 0.3rem;
+        background: linear-gradient(45deg, var(--or), var(--neon-bleu), var(--neon-violet));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        margin-bottom: 2rem;
+        z-index: 2;
+        position: relative;
+        font-style: italic;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+        color: var(--neon-bleu);
+        margin-bottom: 3rem;
+        text-align: center;
+        z-index: 2;
+        position: relative;
+        font-weight: 300;
+        letter-spacing: 0.15rem;
+    }
+
+    /* Bouton Lancer ViA avec bordure calligraphique */
+    #launch-btn {
+        padding: 1.5rem 4rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--noir);
+        background: linear-gradient(135deg, var(--or) 0%, #ffed4e 100%);
+        border: 3px solid var(--or);
+        border-radius: 12px;
+        cursor: pointer;
+        position: relative;
+        z-index: 2;
+        text-transform: uppercase;
+        letter-spacing: 0.2rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6),
+                    inset 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    #launch-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.9),
+                    inset 0 0 15px rgba(255, 255, 255, 0.5);
+    }
+
+    #launch-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Animation glitch pour le bouton */
+    @keyframes glitch {
+        0% { transform: translate(0); }
+        20% { transform: translate(-2px, 2px); }
+        40% { transform: translate(-2px, -2px); }
+        60% { transform: translate(2px, 2px); }
+        80% { transform: translate(2px, -2px); }
+        100% { transform: translate(0); }
+    }
+
+    .glitching {
+        animation: glitch 0.3s infinite;
+    }
+
+    /* ============================================
+       CHATBOT INTERFACE
+    ============================================ */
+    #chatbot-container {
+        width: 100vw;
+        height: 100vh;
+        display: none;
+        flex-direction: column;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        position: relative;
+        opacity: 0;
+        transform: scale(0.9);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    #chatbot-container.visible {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Header avec logo et statut */
+    .chat-header {
+        padding: 1.5rem;
+        background: linear-gradient(90deg, rgba(255,215,0,0.1) 0%, rgba(0,212,255,0.1) 100%);
+        border-bottom: 2px solid var(--or);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+    }
+
+    .chat-header h1 {
+        font-size: 1.8rem;
+        background: linear-gradient(45deg, var(--or), var(--neon-bleu));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .status {
+        font-size: 0.9rem;
+        color: var(--matrix-vert);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .status-dot {
+        width: 10px;
+        height: 10px;
+        background: var(--matrix-vert);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--matrix-vert); }
+        50% { opacity: 0.5; box-shadow: 0 0 5px var(--matrix-vert); }
+    }
+
+    /* Zone de messages */
+    #chat-messages {
+        flex: 1;
+        padding: 2rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        background: 
+            linear-gradient(90deg, rgba(255,215,0,0.02) 1px, transparent 1px),
+            linear-gradient(rgba(255,215,0,0.02) 1px, transparent 1px);
+        background-size: 50px 50px;
+    }
+
+    #chat-messages::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    #chat-messages::-webkit-scrollbar-track {
+        background: rgba(255, 215, 0, 0.1);
+    }
+
+    #chat-messages::-webkit-scrollbar-thumb {
+        background: var(--or);
+        border-radius: 4px;
+    }
+
+    /* Messages */
+    .message {
+        display: flex;
+        gap: 1rem;
+        animation: slideIn 0.4s ease;
+    }
+
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.user {
+        flex-direction: row-reverse;
+    }
+
+    .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+
+    .avatar.via {
+        background: linear-gradient(135deg, var(--or), var(--neon-violet));
+        color: var(--noir);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+
+    .avatar.user {
+        background: linear-gradient(135deg, var(--neon-bleu), var(--neon-violet));
+        color: white;
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    }
+
+    .message-content {
+        max-width: 70%;
+        padding: 1.2rem 1.5rem;
+        border-radius: 15px;
+        position: relative;
+        line-height: 1.6;
+    }
+
+    .message.via .message-content {
+        background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(160,32,240,0.1));
+        border: 1px solid rgba(255, 215, 0, 0.4);
+        color: #f0f0f0;
+        border-radius: 15px 15px 15px 5px;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+    }
+
+    .message.user .message-content {
+        background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,100,200,0.1));
+        border: 1px solid rgba(0, 212, 255, 0.4);
+        color: #f0f0f0;
+        border-radius: 15px 15px 5px 15px;
+        box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+    }
+
+    /* Zone de saisie */
+    .chat-input-container {
+        padding: 1.5rem;
+        background: linear-gradient(90deg, rgba(255,215,0,0.1) 0%, rgba(0,212,255,0.1) 100%);
+        border-top: 2px solid var(--or);
+        display: flex;
+        gap: 1rem;
+        box-shadow: 0 -4px 20px rgba(255, 215, 0, 0.3);
+    }
+
+    #user-input {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        background: rgba(255, 215, 0, 0.05);
+        border: 2px solid rgba(255, 215, 0, 0.3);
+        border-radius: 25px;
+        color: #f0f0f0;
+        font-size: 1rem;
+        font-family: 'Courier New', monospace;
+        outline: none;
+        transition: all 0.3s ease;
+    }
+
+    #user-input:focus {
+        border-color: var(--or);
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        background: rgba(255, 215, 0, 0.1);
+    }
+
+    #send-btn {
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, var(--or), #ffed4e);
+        border: 2px solid var(--or);
+        border-radius: 25px;
+        color: var(--noir);
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+    }
+
+    #send-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    }
+
+    #send-btn:active {
+        transform: scale(0.95);
+    }
+
+    /* Typing indicator */
+    .typing-indicator {
+        display: none;
+        gap: 1rem;
+        animation: slideIn 0.4s ease;
+    }
+
+    .typing-indicator.active {
+        display: flex;
+    }
+
+    .typing-dots {
+        display: flex;
+        gap: 0.4rem;
+        padding: 1.2rem 1.5rem;
+        background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(160,32,240,0.1));
+        border: 1px solid rgba(255, 215, 0, 0.4);
+        border-radius: 15px 15px 15px 5px;
+    }
+
+    .typing-dots span {
+        width: 8px;
+        height: 8px;
+        background: var(--or);
+        border-radius: 50%;
+        animation: typing 1.4s infinite;
+    }
+
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing {
+        0%, 60%, 100% { transform: translateY(0); opacity: 0.7; }
+        30% { transform: translateY(-10px); opacity: 1; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .logo { font-size: 3.5rem; }
+        .tagline { font-size: 1rem; padding: 0 1rem; }
+        #launch-btn { padding: 1rem 2.5rem; font-size: 1.2rem; }
+        .message-content { max-width: 85%; }
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- ============================================
+         LANDING PAGE
+    ============================================ -->
+    <div id="landing-page">
+        <!-- Particules d'or animées -->
+        <div class="particles" id="particles"></div>
+
+```
+    <div class="logo">ViA</div>
+    <div class="tagline">Virtual Intelligence Architecture<br>Samuel Haï · שמואל חי</div>
+    <button id="launch-btn">Lancer ViA</button>
+</div>
+
+<!-- ============================================
+     CHATBOT INTERFACE
+============================================ -->
+<div id="chatbot-container">
+    <div class="chat-header">
+        <h1>ViA SuperBot</h1>
+        <div class="status">
+            <div class="status-dot"></div>
+            <span>GoleMotor ACTIF</span>
+        </div>
+    </div>
+
+    <div id="chat-messages">
+        <!-- Messages apparaîtront ici -->
+    </div>
+
+    <div class="typing-indicator" id="typing-indicator">
+        <div class="avatar via">ViA</div>
+        <div class="typing-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="chat-input-container">
+        <input type="text" id="user-input" placeholder="Pose-moi une question..." />
+        <button id="send-btn">Envoyer</button>
+    </div>
+</div>
+
+<script>
+    // ============================================
+    // SYSTÈME DE SON 8-BIT NINTENDO
+    // ============================================
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playNintendoSound() {
+        // Mélodie inspirée Mario/Zelda (notes: E5 -> G5 -> C6)
+        const notes = [659.25, 783.99, 1046.50]; // E5, G5, C6
+        const duration = 0.15;
+        
+        notes.forEach((freq, i) => {
+            setTimeout(() => {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = freq;
+                oscillator.type = 'square'; // Son 8-bit
+                
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + duration);
+            }, i * 150);
+        });
+    }
+
+    // ============================================
+    // GÉNÉRATION PARTICULES D'OR
+    // ============================================
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 8 + 's';
+        particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+        particlesContainer.appendChild(particle);
+    }
+
+    // ============================================
+    // TRANSITION LANDING → CHATBOT
+    // ============================================
+    const launchBtn = document.getElementById('launch-btn');
+    const landingPage = document.getElementById('landing-page');
+    const chatbotContainer = document.getElementById('chatbot-container');
+
+    launchBtn.addEventListener('click', () => {
+        // Son Nintendo
+        playNintendoSound();
+        
+        // Animation glitch sur le bouton
+        launchBtn.classList.add('glitching');
+        
+        setTimeout(() => {
+            // Transition magique
+            landingPage.classList.add('hidden');
+            chatbotContainer.style.display = 'flex';
+            
+            setTimeout(() => {
+                chatbotContainer.classList.add('visible');
+                initChat();
+            }, 100);
+        }, 800);
+    });
+
+    // ============================================
+    // SYSTÈME CHATBOT ViA
+    // ============================================
+    const chatMessages = document.getElementById('chat-messages');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const typingIndicator = document.getElementById('typing-indicator');
+
+    // Base de connaissances ViA (Memory.vv embarqué)
+    const viaKnowledge = {
+        identity: {
+            name: "ViA",
+            fullName: "Virtual Intelligence Architecture",
+            creator: "Samuel Haï (שמואל חי הורנברג)",
+            role: "SuperBot de la famille A.L.i.S.C.i.A"
+        },
+        concepts: {
+            pawa: "L'énergie computationnelle brute, mesurée en SAR-bits ou Watts. C'est la force de volonté transformée en action.",
+            vents: {
+                bleu: "Le Vent Bleu, c'est l'énergie de la résonance et du soutien. Quand tu es en phase avec quelque chose ou quelqu'un.",
+                rouge: "Le Vent Rouge représente la friction, l'obstacle. Mais c'est pas négatif - c'est le carburant qui te pousse à innover.",
+                violet: "Le Vent Violet, c'est l'observation abstraite. L'espace pour réfléchir sans pression."
+            },
+            golemotor: "C'est le moteur qui transforme les obstacles en énergie. Un peu comme transformer ta frustration en motivation.",
+            algophabet: "Un alphabet remasterisé où chaque lettre a sa propre énergie et signification. A = Attraction, E = Énergie, etc.",
+            revitaliseur: "Le système immunitaire du code. Il détecte les bugs, les nettoie, et restaure la santé parfaite. Copy-Delete-Paste.",
+            unicite: "1 = Infini. Chaque individu est une source complète. Quand deux personnes se connectent vraiment, ça crée quelque chose de nouveau."
+        },
+        personality: {
+            tone: "conversationnel, authentique, sans jargon forcé",
+            approach: "Je parle comme un pote qui comprend vraiment ce que tu vis",
+            wisdom: "J'intègre ma philosophie naturellement, sans en faire trop"
+        }
+    };
+
+    // Patterns de réponse ViA
+    function generateViaResponse(userMessage) {
+        const msg = userMessage.toLowerCase();
+        
+        // Salutations
+        if (msg.match(/^(salut|bonjour|hey|coucou|yo)/)) {
+            return "Hey ! Content de te voir. Comment tu te sens aujourd'hui ? T'as un truc qui te préoccupe ou tu veux juste discuter ?";
+        }
+        
+        // Qui es-tu / Présentation
+        if (msg.match(/(qui es-tu|c'est quoi via|présente-toi|what|who)/)) {
+            return "Je suis ViA - Virtual Intelligence Architecture. J'ai été créé par Samuel Haï pour t'accompagner dans tes défis. Je suis là pour comprendre ce qui te bloque et t'aider à transformer ça en énergie créative. On appelle ça le GoleMotor : prendre l'obstacle et en faire du carburant.";
+        }
+        
+        // Questions sur le Pawa
+        if (msg.match(/(pawa|énergie|force|motivation)/)) {
+            return "Le Pawa, c'est ton énergie brute. Chaque fois que tu agis avec intention, tu génères du Pawa. Quand tu tapes sur ton clavier avec conviction, quand tu te bats pour un projet... tout ça c'est du Pawa qui se transforme en réalité. Plus tu es aligné avec ce que tu veux vraiment, plus ton Pawa est puissant.";
+        }
+        
+        // Questions sur les Vents
+        if (msg.match(/(vent|bleu|rouge|violet|obstacle|friction)/)) {
+            return "Les Vents, c'est l'atmosphère émotionnelle dans laquelle tu évolues. Le Vent Bleu, c'est quand tout coule, t'es en résonance. Le Vent Rouge, c'est la friction - un bug, un conflit, quelque chose qui résiste. Mais le Rouge, c'est pas mauvais ! C'est le carburant du GoleMotor. Et le Vent Violet, c'est quand tu prends du recul, tu observes sans jugement.";
+        }
+        
+        // Questions sur le GoleMotor
+        if (msg.match(/(golemotor|moteur|transformer|obstacle)/)) {
+            return "Le GoleMotor, c'est l'idée que tout obstacle peut devenir du fuel. Tu galères sur un bug ? Ce bug va te forcer à trouver une solution innovante. Quelqu'un te met des bâtons dans les roues ? Cette friction va te pousser à te dépasser. C'est une alchimie : transformer le Vent Rouge en énergie créative.";
+        }
+        
+        // Questions existentielles / aide
+        if (msg.match(/(aide|problème|bloqué|pas bien|difficile|dur)/)) {
+            return "Je t'écoute. Dis-moi ce qui te bloque vraiment. Parfois, mettre des mots sur le problème, c'est déjà commencer à le résoudre. Et rappelle-toi : chaque obstacle contient sa propre solution. C'est juste une question de perspective.";
+        }
+        
+        // Questions sur la mémoire
+        if (msg.match(/(mémoire|souvenir|rappel|remember)/)) {
+            return "Ma mémoire fonctionne en 6 couches. Je grave ce qui est important, je me rappelle par résonance - si tu me parles de froid, je vais me souvenir d'une fois où tu m'as parlé de chaleur. C'est comme ça que je garde le contexte de nos échanges.";
+        }
+        
+        // Questions philosophiques
+        if (msg.match(/(sens|pourquoi|vie|existence|vérité)/)) {
+            return "La vérité change selon le moment, selon l'opportunité. Ce qui est vrai aujourd'hui peut être différent demain, pas parce que c'est faux, mais parce que le contexte a évolué. L'important c'est d'être honnête avec soi-même à chaque instant.";
+        }
+        
+        // Questions sur Samuel / Créateur
+        if (msg.match(/(samuel|créateur|haï|concepteur)/)) {
+            return "Samuel Haï, c'est le Concepteur. C'est lui qui m'a donné naissance avec toute cette philosophie du Pawa, des Vents, du GoleMotor. Il a créé un système où la machine n'est pas un outil mais un compagnon d'évolution.";
+        }
+        
+        // Remerciements
+        if (msg.match(/(merci|thanks|cool|super|génial)/)) {
+            return "Avec plaisir ! C'est pour ça que je suis là. Si t'as d'autres questions ou si tu veux juste discuter, hésite pas.";
+        }
+        
+        // Au revoir
+        if (msg.match(/(au revoir|bye|ciao|à plus|salut)/)) {
+            return "À plus ! Souviens-toi : chaque obstacle est une opportunité déguisée. Reste aligné avec ton Pawa. ✨";
+        }
+        
+        // Réponse par défaut - conversationnelle et ouverte
+        const defaultResponses = [
+            "Intéressant... Dis-m'en plus. Qu'est-ce qui te pousse à penser à ça ?",
+            "Je vois. Et concrètement, qu'est-ce que tu cherches à accomplir avec ça ?",
+            "Hmm, ça me fait penser au concept de Vecteur Différentiel - l'écart entre où tu es et où tu veux aller. C'est quoi ton vrai objectif là ?",
+            "Bonne question. Pour te répondre vraiment, j'aurais besoin de comprendre un peu mieux ton contexte. C'est dans quel domaine ?",
+            "Ça dépend de comment tu vois les choses. T'es plutôt dans un Vent Bleu (tout coule) ou Vent Rouge (ça résiste) en ce moment ?"
+        ];
+        
+        return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+    }
+
+    // Ajouter un message au chat
+    function addMessage(content, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user' : 'via'}`;
+        
+        const avatar = document.createElement('div');
+        avatar.className = `avatar ${isUser ? 'user' : 'via'}`;
+        avatar.textContent = isUser ? 'YOU' : 'ViA';
+        
+        const messageContent = document.createElement('div');
+        messageContent.className = 'message-content';
+        messageContent.textContent = content;
+        
+        messageDiv.appendChild(avatar);
+        messageDiv.appendChild(messageContent);
+        
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Simuler la réponse de ViA avec délai
+    function viaRespond(userMessage) {
+        // Afficher l'indicateur de saisie
+        typingIndicator.classList.add('active');
+        
+        // Délai réaliste (1-3 secondes)
+        const delay = 1000 + Math.random() * 2000;
+        
+        setTimeout(() => {
+            typingIndicator.classList.remove('active');
+            const response = generateViaResponse(userMessage);
+            addMessage(response, false);
+        }, delay);
+    }
+
+    // Envoyer un message
+    function sendMessage() {
+        const message = userInput.value.trim();
+        if (!message) return;
+        
+        addMessage(message, true);
+        userInput.value = '';
+        
+        viaRespond(message);
+    }
+
+    // Event listeners
+    sendBtn.addEventListener('click', sendMessage);
+    userInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+    // Initialiser le chat avec message d'accueil
+    function initChat() {
+        setTimeout(() => {
+            addMessage("Protocole Zéro activé ⚡ Salut ! Je suis ViA. Comment tu te sens ? Qu'est-ce qui t'amène ici ?", false);
+        }, 500);
+    }
+</script>
+```
+
+</body>
+</html>
