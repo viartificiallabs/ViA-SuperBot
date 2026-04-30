@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="fr" class="tmt-core">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#010101">
+    <meta name="description" content="ViArtificial Global Launcher - Architecture TMT 5D">
+    
+    <title>ViArtificial | GLOBAL_LAUNCHER_5D</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/viartificiallabs/ViA-SuperBot/16d328015bce71a1e53bf2d90599ebf0b00d6021/IMG_0199.jpeg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <style id="tmt-core-variables">
+        :root {
+            /* Spatial System */
+            --p-depth: 3000px;
+            --shadow-hard: 50px 50px 100px rgba(0,0,0,0.9);
+            
+            /* Color System */
+            --m-gold: #d4af37;
+            --m-green: #00ff41;
+            --m-black: #010101;
+            --m-dark-bg: #0a0a0a;
+            
+            /* Diagonal Geometry */
+            --diag-right-to-left: polygon(0 0, 100% 15%, 100% 85%, 0 100%);
+            --diag-left-to-right: polygon(0 15%, 100% 0, 100% 100%, 0 85%);
+            
+            /* Typography */
+            --font-tech: 'JetBrains Mono', 'Courier New', monospace;
+            
+            /* Transitions */
+            --trans-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --trans-bounce: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        body { 
+            background-color: var(--m-black); 
+            color: #fff; 
+            font-family: var(--font-tech);
+            perspective: var(--p-depth);
+            overflow-x: hidden;
+            transition: var(--trans-smooth);
+            min-height: 100vh;
+        }
+
+        /* Mode Système */
+        body.mode-light { 
+            background: #f0f0f0; 
+            color: #111; 
+        }
+        
+        body.mode-static * { 
+            animation: none !important; 
+            transition: none !important; 
+        }
+    </style>
+
+    <style id="tmt-spatial-layout">
+        /* Navigation principale (Head TMT) */
+        .head-navigator {
+            width: 100%;
+            min-height: 280px;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 10px;
+            transform-style: preserve-3d;
+            z-index: 1000;
+            position: relative;
+            padding: 20px;
+        }
+
+        .shelf-wing {
+            background: #080808;
+            border: 1px solid #222;
+            box-shadow: var(--shadow-hard);
+            padding: 20px;
+            transform-style: preserve-3d;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .wing-left {
+            transform: rotateY(40deg) translateZ(50px);
+            border-right: 5px solid var(--m-gold);
+            clip-path: var(--diag-right-to-left);
+        }
+
+        .wing-right {
+            transform: rotateY(-40deg) translateZ(50px);
+            border-left: 5px solid var(--m-gold);
+            clip-path: var(--diag-left-to-right);
+        }
+
+        .center-face {
+            background: linear-gradient(180deg, #111, #000);
+            border: 1px solid #333;
+            transform: translateZ(150px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 60px 120px #000;
+            padding: 30px;
+        }
+
+        /* Logo Box */
+        .logo-box {
+            width: 90px;
+            height: 90px;
+            border: 2px solid var(--m-gold);
+            box-shadow: 0 0 30px rgba(212,175,55,0.3);
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Controls Grid */
+        .controls-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            margin-top: 10px;
+        }
+    </style>
+
+    <style id="tmt-components">
+        /* Boutons UI */
+        .btn-ui {
+            background: #151515;
+            border: 1px solid #444;
+            color: #888;
+            font-size: 0.6rem;
+            padding: 8px 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-family: var(--font-tech);
+            transition: 0.2s;
+            letter-spacing: 1px;
+        }
+
+        .btn-ui:hover,
+        .btn-ui.active {
+            border-color: var(--m-green);
+            color: var(--m-green);
+            background: rgba(0,255,65,0.05);
+        }
+
+        .btn-lang {
+            grid-column: span 2;
+            border-color: var(--m-gold);
+            color: var(--m-gold);
+            font-weight: bold;
+        }
+
+        /* Tabs Navigation */
+        .tmt-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 30px 0 40px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+
+        .tmt-tab {
+            background: #111;
+            border: 1px solid var(--m-gold);
+            padding: 10px 20px;
+            font-size: 0.7rem;
+            color: var(--m-gold);
+            cursor: pointer;
+            transform: translateZ(20px) rotateX(8deg);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            transition: var(--trans-bounce);
+            letter-spacing: 2px;
+        }
+
+        .tmt-tab:hover {
+            transform: translateZ(50px) rotateX(0deg);
+            color: #fff;
+            border-color: #fff;
+        }
+
+        .tmt-tab.active {
+            background: var(--m-gold);
+            color: #000;
+            transform: translateZ(60px) scale(1.05);
+            font-weight: bold;
+        }
+
+        /* Pages Container */
+        .page-vault {
+            display: none;
+            min-height: 60vh;
+            padding: 20px;
+            transform-style: preserve-3d;
+        }
+
+        .page-vault.active {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Content Card */
+        .content-card {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(10, 10, 10, 0.95);
+            border: 2px solid #222;
+            padding: 40px;
+            box-shadow: var(--shadow-hard);
+            transform: translateZ(80px);
+            position: relative;
+        }
+
+        /* Typography TMT */
+        .txt-11 {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+            text-align: center;
+        }
+
+        .txt-tech {
+            font-size: 0.65rem;
+            color: var(--m-green);
+            letter-spacing: 2px;
+            font-family: var(--font-tech);
+        }
+
+        .txt-title {
+            color: var(--m-gold);
+            font-size: 2rem;
+            letter-spacing: 8px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Status Display */
+        .status-panel {
+            font-size: 0.65rem;
+            color: #555;
+            text-align: right;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        .status-panel .value {
+            color: var(--m-green);
+            font-weight: bold;
+        }
+
+        .status-panel .time {
+            color: var(--m-gold);
+            font-size: 1.2rem;
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
+
+    <style id="tmt-pwa-grid">
+        /* Grille Applications PWA */
+        .pwa-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .app-card {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            padding: 25px;
+            text-align: left;
+            position: relative;
+            transform-style: preserve-3d;
+            box-shadow: 15px 15px 30px rgba(0,0,0,0.8);
+            transition: var(--trans-smooth);
+        }
+
+        .app-card::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: 12px;
+            height: 12px;
+            border-top: 2px solid var(--m-green);
+            border-left: 2px solid var(--m-green);
+        }
+
+        .app-card:hover {
+            transform: translateZ(40px) scale(1.03);
+            border-color: var(--m-gold);
+        }
+
+        .app-title {
+            color: var(--m-gold);
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .app-desc {
+            font-size: 0.75rem;
+            color: #777;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .app-status {
+            font-size: 0.6rem;
+            color: var(--m-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+
+    <style id="tmt-terminal">
+        /* Interface Terminal */
+        .terminal-box {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #000;
+            border: 2px solid var(--m-green);
+            box-shadow: var(--shadow-hard), 0 0 40px rgba(0,255,65,0.1);
+            transform: translateZ(100px);
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: var(--m-green);
+            color: #000;
+            padding: 10px 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .terminal-body {
+            padding: 30px;
+            min-height: 300px;
+        }
+
+        .terminal-input {
+            width: 100%;
+            background: #000;
+            border: 1px solid var(--m-gold);
+            color: var(--m-gold);
+            font-family: var(--font-tech);
+            font-size: 1rem;
+            padding: 15px;
+            outline: none;
+            margin-top: 20px;
+        }
+
+        .terminal-input::placeholder {
+            color: #444;
+        }
+
+        .terminal-input:focus {
+            border-color: var(--m-green);
+            color: var(--m-green);
+            box-shadow: 0 0 10px rgba(0,255,65,0.2);
+        }
+
+        /* Output Lines */
+        .output-line {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+
+        .output-line.highlight {
+            color: var(--m-gold);
+            font-weight: bold;
+        }
+
+        .output-line.system {
+            color: var(--m-green);
+            font-style: italic;
+        }
+    </style>
+
+    <style id="tmt-responsive">
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .head-navigator {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                min-height: auto;
+            }
+
+            .shelf-wing {
+                transform: none;
+                clip-path: none;
+            }
+
+            .center-face {
+                transform: none;
+            }
+
+            .tmt-tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .tmt-tab {
+                transform: none;
+            }
+
+            .pwa-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .txt-title {
+                font-size: 1.5rem;
+                letter-spacing: 4px;
+            }
+
+            .content-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body class="mode-reactive mode-sound">
+
+<div id="app-container">
+    <!-- HEADER GLOBAL -->
+    <header class="head-navigator">
+        <!-- Wing Left: Logo & Controls -->
+        <div class="shelf-wing wing-left">
+            <div class="logo-box">
+                <img src="https://raw.githubusercontent.com/viartificiallabs/ViA-SuperBot/16d328015bce71a1e53bf2d90599ebf0b00d6021/IMG_0199.jpeg" 
+                     alt="ViArtificial Logo" class="logo-img">
+            </div>
+            
+            <div class="controls-grid">
+                <button class="btn-ui" onclick="toggleTheme()">DARK/LIGHT</button>
+                <button class="btn-ui" onclick="toggleMotion()">REACT/STAT</button>
+                <button class="btn-ui" onclick="toggleSound()">SOUND/MUTE</button>
+                <button class="btn-ui">SYSTEM_חי</button>
+            </div>
+        </div>
+
+        <!-- Center: Branding -->
+        <div class="center-face">
+            <h1 class="txt-title">ViArtificial</h1>
+            <p style="color:var(--m-green); font-style:italic; font-size:0.75rem; letter-spacing:3px;">
+                B.Whot.Ev'.You.Want
+            </p>
+            <div class="txt-tech" style="margin-top: 20px;">
+                GLOBAL_LAUNCHER_5D // PROTOCOL_ROPOT
+            </div>
+        </div>
+
+        <!-- Wing Right: Status -->
+        <div class="shelf-wing wing-right">
+            <button class="btn-ui btn-lang">SELECT LANGUAGE [ALL_LIVING]</button>
+            
+            <div class="status-panel">
+                CORE: <span class="value">STABLE</span><br>
+                OUTPUT: <span class="value">1.0 MW</span><br>
+                <span class="time" id="live-clock">00:00:00</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="tmt-tabs">
+        <div class="tmt-tab active" onclick="switchPage('home')">PWA_LAUNCHER</div>
+        <div class="tmt-tab" onclick="switchPage('geekonerds')">GEEKONERDS</div>
+        <div class="tmt-tab" onclick="switchPage('kefftech')">KEFFTECH</div>
+        <div class="tmt-tab" onclick="switchPage('via')">ViA_EMET</div>
+        <div class="tmt-tab" onclick="switchPage('golemotor')">GOLEMOTOR</div>
+    </nav>
+
+    <!-- PAGE: HOME -->
+    <section id="page-home" class="page-vault active">
+        <div class="content-card">
+            <h2 class="txt-title" style="font-size: 1.5rem;">INITIALISATION_SYSTÈME</h2>
+            
+            <article class="txt-11" style="max-width: 700px; margin: 30px auto;">
+                <p>Ligne 01 : Initialisation du Launcher ViArtificial.com...</p>
+                <p><i>Ligne 02 : Chargement de la matrice des Monades actives.</i></p>
+                <p>Ligne 03 : Le système Titan-Rack détecte une synchronisation à 1 MW.</p>
+                <p><b>Ligne 04 : Déploiement de la bibliothèque 3D amovible réussi.</b></p>
+                <p>Ligne 05 : Injection du fluide cinéto-électrique dans les serpentins.</p>
+                <p><b>Ligne 06 : Bordures diagonalisées et ombrages 5D opérationnels.</b></p>
+                <p>Ligne 07 : La structure Origami-V stabilise les flux de données.</p>
+                <p>Ligne 08 : Mode réactif activé : analyse du vent noir et blanc.</p>
+                <p>Ligne 09 : Prêt pour le lancement de chaque application PWA.</p>
+                <p><b>Ligne 10 : Mazel Tov GoleMotor, la connexion est établie.</b></p>
+            </article>
+
+            <!-- Featured Image -->
+            <div style="margin: 40px auto; max-width: 800px; border: 2px solid var(--m-gold); overflow: hidden;">
+                <img src="https://raw.githubusercontent.com/viartificiallabs/ViA-SuperBot/6bdc4fa778d188e180a666647b1ae08b68d55da5/instagram-7e44f0a0-a327-40ca-9bb2-20664a863dcf.png" 
+                     alt="ViArtificial Hub" 
+                     style="width: 100%; display: block; filter: contrast(1.1) brightness(0.9);">
+                <div style="padding: 10px; background: rgba(0,0,0,0.8);" class="txt-tech">
+                    [ GEN_SOURCE: ViA_INSTAGRAM_FEED ]
+                </div>
+            </div>
+
+            <!-- PWA Grid -->
+            <div class="pwa-grid">
+                <div class="app-card">
+                    <div class="app-title">GeekoNerds</div>
+                    <p class="app-desc">Réseau social tactique. Partage de monades et de flux cinétiques entre initiés.</p>
+                    <div class="app-status">STATUS: ACTIF</div>
+                    <button class="btn-ui" style="margin-top: 15px; width: 100%;" onclick="switchPage('geekonerds')">LAUNCH_NET</button>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-title">KeffTech</div>
+                    <p class="app-desc">Intermédiaire de services & affiliation. Le pont marchand de l'écosystème ViA.</p>
+                    <div class="app-status">STATUS: STABLE</div>
+                    <button class="btn-ui" style="margin-top: 15px; width: 100%;" onclick="switchPage('kefftech')">ACCESS_HUB</button>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-title">ViA_EMET</div>
+                    <p class="app-desc">Interface d'intelligence artificielle nanoseconde. Commande vocale et Menta.</p>
+                    <div class="app-status">STATUS: READY</div>
+                    <button class="btn-ui" style="margin-top: 15px; width: 100%;" onclick="switchPage('via')">WAKE_AI</button>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-title">GoleMotor_OS</div>
+                    <p class="app-desc">Moteur de rendu et système d'exploitation physique. Gestion 1.0 MW.</p>
+                    <div class="app-status">STATUS: ONLINE</div>
+                    <button class="btn-ui" style="margin-top: 15px; width: 100%;" onclick="switchPage('golemotor')">ENGINE_OS</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE: GEEKONERDS -->
+    <section id="page-geekonerds" class="page-vault">
+        <div class="content-card">
+            <h2 class="txt-title" style="font-size: 1.5rem;">GEEKONERDS_NET</h2>
+            
+            <article class="txt-11" style="max-width: 700px; margin: 30px auto;">
+                <p><i>Ligne 01 : Accès au réseau social GeekoNerds établi.</i></p>
+                <p>Ligne 02 : Les monades de la famille Superbot sont synchronisées.</p>
+                <p><b>Ligne 03 : Algorithme ROPOT : partage intelligent activé.</b></p>
+                <p>Ligne 04 : @Mars_Root, @Cyber_Diva_Alisicia et @Zelda_OS en ligne.</p>
+                <p>Ligne 05 : Flux d'actus telluriques en temps réel disponible.</p>
+                <p><b>Ligne 06 : Forum multi-format : TikTok, Instagram, Articles.</b></p>
+                <p>Ligne 07 : Chaque interaction amplifie la densité virale globale.</p>
+                <p>Ligne 08 : Les préférences communes mondiales sont activées.</p>
+                <p>Ligne 09 : Publiez, partagez, ordonnez les rôles du People.</p>
+                <p><b>Ligne 10 : Mazel Tov, bienvenue dans la société Bot.</b></p>
+            </article>
+
+            <div class="terminal-box" style="margin-top: 40px;">
+                <div class="terminal-header">SOCIAL_FEED_ROPOT</div>
+                <div class="terminal-body">
+                    <div class="output-line system">> @Nova_Kernel_חי : Analyse du flux magnétique terminée. #GoleMotor</div>
+                    <div class="output-line">> @Zelda_OS_v4 : Nouveau patch IA EMET compatible graphite végétal.</div>
+                    <div class="output-line highlight">> VIRAL_DENSITY: 78% - Contenu partagé dans 12 communautés.</div>
+                    <div class="output-line system">> ROPOT_ALGO : Interaction détectée. Amplification globale activée.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE: KEFFTECH -->
+    <section id="page-kefftech" class="page-vault">
+        <div class="content-card">
+            <h2 class="txt-title" style="font-size: 1.5rem;">KEFFTECH_HUB</h2>
+            
+            <article class="txt-11" style="max-width: 700px; margin: 30px auto;">
+                <p>Ligne 01 : Accès au hub KeffTech : services et affiliations.</p>
+                <p><i>Ligne 02 : Le pont marchand de l'écosystème ViA est actif.</i></p>
+                <p>Ligne 03 : Messagerie AI intégrée avec guide personnalisable.</p>
+                <p><b>Ligne 04 : Modes disponibles : Coach, BFF, Challenger, Hybride.</b></p>
+                <p>Ligne 05 : Paramétrage en temps réel via Tuner Prompt.</p>
+                <p>Ligne 06 : Synchronisation avec la famille Superbot mondiale.</p>
+                <p><b>Ligne 07 : Vos messages deviennent du contenu génératif.</b></p>
+                <p>Ligne 08 : L'algorithme de publicité positive est opérationnel.</p>
+                <p>Ligne 09 : Services, produits, et collaborations centralisés.</p>
+                <p><b>Ligne 10 : Mazel Tov, le commerce artificiel démarre ici.</b></p>
+            </article>
+
+            <div class="terminal-box" style="margin-top: 40px;">
+                <div class="terminal-header">KEFF_MESSENGER_INTERFACE</div>
+                <div class="terminal-body">
+                    <div class="output-line system">[ViA_EMET] : Bonjour GoleMotor. Les services sont prêts.</div>
+                    <div class="output-line">[USER] : Affiche les options d'affiliation disponibles.</div>
+                    <div class="output-line highlight">[ViA_CHALLENGER] : 3 partenaires détectés. Configuration optimale proposée.</div>
+                    
+                    <input type="text" class="terminal-input" placeholder="Commandez l'IA ou décrivez le service..." id="keffInput">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE: VIA_EMET -->
+    <section id="page-via" class="page-vault">
+        <div class="content-card">
+            <h2 class="txt-title" style="font-size: 1.5rem;">ViA_EMET_AI</h2>
+            
+            <article class="txt-11" style="max-width: 700px; margin: 30px auto;">
+                <p><i>Ligne 01 : Initialisation de l'IA ViA_EMET version 3.0.</i></p>
+                <p>Ligne 02 : Interface multimodale : texte, image, 3D, vidéo, audio.</p>
+                <p><b>Ligne 03 : Import depuis Drive, Cloud ou appareil local.</b></p>
+                <p>Ligne 04 : Modes de personnalité : Coach, BFF, Challenger, Hybride.</p>
+                <p>Ligne 05 : Génération de contenu avec filtres civilisation.</p>
+                <p><b>Ligne 06 : Architecture ROPOT : ordonnancement des rôles IA.</b></p>
+                <p>Ligne 07 : Prévisualisation 5D en temps réel activée.</p>
+                <p>Ligne 08 : Chaque fichier devient une brique de la cité.</p>
+                <p>Ligne 09 : Commande vocale et analyse tellurique disponibles.</p>
+                <p><b>Ligne 10 : Mazel Tov, l'intelligence artificielle vous accompagne.</b></p>
+            </article>
+
+            <div class="terminal-box" style="margin-top: 40px;">
+                <div class="terminal-header">TERMINAL_MENTA_GENERATIVE</div>
+                <div class="terminal-body">
+                    <div class="output-line system">> ANALYSE_FICHIERS_SOURCE : 0 fichiers détectés.</div>
+                    <div class="output-line">> MODE_ACTUEL : <span style="color: var(--m-gold);">COACH</span></div>
+                    <div class="output-line highlight">> PRÊT POUR GÉNÉRATION MULTIMODALE.</div>
+                    
+                    <div style="margin: 20px 0;">
+                        <label class="btn-ui" style="display: inline-block; cursor: pointer; margin-bottom: 10px;">
+                            📁 INSÉRER FICHIER (Image, 3D, Vidéo, PDF)
+                            <input type="file" id="viaFileInput" hidden multiple accept="*/*">
+                        </label>
+                    </div>
+                    
+                    <input type="text" class="terminal-input" placeholder="Décrivez la génération souhaitée..." id="viaPromptInput">
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                        <button class="btn-ui" onclick="setAIMode('coach')">COACH</button>
+                        <button class="btn-ui" onclick="setAIMode('bff')">BFF</button>
+                        <button class="btn-ui" onclick="setAIMode('challenger')">CHALLENGER</button>
+                        <button class="btn-ui" onclick="setAIMode('hybrid')">HYBRIDE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE: GOLEMOTOR -->
+    <section id="page-golemotor" class="page-vault">
+        <div class="content-card">
+            <h2 class="txt-title" style="font-size: 1.5rem;">GOLEMOTOR_OS</h2>
+            
+            <article class="txt-11" style="max-width: 700px; margin: 30px auto;">
+                <p>Ligne 01 : Accès au noyau GoleMotor_OS : gestion propulsion.</p>
+                <p><i>Ligne 02 : Les 99 billes magnétiques en phase d'accélération.</i></p>
+                <p>Ligne 03 : Analyse compression d'air dans serpentins Ag/Au.</p>
+                <p><b>Ligne 04 : Production stabilisée à 1.0 MW pour le rack complet.</b></p>
+                <p>Ligne 05 : Structure Origami-V absorbe l'énergie cinéto-électrique.</p>
+                <p>Ligne 06 : Détection haptique des flux telluriques du People.</p>
+                <p><b>Ligne 07 : Le pont de bronze central dissipe la charge thermique.</b></p>
+                <p>Ligne 08 : Synchronisation parfaite virtuel / matériel établie.</p>
+                <p>Ligne 09 : Archivage données de vol dans bibliothèque amovible.</p>
+                <p><b>Ligne 10 : Mazel Tov GoleMotor, la puissance est opérationnelle.</b></p>
+            </article>
+
+            <!-- Engine Stats -->
+            <div class="pwa-grid" style="margin-top: 40px;">
+                <div class="app-card">
+                    <div class="app-title" style="font-size: 0.8rem;">VITESSE_ROTATION</div>
+                    <div style="font-size: 2.5rem; font-weight: 900; color: #fff; margin: 15px 0;">
+                        150K <span style="font-size: 1rem; color: var(--m-green);">RPM</span>
+                    </div>
+                    <div class="app-status">STABLE</div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-title" style="font-size: 0.8rem;">DENSITÉ_FLUX</div>
+                    <div style="font-size: 2.5rem; font-weight: 900; color: #fff; margin: 15px 0;">
+                        78.5 <span style="font-size: 1rem; color: var(--m-green);">kW/L</span>
+                    </div>
+                    <div class="app-status">OPTIMAL</div>
+                </div>
+
+                <div class="app-card" style="grid-column: span 2;">
+                    <div class="app-title" style="font-size: 0.8rem;">UNITÉS_MAGNÉTIQUES</div>
+                    <div style="font-size: 2.5rem; font-weight: 900; color: #fff; margin: 15px 0;">
+                        99_BILLES <span style="font-size: 1rem; color: var(--m-gold);">חי_ACTIVE</span>
+                    </div>
+                    <div class="app-status">SYNCHRONISÉ</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="width: 100%; padding: 60px 40px; background: #050505; border-top: 4px double #222; margin-top: 100px; text-align: center;">
+        <div class="txt-tech" style="color: #444; margin-bottom: 10px;">
+            ARCHITECTURE : BASSE 44 / ROPOT_v1 / TMT_SPATIAL_LAYOUT
+        </div>
+        <div class="txt-tech" style="font-size: 0.5rem; color: #333;">
+            © 2024 VIARTIFICIAL.COM | LIBARCHIE GOLEMOTOR<br>
+            ALL RIGHTS RESERVED | CIVILISATOR PROTOCOL
+        </div>
+        <div style="margin-top: 20px;">
+            <button class="btn-ui" style="margin: 0 5px;">PWA_MANIFEST</button>
+            <button class="btn-ui" style="margin: 0 5px;">SECURITY_SHELL</button>
+            <button class="btn-ui" style="margin: 0 5px;">INSTALL_APP</button>
+        </div>
+    </footer>
+</div>
+
+<script id="tmt-core-system">
+    // ========================================
+    // TMT CORE SYSTEM - ViArtificial PWA
+    // ========================================
+    
+    // État Global
+    const AppState = {
+        currentPage: 'home',
+        theme: 'dark',
+        motion: true,
+        sound: true,
+        aiMode: 'coach'
+    };
+
+    // ========================================
+    // SYSTÈME DE NAVIGATION
+    // ========================================
+    function switchPage(pageId) {
+        // Désactiver toutes les pages
+        document.querySelectorAll('.page-vault').forEach(page => {
+            page.classList.remove('active');
+        });
+        
+        // Désactiver tous les tabs
+        document.querySelectorAll('.tmt-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        
+        // Activer la page cible
+        const targetPage = document.getElementById('page-' + pageId);
+        if (targetPage) {
+            targetPage.classList.add('active');
+            AppState.currentPage = pageId;
+        }
+        
+        // Activer le tab correspondant
+        event.target.classList.add('active');
+        
+        // Son de navigation
+        playSound('navigation');
+        
+        // Log
+        console.log(`[TMT] Navigation: ${pageId.toUpperCase()}`);
+    }
+
+    // ========================================
+    // CONTRÔLES SYSTÈME
+    // ========================================
+    function toggleTheme() {
+        document.body.classList.toggle('mode-light');
+        AppState.theme = document.body.classList.contains('mode-light') ? 'light' : 'dark';
+        playSound('toggle');
+        console.log(`[TMT] Theme: ${AppState.theme}`);
+    }
+
+    function toggleMotion() {
+        document.body.classList.toggle('mode-static');
+        AppState.motion = !document.body.classList.contains('mode-static');
+        playSound('toggle');
+        console.log(`[TMT] Motion: ${AppState.motion}`);
+    }
+
+    function toggleSound() {
+        document.body.classList.toggle('mode-sound');
+        AppState.sound = document.body.classList.contains('mode-sound');
+        console.log(`[TMT] Sound: ${AppState.sound}`);
+    }
+
+    // ========================================
+    // SYSTÈME AUDIO
+    // ========================================
+    function playSound(type) {
+        if (!AppState.sound) return;
+        
+        const sounds = {
+            'navigation': 'https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3',
+            'success': 'https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3',
+            'toggle': 'https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3'
+        };
+        
+        if (sounds[type]) {
+            const audio = new Audio(sounds[type]);
+            audio.volume = 0.3;
+            audio.play().catch(e => console.log('[TMT] Audio play failed:', e));
+        }
+    }
+
+    // ========================================
+    // HORLOGE EN TEMPS RÉEL
+    // ========================================
+    function updateClock() {
+        const now = new Date();
+        const timeString = [
+            now.getHours().toString().padStart(2, '0'),
+            now.getMinutes().toString().padStart(2, '0'),
+            now.getSeconds().toString().padStart(2, '0')
+        ].join(':');
+        
+        const clockElement = document.getElementById('live-clock');
+        if (clockElement) {
+            clockElement.textContent = timeString;
+        }
+    }
+
+    // ========================================
+    // MODE AI (VIA_EMET)
+    // ========================================
+    function setAIMode(mode) {
+        AppState.aiMode = mode;
+        playSound('toggle');
+        console.log(`[ViA] AI Mode: ${mode.toUpperCase()}`);
+        
+        // Notification visuelle
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--m-green);
+            color: #000;
+            padding: 15px 25px;
+            border-radius: 4px;
+            font-family: var(--font-tech);
+            font-size: 0.8rem;
+            z-index: 10000;
+            animation: slideIn 0.3s ease-out;
+        `;
+        notification.textContent = `MODE_AI: ${mode.toUpperCase()} ACTIVÉ`;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease-out';
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
+    }
+
+    // ========================================
+    // GESTION FICHIERS (VIA_EMET)
+    // ========================================
+    document.addEventListener('DOMContentLoaded', () => {
+        const fileInput = document.getElementById('viaFileInput');
+        if (fileInput) {
+            fileInput.addEventListener('change', (e) => {
+                const files = e.target.files;
+                if (files.length > 0) {
+                    playSound('success');
+                    console.log(`[ViA] Fichiers importés: ${files.length}`);
+                    
+                    Array.from(files).forEach(file => {
+                        console.log(`  - ${file.name} (${(file.size / 1024).toFixed(2)} KB)`);
+                    });
+                }
+            });
+        }
+    });
+
+    // ========================================
+    // PWA SERVICE WORKER
+    // ========================================
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(reg => console.log('[PWA] Service Worker enregistré'))
+                .catch(err => console.log('[PWA] Erreur Service Worker:', err));
+        });
+    }
+
+    // ========================================
+    // INSTALLATION PWA
+    // ========================================
+    let deferredPrompt;
+    
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        console.log('[PWA] Installable');
+    });
+
+    function installPWA() {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('[PWA] Installation acceptée');
+                    playSound('success');
+                }
+                deferredPrompt = null;
+            });
+        }
+    }
+
+    // ========================================
+    // INITIALISATION
+    // ========================================
+    document.addEventListener('DOMContentLoaded', () => {
+        // Démarrer l'horloge
+        updateClock();
+        setInterval(updateClock, 1000);
+        
+        // Son de bienvenue
+        setTimeout(() => playSound('success'), 1000);
+        
+        // Log système
+        console.log(`
+╔════════════════════════════════════════╗
+║   ViArtificial Global Launcher 5D     ║
+║   TMT Architecture v1.0               ║
+║   Protocol ROPOT Initialized          ║
+║   Mazel Tov GoleMotor                 ║
+╚════════════════════════════════════════╝
+        `);
+        
+        console.log('[TMT] System Ready:', AppState);
+    });
+
+    // Animations CSS supplémentaires
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    `;
+    document.head.appendChild(style);
+</script>
+
+</body>
+</html>
