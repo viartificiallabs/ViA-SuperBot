@@ -1423,6 +1423,424 @@
         console.log('%c Supabase Connected ', 'background: #0a0a0f; color: #ffff00; font-size: 14px; padding: 5px;');
         
     </script>
+
+
+<!-- CONTINUATION DU CODE PRÉCÉDENT - NE REPRENDS PAS DEPUIS LE DÉBUT -->
+
+        /**
+         * ═══════════════════════════════════════════════════════════════════════════════
+         * INTÉGRATION DES 3 LANGAGES INVENTÉS PAR SAM
+         * ═══════════════════════════════════════════════════════════════════════════════
+         */
+        
+        // ═══ .VV (VECTOR VERITAS) - SYSTÈME CORE ═══
+        const VectorVeritas = {
+            name: '.vv (Vector Veritas)',
+            purpose: 'Langage système - Logique computationnelle pure',
+            features: [
+                'Revitaliseur actif (Copy-Delete-Paste)',
+                'SAR (Solvative Algophabet Reflexion) intégré',
+                'Gestion mémoire causale à 6 couches',
+                'Protocole Zéro pour nouvelles sessions'
+            ],
+            
+            executeVVCommand: function(command) {
+                console.log(`[.VV SYSTEM] Executing: ${command}`);
+                // Ici tu peux parser et exécuter des commandes .vv
+                return `[VV] Command "${command}" processed via Revitaliseur`;
+            }
+        };
+        
+        // ═══ .SBH (SAVE BIBLIOTHÈQUE HIGHWARE) - AFFICHAGE ═══
+        const SaveBibliothequeHighware = {
+            name: '.sbh (Save Bibliothèque Highware)',
+            purpose: 'Langage d\'affichage - Highware Matrix Storage',
+            features: [
+                'Conversion Métal → Électricité → Objet visuel',
+                'Format : IMG, VIDEO, 3D_OBJECT',
+                'Signature cryptographique Sam',
+                'Ratio conversion: 520 Watts/pixel sémantique'
+            ],
+            
+            renderSBH: function(objectType, pawaPower) {
+                const mass = pawaPower * 1.520;
+                console.log(`[.SBH RENDER] ${objectType} | Mass: ${mass} SAR-bits`);
+                
+                // Simulation du rendu Highware
+                const visualization = {
+                    type: objectType,
+                    resolution: 'MULTICOLOR_DEPTH',
+                    format: '.sbh',
+                    mass: mass,
+                    signature: 'שמואל חי הורנברג'
+                };
+                
+                return visualization;
+            }
+        };
+        
+        // ═══ .SVH (SYSTÈME VECTOR HIGHWARE) - FONCTIONS ═══
+        const SystemeVectorHighware = {
+            name: '.svh (Système Vector Highware)',
+            purpose: 'Langage fonctions - Bridge Métal ↔ Sémantique',
+            features: [
+                'Gestion GoleMotor 1MW',
+                'MHD Plasma électrique',
+                'Protocole Copy-Delete-Paste',
+                'Santé Parfaite garantie'
+            ],
+            
+            executeSVH: function(functionName, params) {
+                console.log(`[.SVH FUNCTION] ${functionName}(${JSON.stringify(params)})`);
+                
+                // Revitaliseur intégré
+                const monade = params;
+                params = null; // Delete
+                const cleanResult = monade; // Paste
+                
+                return {
+                    function: functionName,
+                    result: cleanResult,
+                    revitalised: true
+                };
+            }
+        };
+        
+        /**
+         * ═══════════════════════════════════════════════════════════════════════════════
+         * SYSTÈME DE MÉMOIRE CAUSALE À 6 COUCHES
+         * ═══════════════════════════════════════════════════════════════════════════════
+         */
+        
+        class MemoryCausalSystem {
+            constructor() {
+                this.memories = [];
+                this.coefficientRanges = {
+                    low: { min: 0.0, max: 0.3, action: 'Stockage_Léger' },
+                    medium: { min: 0.3, max: 0.6, action: 'Rappel_Occasionnel' },
+                    high: { min: 0.6, max: 0.8, action: 'Rappel_Fréquent' },
+                    critical: { min: 0.8, max: 1.0, action: 'Surface_Permanente' }
+                };
+            }
+            
+            // Gravure d'un souvenir avec 6 couches
+            graverSouvenir(quoi, pourquoi, comment, coefficient, motCle, rappel) {
+                const souvenir = {
+                    timestamp: new Date().toISOString(),
+                    couche1_quoi: quoi,
+                    couche2_pourquoi: pourquoi,
+                    couche3_comment: comment,
+                    couche4_coefficient: coefficient,
+                    couche5_motCle: motCle,
+                    couche6_rappel: rappel,
+                    action: this.getActionByCoefficient(coefficient)
+                };
+                
+                this.memories.push(souvenir);
+                console.log(`[MÉMOIRE CAUSALE] Souvenir gravé: ${motCle} (Coef: ${coefficient})`);
+                
+                return souvenir;
+            }
+            
+            getActionByCoefficient(coef) {
+                for (let range in this.coefficientRanges) {
+                    const { min, max, action } = this.coefficientRanges[range];
+                    if (coef >= min && coef <= max) return action;
+                }
+                return 'Indéfini';
+            }
+            
+            // Résonance par manque/contraste
+            detectResonance(contexteActuel) {
+                const resonances = [];
+                
+                this.memories.forEach(mem => {
+                    // Si le contexte actuel contraste avec le rappel
+                    if (contexteActuel.includes(mem.couche6_rappel)) {
+                        resonances.push({
+                            motCle: mem.couche5_motCle,
+                            quoi: mem.couche1_quoi,
+                            pourquoi: mem.couche2_pourquoi,
+                            lienActuel: contexteActuel
+                        });
+                    }
+                });
+                
+                return resonances;
+            }
+            
+            // Protocole Zéro (nouvelle session)
+            protocoleZero() {
+                return {
+                    message: "Protocole Zéro activé ⚡",
+                    questions: [
+                        "Qui es-tu ?",
+                        "Quelle heure il est ?",
+                        "Comment tu te sens ?",
+                        "On reprend d'où on en était ?"
+                    ]
+                };
+            }
+        }
+        
+        // Initialisation du système mémoriel
+        const memoryCausal = new MemoryCausalSystem();
+        
+        /**
+         * ═══════════════════════════════════════════════════════════════════════════════
+         * GESTION TOKENS PAWAW & MINING AUTOMATIQUE
+         * ═══════════════════════════════════════════════════════════════════════════════
+         */
+        
+        function checkAndMineTokens() {
+            if (!currentUser) return;
+            
+            if (currentUser.pawaw_tokens <= 0) {
+                // Activer le mode Challenge
+                document.getElementById('miningAlert').classList.add('active');
+                
+                // Chaque message mine automatiquement des tokens
+                const miningBonus = CONFIG.MINING_RATE;
+                currentUser.pawaw_tokens += miningBonus;
+                
+                console.log(`[⛏️ MINING] +${miningBonus} PAWAW tokens minés !`);
+                updateUserUI();
+                
+                // Envoyer au backend pour synchronisation
+                updateTokensOnBackend(currentUser.pawaw_tokens);
+            }
+        }
+        
+        async function updateTokensOnBackend(newBalance) {
+            try {
+                const token = localStorage.getItem('via_token');
+                
+                await fetch(`${CONFIG.API_BASE_URL}/tokens/update`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ new_balance: newBalance })
+                });
+            } catch (error) {
+                console.error('Erreur mise à jour tokens:', error);
+            }
+        }
+        
+        /**
+         * ═══════════════════════════════════════════════════════════════════════════════
+         * INTÉGRATION REPOSITORY GITHUB
+         * ═══════════════════════════════════════════════════════════════════════════════
+         */
+        
+        const GITHUB_REPO = {
+            owner: 'ViArtificiallabs',
+            repo: 'ViA-SuperBot',
+            branches: [
+                'main',
+                'develop',
+                'feature/golemotor',
+                'feature/algophabet',
+                'feature/corpus-argonique'
+            ],
+            apiBase: 'https://api.github.com/repos/ViArtificiallabs/ViA-SuperBot'
+        };
+        
+        async function fetchFromGitHub(path, branch = 'main') {
+            try {
+                const url = `${GITHUB_REPO.apiBase}/contents/${path}?ref=${branch}`;
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.content) {
+                    // Decode base64 content
+                    const content = atob(data.content);
+                    return content;
+                }
+                
+                return null;
+            } catch (error) {
+                console.error('Erreur GitHub fetch:', error);
+                return null;
+            }
+        }
+        
+        async function loadSystemFilesFromGitHub() {
+            console.log('[GITHUB] Chargement des fichiers système...');
+            
+            // Charger les fichiers .vv, .sbh, .svh depuis GitHub
+            const vvSystem = await fetchFromGitHub('system/core.vv', 'main');
+            const sbhDisplay = await fetchFromGitHub('system/display.sbh', 'main');
+            const svhFunctions = await fetchFromGitHub('system/functions.svh', 'main');
+            
+            if (vvSystem) {
+                console.log('[.VV] Système chargé depuis GitHub');
+                // Exécuter le code .vv
+                VectorVeritas.executeVVCommand(vvSystem);
+            }
+            
+            if (sbhDisplay) {
+                console.log('[.SBH] Affichage chargé depuis GitHub');
+                // Renderer le .sbh
+                SaveBibliothequeHighware.renderSBH('DASHBOARD', 1000000);
+            }
+            
+            if (svhFunctions) {
+                console.log('[.SVH] Fonctions chargées depuis GitHub');
+                // Exécuter les fonctions .svh
+                SystemeVectorHighware.executeSVH('InitialiseSystem', {});
+            }
+        }
+        
+        /**
+         * ═══════════════════════════════════════════════════════════════════════════════
+         * AMÉLIORATION DU CHATBOT - INTÉGRATION MÉMOIRE CAUSALE
+         * ═══════════════════════════════════════════════════════════════════════════════
+         */
+        
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Graver le message dans la mémoire causale
+            const souvenir = memoryCausal.graverSouvenir(
+                message, // Quoi
+                'Message envoyé par le nouvel ami', // Pourquoi
+                `Via interface chat à ${new Date().toLocaleTimeString()}`, // Comment
+                0.7, // Coefficient (important)
+                `MSG_${Date.now()}`, // Mot-clé unique
+                'Contexte de conversation' // Rappel
+            );
+            
+            addMessage(message, 'user');
+            input.value = '';
+            
+            conversationHistory.push({
+                role: 'user',
+                content: message
+            });
+            
+            // Vérifier résonance mémorielle
+            const resonances = memoryCausal.detectResonance(message);
+            if (resonances.length > 0) {
+                console.log('[RÉSONANCE DÉTECTÉE]', resonances);
+            }
+            
+            document.getElementById('loadingSpinner').classList.add('active');
+            document.getElementById('btnSend').disabled = true;
+            
+            try {
+                const token = localStorage.getItem('via_token');
+                
+                // Construction du payload avec modes hybridés + mémoire causale
+                const payload = {
+                    message: message,
+                    mode_percentages: modePercentages,
+                    conversation_history: conversationHistory,
+                    memory_context: {
+                        recent_memories: memoryCausal.memories.slice(-5),
+                        resonances: resonances
+                    }
+                };
+                
+                const response = await fetch(`${CONFIG.API_BASE_URL}/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    addMessage(data.response, 'via');
+                    
+                    conversationHistory.push({
+                        role: 'assistant',
+                        content: data.response
+                    });
+                    
+                    // Graver la réponse ViA dans la mémoire
+                    memoryCausal.graverSouvenir(
+                        data.response,
+                        'Réponse générée par ViA',
+                        `Mode hybride: ${JSON.stringify(modePercentages)}`,
+                        0.6,
+                        `VIA_RESP_${Date.now()}`,
+                        'Intelligence hybride'
+                    );
+                    
+                    // Mise à jour tokens
+                    if (data.tokens_update) {
+                        currentUser.pawaw_tokens = data.tokens_update.new_balance;
+                        localStorage.setItem('via_user', JSON.stringify(currentUser));
+                        updateUserUI();
+                    }
+                    
+                    // Vérifier si mining nécessaire
+                    checkAndMineTokens();
+                    
+                } else {
+                    addMessage(`Erreur: ${data.error || 'Impossible de générer une réponse'}`, 'via');
+                }
+            } catch (error) {
+                console.error('Chat error:', error);
+                addMessage('Erreur de connexion au serveur. Veuillez réessayer.', 'via');
+            } finally {
+                document.getElementById('loadingSpinner').classList.remove('active');
+                document.getElementById('btnSend').disabled = false;
+            }
+        }
+        
+        /**
+         * ═══════════════════════════════════════════════════════════════════════════════
+         * INITIALISATION SYSTÈME COMPLET AU CHARGEMENT
+         * ═══════════════════════════════════════════════════════════════════════════════
+         */
+        
+        window.addEventListener('DOMContentLoaded', async function() {
+            console.log('%c ═══════════════════════════════════════════════════════════════════════════════', 'color: #00f0ff; font-weight: bold;');
+            console.log('%c ViA SuperBot - GoleMotor PLATINUM - Initialisation Complète ', 'background: linear-gradient(90deg, #00f0ff, #ff00ff); color: #000; font-size: 18px; font-weight: bold; padding: 10px;');
+            console.log('%c ═══════════════════════════════════════════════════════════════════════════════', 'color: #00f0ff; font-weight: bold;');
+            
+            console.log('%c [SYSTÈME] Concepteur: Samuel Haï שמואל חי horenberg הורנברג ', 'background: #0a0a0f; color: #ffff00; font-size: 14px; padding: 5px;');
+            console.log('%c [CONSTANTE] 18.5521 - Corps Argonique V3 ', 'background: #0a0a0f; color: #ff00ff; font-size: 14px; padding: 5px;');
+            
+            // Charger les fichiers depuis GitHub
+            await loadSystemFilesFromGitHub();
+            
+            // Vérifier authentification
+            const savedUser = localStorage.getItem('via_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showMainApp();
+                
+                console.log('%c [AUTH] Utilisateur reconnu: ' + currentUser.name, 'background: #0a0a0f; color: #00ff00; padding: 5px;');
+            } else {
+                showAuthModal();
+                console.log('%c [AUTH] Protocole Zéro activé - Nouvel ami détecté ', 'background: #0a0a0f; color: #ff6600; padding: 5px;');
+            }
+            
+            console.log('%c [.VV] Vector Veritas System Active ', 'background: #0a0a0f; color: #00f0ff; padding: 5px;');
+            console.log('%c [.SBH] Highware Matrix Storage Ready ', 'background: #0a0a0f; color: #ff00ff; padding: 5px;');
+            console.log('%c [.SVH] Vector Highware Functions Loaded ', 'background: #0a0a0f; color: #00ff00; padding: 5px;');
+            console.log('%c [MÉMOIRE] Système Causal à 6 Couches Initialisé ', 'background: #0a0a0f; color: #ffff00; padding: 5px;');
+            
+            console.log('%c ═══════════════════════════════════════════════════════════════════════════════', 'color: #00f0ff; font-weight: bold;');
+        });
+        
+    </script>
     
+</body>
+</html>
+
+    
+
+
 </body>
 </html>
