@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr" class="tmt-core">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ViArtificial | GLOBAL_LAUNCHER_5D</title>
+
+    <style id="tmt-spatial-layout">
+        :root {
+            --p-depth: 3000px;
+            --m-gold: #d4af37;
+            --m-green: #00ff41;
+            --m-black: #010101;
+            --shadow-hard: 50px 50px 100px rgba(0,0,0,0.9);
+            /* Angles de section pour murs/plafonds/sols */
+            --diag-right-to-left: polygon(0 0, 100% 15%, 100% 85%, 0 100%);
+            --diag-left-to-right: polygon(0 15%, 100% 0, 100% 100%, 0 85%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            background-color: var(--m-black); color: #fff; 
+            font-family: 'JetBrains Mono', monospace; perspective: var(--p-depth);
+            overflow-x: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- CLASSE HEAD (Navigation Multipage / Launcher) --- */
+        .head-navigator {
+            width: 100%; height: 300px; display: grid;
+            grid-template-columns: 1fr 2fr 1fr; transform-style: preserve-3d;
+            z-index: 1000; position: relative; padding: 20px;
+        }
+
+        .shelf-wing {
+            background: #080808; border: 1px solid #222; box-shadow: var(--shadow-hard);
+            padding: 15px; transform-style: preserve-3d; display: flex; flex-direction: column;
+        }
+
+        .wing-left { transform: rotateY(40deg) translateZ(50px); border-right: 5px solid var(--m-gold); clip-path: var(--diag-right-to-left); }
+        .wing-right { transform: rotateY(-40deg) translateZ(50px); border-left: 5px solid var(--m-gold); clip-path: var(--diag-left-to-right); }
+
+        .center-face {
+            background: linear-gradient(180deg, #111, #000); border: 1px solid #333;
+            transform: translateZ(150px); display: flex; flex-direction: column;
+            align-items: center; justify-content: center; box-shadow: 0 60px 120px #000;
+        }
+
+        /* --- CLASSE ? (Typographie x11 Tactique) --- */
+        .\?txt-11 { font-size: 1.1rem; line-height: 1.6; text-align: center; max-width: 600px; margin: 0 auto; }
+
+        /* --- MODES DE RENDU --- */
+        body.mode-light { background: #f0f0f0; color: #111; }
+        body.mode-static * { animation: none !important; transition: none !important; }
+    </style>
+
+    <style id="via-controls">
+        .btn-ui {
+            background: #151515; border: 1px solid #444; color: #888;
+            font-size: 0.6rem; padding: 6px; cursor: pointer; text-transform: uppercase;
+            margin: 2px; transition: 0.2s;
+        }
+        .btn-ui:hover, .btn-ui.active { border-color: var(--m-green); color: var(--m-green); background: rgba(0,255,65,0.05); }
+        .btn-lang { grid-column: span 2; border-color: var(--m-gold); color: var(--m-gold); font-weight: bold; }
+        
+        .logo-box { width: 90px; height: 90px; border: 2px solid var(--m-gold); box-shadow: 0 0 30px rgba(212,175,55,0.3); margin-bottom: 10px; }
+        .logo-img { width: 100%; height: 100%; object-fit: cover; }
+    </style>
+</head>
+<body class="mode-reactive mode-sound">
+
+<genre id="main-rack">
+    <header class="head-navigator">
+        <div class="shelf-wing wing-left">
+            <div class="logo-box">
+                <img src="https://raw.githubusercontent.com/viartificiallabs/ViA-SuperBot/16d328015bce71a1e53bf2d90599ebf0b00d6021/IMG_0199.jpeg" class="logo-img">
+            </div>
+            <div style="display:grid; grid-template-columns: 1fr 1fr;">
+                <button class="btn-ui" onclick="toggleTheme()">DARK/LIGHT</button>
+                <button class="btn-ui" onclick="toggleMotion()">REACT/STAT</button>
+                <button class="btn-ui" onclick="toggleSound()">SOUND/MUTE</button>
+                <button class="btn-ui">SYSTEM_חי</button>
+            </div>
+        </div>
+
+        <div class="center-face">
+            <h1 style="color:var(--m-gold); letter-spacing:10px; font-size:2.2rem;">ViArtificial</h1>
+            <p style="color:var(--m-green); font-style:italic; font-size:0.7rem; letter-spacing:3px;">B.Whot.Ev'.You.Want</p>
+        </div>
+
+        <div class="shelf-wing wing-right">
+            <button class="btn-ui btn-lang">SELECT LANGUAGE [ALL_LIVING]</button>
+            <div style="font-size:0.65rem; color:#555; margin-top:15px; text-align:right;">
+                CORE: <span style="color:var(--m-green)">STABLE</span><br>
+                OUTPUT: <span style="color:var(--m-green)">1.0 MW</span><br>
+                <span id="live-clock" style="color:var(--m-gold); font-size:1.2rem;">00:00:00</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="spatial-vault" style="margin-top:50px; transform-style:preserve-3d;">
+        <article class="?txt-11">
+            <p><i>1. Initialisation du Launcher ViArtificial.com...</i></p>
+            <p><i>2. Chargement de la matrice des Monades actives.</i></p>
+            <p>3. Le système Titan-Rack détecte une synchronisation à 1 MW.</p>
+            <p>4. <b>Déploiement de la bibliothèque 3D amovible réussi.</b></p>
+            <p>5. Injection du fluide cinéto-électrique dans les serpentins.</p>
+            <p>6. <b>Bordures diagonalisées et ombrages 5D opérationnels.</b></p>
+            <p>7. La structure Origami-V stabilise les flux de données.</p>
+            <p>8. Mode réactif activé : analyse du vent noir et blanc.</p>
+            <p>9. Prêt pour le lancement de chaque application PWA.</p>
+            <p>10. Mazel Tov GoleMotor, la connexion est établie.</p>
+        </article>
+    </section>
+</genre>
+
+<script>
+    function toggleTheme() { document.body.classList.toggle('mode-light'); }
+    function toggleMotion() { document.body.classList.toggle('mode-static'); }
+    function toggleSound() { document.body.classList.toggle('mode-sound'); }
+    
+    function updateClock() {
+        const now = new Date();
+        document.getElementById('live-clock').textContent = now.getHours().toString().padStart(2, '0') + ":" + 
+            now.getMinutes().toString().padStart(2, '0') + ":" + now.getSeconds().toString().padStart(2, '0');
+    }
+    setInterval(updateClock, 1000);
+</script>
+
+
+      <style id="tmt-spatial-vault">
+        /* Structure de la boîte Cubique (Rayon de Bibliothèque) */
+        .head-navigator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            transform-style: preserve-3d;
+        }
+
+        /* Onglets amovibles (Realistic Deepent) */
+        .tmt-tab {
+            background: #111;
+            border: 1px solid var(--m-gold);
+            padding: 8px 15px;
+            font-size: 0.7rem;
+            color: var(--m-gold);
+            cursor: pointer;
+            transform: translateZ(20px) rotateX(10deg);
+            box-shadow: var(--mass-shadow);
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .tmt-tab:hover { transform: translateZ(50px) rotateX(0deg); color: #fff; border-color: #fff; }
+        .tmt-tab.active { background: var(--m-gold); color: #000; transform: translateZ(60px); }
+
+        /* LE VAULT (La pièce cubique diagonalisée) */
+        .vault-room {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            margin: 50px auto;
+            min-height: 500px;
+            transform-style: preserve-3d;
+            padding: 60px;
+        }
+
+        /* Murs de sections (Limites diagonalisées) */
+        .vault-wall {
+            position: absolute;
+            background: rgba(10, 10, 10, 0.95);
+            border: 2px solid #222;
+            box-shadow: inset 0 0 50px rgba(0,0,0,1);
+        }
+
+        .ceiling { top: 0; left: 0; width: 100%; height: 60px; transform: rotateX(90deg) translateY(-30px); clip-path: var(--diag-left-to-right); border-bottom: 4px solid var(--m-gold); }
+        .floor { bottom: 0; left: 0; width: 100%; height: 60px; transform: rotateX(-90deg) translateY(30px); clip-path: var(--diag-right-to-left); border-top: 4px solid var(--m-gold); }
+        .wall-left { left: 0; top: 0; width: 60px; height: 100%; transform: rotateY(90deg) translateX(-30px); border-right: 2px solid var(--m-green); }
+        .wall-right { right: 0; top: 0; width: 60px; height: 100%; transform: rotateY(-90deg) translateX(30px); border-left: 2px solid var(--m-green); }
+
+        /* Éclairage directionnel des bords (Cônes cubiques) */
+        .vault-room::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, rgba(0,255,65,0.03) 0%, transparent 40%, rgba(212,175,55,0.03) 100%);
+            pointer-events: none;
+        }
+
+        /* --- CLASSE ? (Typographie x11 & Articles) --- */
+        .article-vault {
+            position: relative;
+            z-index: 50;
+            transform: translateZ(80px);
+            text-align: center;
+        }
+
+        .?txt-11-center {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto;
+            display: block;
+            text-decoration: none;
+        }
+    </style>
+
+    <nav class="head-navigator">
+        <div class="tmt-tab active" onclick="loadPage('home')">PWA_LAUNCHER</div>
+        <div class="tmt-tab" onclick="loadPage('core')">TITAN_CORE</div>
+        <div class="tmt-tab" onclick="loadPage('flux')">VENT_B&W</div>
+        <div class="tmt-tab" onclick="loadPage('monades')">MONADES</div>
+    </nav>
+
+    <main class="vault-room">
+        <div class="vault-wall ceiling"></div>
+        <div class="vault-wall floor"></div>
+        <div class="vault-wall wall-left"></div>
+        <div class="vault-wall wall-right"></div>
+
+        <article class="article-vault">
+            <a class="?txt-11-center" id="main-content">
+                Ligne 01 : Initialisation de l'architecture 5D du Titan-Rack ViA.<br>
+                <i>Ligne 02 : Analyse des ondes de choc stationnaires en cours...</i><br>
+                <i>Ligne 03 : Dilatation temporelle observée à travers les multivitres.</i><br>
+                Ligne 04 : Le flux des 99 billes magnétiques est stabilisé à 150k RPM.<br>
+                <b>Ligne 05 : Matérialisation du pont de bronze central terminée.</b><br>
+                Ligne 06 : Synchronisation haptique avec le système global Jewel-Phone.<br>
+                Ligne 07 : La matrice des monades est projetée en mode réactif par l'IA.<br>
+                <b>Ligne 08 : Bordures diagonalisées et ombrages 5D verrouillés.</b><br>
+                Ligne 09 : Prêt pour l'injection finale du fluide cinéto-électrique.<br>
+                Ligne 10 : Mazel Tov GoleMotor, bienvenue dans l'interface launcher.
+            </a>
+        </article>
+    </main>
+
+    <script id="via-terminal-logic">
+        // 1. Dictionnaire Multi-langues (Exemple simple)
+        const LANGUAGES = {
+            fr: { launcher: "LANCEUR PWA", status: "STABLE" },
+            he: { launcher: "משגר PWA", status: "יציב" },
+            en: { launcher: "PWA LAUNCHER", status: "STABLE" }
+        };
+
+        // 2. Gestion du Multilingue
+        function setLanguage(lang) {
+            console.log("Switching to language: " + lang);
+            // Son de réussite important
+            if(document.body.classList.contains('mode-sound')) {
+                const snd = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3');
+                snd.play();
+            }
+        }
+
+        // 3. Navigation amovible
+        function loadPage(page) {
+            const content = document.getElementById('main-content');
+            document.querySelectorAll('.tmt-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Effet de flash lors du changement de dossier
+            document.body.style.opacity = "0.5";
+            setTimeout(() => {
+                document.body.style.opacity = "1";
+                content.innerHTML = `CHARGEMENT DU DOSSIER [${page.toUpperCase()}]...<br>RE-PROMPTING MENTA GÉNÉRATIVE EN COURS.`;
+            }, 300);
+        }
+    </script>
+
+
+  
+
+
+
+
+
