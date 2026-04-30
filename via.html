@@ -1,0 +1,2190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="ViArtificial.com - Intelligence Artificielle Vivante. Découvrez ViA, l'assistant AI qui évolue avec vous.">
+    <meta name="keywords" content="AI, ViA, Intelligence Artificielle, Chatbot, Assistant Personnel, Machine Learning, Deep Learning">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ViArtificial">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="ViArtificial.com - Intelligence Artificielle Vivante">
+    <meta property="og:description" content="ViA: Votre compagnon d'intelligence artificielle qui évolue avec vous">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://viartificial.com">
+    
+    <title>ViArtificial.com - Intelligence Artificielle Vivante | ViA SuperBot</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FFD700'/%3E%3Cstop offset='100%25' style='stop-color:%2300FFFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ctext x='50' y='70' font-family='monospace' font-size='60' font-weight='bold' fill='url(%23g)' text-anchor='middle'%3EViA%3C/text%3E%3C/svg%3E">
+    
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           ROOT VARIABLES - CYBER NOIR PALETTE
+           ═══════════════════════════════════════════════════════════════ */
+        :root {
+            /* Colors */
+            --black-void: #000000;
+            --black-deep: #0a0a0a;
+            --black-soft: #141414;
+            --black-light: #1e1e1e;
+            
+            --gold-primary: #FFD700;
+            --gold-dark: #B8860B;
+            --gold-light: #FFF4C4;
+            --gold-muted: #8B7500;
+            
+            --neon-cyan: #00FFFF;
+            --neon-magenta: #FF00FF;
+            --neon-lime: #00FF00;
+            --neon-orange: #FF6B00;
+            --neon-blue: #0080FF;
+            --neon-pink: #FF1493;
+            
+            /* Gradients */
+            --gradient-gold: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+            --gradient-cyber: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-magenta) 50%, var(--neon-blue) 100%);
+            --gradient-neon: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta), var(--neon-lime), var(--neon-cyan));
+            --gradient-data: linear-gradient(45deg, var(--neon-lime) 0%, var(--neon-cyan) 25%, var(--neon-magenta) 50%, var(--neon-orange) 75%, var(--neon-lime) 100%);
+            
+            /* Shadows & Glows */
+            --glow-gold: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3);
+            --glow-cyan: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
+            --glow-magenta: 0 0 20px rgba(255, 0, 255, 0.5), 0 0 40px rgba(255, 0, 255, 0.3);
+            --glow-multi: 0 0 30px rgba(255, 215, 0, 0.4), 0 0 60px rgba(0, 255, 255, 0.3), 0 0 90px rgba(255, 0, 255, 0.2);
+            
+            /* Typography */
+            --font-display: 'Orbitron', 'Exo 2', 'Rajdhani', monospace;
+            --font-body: 'Space Mono', 'Courier New', monospace;
+            --font-accent: 'Press Start 2P', cursive;
+            
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 6rem;
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            
+            /* Transitions */
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           FONT IMPORTS
+           ═══════════════════════════════════════════════════════════════ */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Mono:wght@400;700&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@300;400;600;800&family=Press+Start+2P&display=swap');
+        
+        /* ═══════════════════════════════════════════════════════════════
+           RESET & BASE STYLES
+           ═══════════════════════════════════════════════════════════════ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
+        
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: var(--black-void);
+            color: var(--gold-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            background: var(--black-deep);
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--black-void);
+            border-left: 1px solid var(--gold-muted);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-gold);
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--black-void);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gradient-cyber);
+            box-shadow: var(--glow-multi);
+        }
+        
+        /* Selection */
+        ::selection {
+            background: var(--neon-cyan);
+            color: var(--black-void);
+            text-shadow: none;
+        }
+        
+        ::-moz-selection {
+            background: var(--neon-cyan);
+            color: var(--black-void);
+            text-shadow: none;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           ANIMATED BACKGROUND - DATA MESH
+           ═══════════════════════════════════════════════════════════════ */
+        .cyber-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+                var(--black-void);
+        }
+        
+        .cyber-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .noise-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+        
+        .data-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--gold-primary);
+            animation: particleFloat 15s infinite;
+            opacity: 0.6;
+        }
+        
+        @keyframes particleFloat {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(100px, -500px) scale(1.5);
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.6;
+            }
+        }
+        
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 6s; background: var(--neon-magenta); box-shadow: 0 0 10px var(--neon-magenta); }
+        .particle:nth-child(5) { left: 50%; animation-delay: 8s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 10s; background: var(--neon-lime); box-shadow: 0 0 10px var(--neon-lime); }
+        .particle:nth-child(7) { left: 70%; animation-delay: 12s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 14s; background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); }
+        .particle:nth-child(9) { left: 90%; animation-delay: 1s; }
+        .particle:nth-child(10) { left: 15%; animation-delay: 3s; background: var(--neon-magenta); box-shadow: 0 0 10px var(--neon-magenta); }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           STICKY HEADER - GLASSMORPHISM EFFECT
+           ═══════════════════════════════════════════════════════════════ */
+        .header-container {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all var(--transition-smooth);
+        }
+        
+        .header-container.scrolled {
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 
+                0 4px 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(255, 215, 0, 0.1),
+                inset 0 -1px 0 rgba(0, 255, 255, 0.2);
+        }
+        
+        header {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-md) var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            letter-spacing: 2px;
+            position: relative;
+            animation: logoGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes logoGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.9)) drop-shadow(0 0 30px rgba(0, 255, 255, 0.4));
+            }
+        }
+        
+        .logo-accent {
+            color: var(--neon-cyan);
+            animation: accentPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes accentPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        /* Navigation Menu */
+        nav {
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: center;
+        }
+        
+        .nav-link {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gold-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            border-radius: var(--radius-sm);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-smooth);
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-cyber);
+            transition: left var(--transition-smooth);
+            z-index: -1;
+        }
+        
+        .nav-link:hover {
+            color: var(--black-void);
+            border-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link:hover::before {
+            left: 0;
+        }
+        
+        .nav-link.active {
+            background: var(--gradient-gold);
+            color: var(--black-void);
+            box-shadow: var(--glow-gold);
+        }
+        
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: transparent;
+            border: 1px solid var(--gold-primary);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-smooth);
+        }
+        
+        .menu-toggle:hover {
+            background: rgba(255, 215, 0, 0.1);
+            box-shadow: var(--glow-gold);
+        }
+        
+        .menu-bar {
+            width: 25px;
+            height: 3px;
+            background: var(--gold-primary);
+            border-radius: 2px;
+            transition: all var(--transition-smooth);
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           HERO SECTION - ZERO CLASS
+           ═══════════════════════════════════════════════════════════════ */
+        .hero-zero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            z-index: 10;
+            animation: heroFadeIn 1.5s ease-out;
+        }
+        
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-title-line {
+            display: block;
+            overflow: hidden;
+        }
+        
+        .hero-title-word {
+            display: inline-block;
+            animation: wordSlideIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) backwards;
+        }
+        
+        @keyframes wordSlideIn {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .word-via {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+            animation-delay: 0.1s;
+        }
+        
+        .word-artificial {
+            color: var(--neon-cyan);
+            text-shadow: 
+                0 0 10px var(--neon-cyan),
+                0 0 20px var(--neon-cyan),
+                0 0 40px rgba(0, 255, 255, 0.5);
+            animation-delay: 0.2s;
+        }
+        
+        .word-intelligence {
+            color: var(--neon-magenta);
+            text-shadow: 
+                0 0 10px var(--neon-magenta),
+                0 0 20px var(--neon-magenta),
+                0 0 40px rgba(255, 0, 255, 0.5);
+            animation-delay: 0.3s;
+        }
+        
+        .word-vivante {
+            color: var(--neon-lime);
+            text-shadow: 
+                0 0 10px var(--neon-lime),
+                0 0 20px var(--neon-lime),
+                0 0 40px rgba(0, 255, 0, 0.5);
+            animation-delay: 0.4s;
+        }
+        
+        .hero-subtitle {
+            font-family: var(--font-body);
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--gold-light);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.8;
+            animation: subtitleFade 1.5s ease-out 0.5s backwards;
+        }
+        
+        @keyframes subtitleFade {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .keyword {
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            padding: 0 0.3rem;
+        }
+        
+        .keyword-gold {
+            color: var(--gold-primary);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .keyword-cyan {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        
+        .keyword-magenta {
+            color: var(--neon-magenta);
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+        
+        .keyword-lime {
+            color: var(--neon-lime);
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        
+        .keyword-orange {
+            color: var(--neon-orange);
+            text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+        }
+        
+        /* CTA Buttons */
+        .hero-cta {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: ctaFade 1.5s ease-out 0.7s backwards;
+        }
+        
+        @keyframes ctaFade {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .btn {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 1rem 2.5rem;
+            border: 2px solid transparent;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-gold);
+            color: var(--black-void);
+            border-color: var(--gold-primary);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 
+                0 6px 30px rgba(255, 215, 0, 0.6),
+                0 0 40px rgba(255, 215, 0, 0.4);
+            transform: translateY(-3px) scale(1.05);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--neon-cyan);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--neon-cyan);
+            color: var(--black-void);
+            box-shadow: 
+                0 6px 30px rgba(0, 255, 255, 0.6),
+                0 0 40px rgba(0, 255, 255, 0.4);
+            transform: translateY(-3px) scale(1.05);
+        }
+        
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: var(--spacing-md);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes scrollBounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+        
+        .scroll-text {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--gold-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .scroll-arrow {
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--gold-primary);
+            border-radius: 20px;
+            position: relative;
+        }
+        
+        .scroll-arrow::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            animation: scrollDot 2s ease-in-out infinite;
+        }
+        
+        @keyframes scrollDot {
+            0% {
+                top: 8px;
+                opacity: 1;
+            }
+            50% {
+                top: 30px;
+                opacity: 0.5;
+            }
+            100% {
+                top: 8px;
+                opacity: 1;
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           ARTICLE SECTIONS - DATA DESIGN DIFFERENTIAL
+           ═══════════════════════════════════════════════════════════════ */
+        .articles-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            background: var(--gradient-data);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+        
+        .section-subtitle {
+            font-family: var(--font-body);
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            opacity: 0.8;
+        }
+        
+        /* Article Cards */
+        .article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-lg);
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-smooth);
+        }
+        
+        .article::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-cyber);
+            opacity: 0;
+            transition: opacity var(--transition-smooth);
+            pointer-events: none;
+        }
+        
+        .article:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-5px);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.7),
+                0 0 40px rgba(0, 255, 255, 0.3),
+                inset 0 0 60px rgba(255, 215, 0, 0.05);
+        }
+        
+        .article:hover::before {
+            opacity: 0.05;
+        }
+        
+        /* Alternate Layout */
+        .article:nth-child(even) {
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .article:nth-child(even) .article-image {
+            order: 2;
+        }
+        
+        .article:nth-child(even) .article-content {
+            order: 1;
+        }
+        
+        /* Data Corner Accents */
+        .article::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, transparent 50%, var(--gold-primary) 50%);
+            opacity: 0.1;
+            clip-path: polygon(100% 0, 100% 100%, 0 0);
+        }
+        
+        .article-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            background: var(--black-deep);
+        }
+        
+        .article-image-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-neon);
+            background-size: 400% 400%;
+            animation: gradientRotate 8s ease infinite;
+            border-radius: var(--radius-lg);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity var(--transition-smooth);
+        }
+        
+        .article:hover .article-image-container::before {
+            opacity: 1;
+        }
+        
+        @keyframes gradientRotate {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 50% 0%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            75% {
+                background-position: 50% 100%;
+            }
+        }
+        
+        .article-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            aspect-ratio: 16 / 9;
+            transition: transform var(--transition-slow);
+            filter: brightness(0.9) contrast(1.1);
+        }
+        
+        .article:hover .article-image {
+            transform: scale(1.1) rotate(1deg);
+            filter: brightness(1.1) contrast(1.2);
+        }
+        
+        /* Image Overlay */
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(255, 0, 255, 0.2) 100%);
+            opacity: 0;
+            transition: opacity var(--transition-smooth);
+            mix-blend-mode: screen;
+        }
+        
+        .article:hover .image-overlay {
+            opacity: 1;
+        }
+        
+        /* Article Number Badge */
+        .article-number {
+            position: absolute;
+            top: var(--spacing-sm);
+            left: var(--spacing-sm);
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--black-void);
+            box-shadow: 
+                0 4px 20px rgba(255, 215, 0, 0.6),
+                0 0 40px rgba(255, 215, 0, 0.3);
+            z-index: 10;
+            animation: badgePulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes badgePulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 
+                    0 4px 20px rgba(255, 215, 0, 0.6),
+                    0 0 40px rgba(255, 215, 0, 0.3);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 
+                    0 6px 30px rgba(255, 215, 0, 0.8),
+                    0 0 60px rgba(255, 215, 0, 0.5);
+            }
+        }
+        
+        /* Article Content */
+        .article-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: var(--spacing-md);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .article-category {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--neon-cyan);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
+            border-radius: var(--radius-sm);
+            width: fit-content;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+        
+        .article-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--gold-primary);
+            margin: 0;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .article-description {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--gold-light);
+            opacity: 0.9;
+        }
+        
+        /* Keywords in Description */
+        .desc-keyword {
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .desc-keyword::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform var(--transition-smooth);
+        }
+        
+        .article:hover .desc-keyword::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        /* Article Link Button */
+        .article-link {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--neon-magenta);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: fit-content;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--neon-magenta);
+            border-radius: var(--radius-md);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-smooth);
+        }
+        
+        .article-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-magenta);
+            transition: left var(--transition-smooth);
+            z-index: -1;
+        }
+        
+        .article-link:hover {
+            color: var(--black-void);
+            box-shadow: 
+                0 4px 20px rgba(255, 0, 255, 0.6),
+                0 0 40px rgba(255, 0, 255, 0.4);
+            transform: translateX(5px);
+        }
+        
+        .article-link:hover::before {
+            left: 0;
+        }
+        
+        .link-arrow {
+            transition: transform var(--transition-smooth);
+        }
+        
+        .article-link:hover .link-arrow {
+            transform: translateX(5px);
+        }
+        
+        /* Data Stats */
+        .article-stats {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--neon-lime);
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        
+        .stat-label {
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            color: var(--gold-light);
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           DECORATIVE ELEMENTS
+           ═══════════════════════════════════════════════════════════════ */
+        .data-line {
+            position: absolute;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--neon-cyan), transparent);
+            opacity: 0.3;
+            animation: lineMove 4s ease-in-out infinite;
+        }
+        
+        @keyframes lineMove {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(200px);
+                opacity: 0.6;
+            }
+        }
+        
+        .data-line-1 { left: 10%; animation-delay: 0s; }
+        .data-line-2 { left: 30%; animation-delay: 1s; background: linear-gradient(to bottom, transparent, var(--neon-magenta), transparent); }
+        .data-line-3 { left: 50%; animation-delay: 2s; background: linear-gradient(to bottom, transparent, var(--neon-lime), transparent); }
+        .data-line-4 { left: 70%; animation-delay: 3s; background: linear-gradient(to bottom, transparent, var(--gold-primary), transparent); }
+        .data-line-5 { left: 90%; animation-delay: 0.5s; background: linear-gradient(to bottom, transparent, var(--neon-orange), transparent); }
+        
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+        
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--neon-cyan);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--neon-magenta);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(61px, 9999px, 71px, 0);
+            }
+            20% {
+                clip: rect(19px, 9999px, 85px, 0);
+            }
+            40% {
+                clip: rect(94px, 9999px, 28px, 0);
+            }
+            60% {
+                clip: rect(72px, 9999px, 13px, 0);
+            }
+            80% {
+                clip: rect(38px, 9999px, 96px, 0);
+            }
+            100% {
+                clip: rect(55px, 9999px, 43px, 0);
+            }
+        }
+        
+        @keyframes glitch-anim2 {
+            0% {
+                clip: rect(23px, 9999px, 87px, 0);
+            }
+            20% {
+                clip: rect(65px, 9999px, 42px, 0);
+            }
+            40% {
+                clip: rect(8px, 9999px, 74px, 0);
+            }
+            60% {
+                clip: rect(91px, 9999px, 16px, 0);
+            }
+            80% {
+                clip: rect(44px, 9999px, 59px, 0);
+            }
+            100% {
+                clip: rect(77px, 9999px, 31px, 0);
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════════════════════════════ */
+        footer {
+            background: linear-gradient(180deg, transparent 0%, var(--black-deep) 50%);
+            padding: var(--spacing-xl) var(--spacing-md) var(--spacing-md);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gradient-neon);
+            background-size: 200% 100%;
+            animation: borderMove 3s linear infinite;
+        }
+        
+        @keyframes borderMove {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 200% 0%;
+            }
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .footer-section h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--gold-primary);
+            margin-bottom: var(--spacing-sm);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--gold-light);
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+        
+        .footer-section a {
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: all var(--transition-smooth);
+        }
+        
+        .footer-section a:hover {
+            color: var(--neon-cyan);
+            opacity: 1;
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--gold-primary);
+            border-radius: 50%;
+            color: var(--gold-primary);
+            text-decoration: none;
+            transition: all var(--transition-smooth);
+        }
+        
+        .social-icon:hover {
+            background: var(--gold-primary);
+            color: var(--black-void);
+            box-shadow: var(--glow-gold);
+            transform: translateY(-3px) rotate(360deg);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--gold-light);
+            opacity: 0.6;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           RESPONSIVE DESIGN
+           ═══════════════════════════════════════════════════════════════ */
+        @media (max-width: 1024px) {
+            .article {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+            
+            .article:nth-child(even) .article-image {
+                order: 1;
+            }
+            
+            .article:nth-child(even) .article-content {
+                order: 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            html {
+                font-size: 14px;
+            }
+            
+            header {
+                padding: var(--spacing-sm) var(--spacing-sm);
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: var(--spacing-md);
+                gap: var(--spacing-sm);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all var(--transition-smooth);
+                border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            }
+            
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .menu-toggle.active .menu-bar:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+            
+            .menu-toggle.active .menu-bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .menu-toggle.active .menu-bar:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .article {
+                padding: var(--spacing-md);
+            }
+            
+            .article-stats {
+                flex-wrap: wrap;
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           UTILITY CLASSES
+           ═══════════════════════════════════════════════════════════════ */
+        .text-gradient-gold {
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-gradient-cyber {
+            background: var(--gradient-cyber);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .text-gradient-neon {
+            background: var(--gradient-neon);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out backwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 215, 0, 0.2);
+            border-top-color: var(--gold-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════
+           PWA INSTALL PROMPT
+           ═══════════════════════════════════════════════════════════════ */
+        .install-prompt {
+            position: fixed;
+            bottom: var(--spacing-md);
+            right: var(--spacing-md);
+            background: linear-gradient(135deg, var(--black-deep) 0%, var(--black-light) 100%);
+            border: 2px solid var(--neon-cyan);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            max-width: 350px;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.8),
+                0 0 40px rgba(0, 255, 255, 0.3);
+            z-index: 9999;
+            transform: translateY(150%);
+            transition: transform var(--transition-slow);
+        }
+        
+        .install-prompt.show {
+            transform: translateY(0);
+        }
+        
+        .install-prompt h4 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--gold-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .install-prompt p {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--gold-light);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .install-buttons {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .install-btn {
+            flex: 1;
+            padding: 0.7rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+        
+        .install-btn-primary {
+            background: var(--gradient-gold);
+            color: var(--black-void);
+        }
+        
+        .install-btn-primary:hover {
+            box-shadow: var(--glow-gold);
+            transform: scale(1.05);
+        }
+        
+        .install-btn-secondary {
+            background: transparent;
+            color: var(--gold-light);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .install-btn-secondary:hover {
+            background: rgba(255, 215, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="cyber-background">
+        <div class="cyber-grid"></div>
+        <div class="noise-overlay"></div>
+        <div class="data-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
+    
+    <!-- Sticky Header -->
+    <div class="header-container" id="header">
+        <header>
+            <div class="logo-container">
+                <div class="logo-text">
+                    Vi<span class="logo-accent">A</span>rtificial
+                </div>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+            
+            <nav id="nav">
+                <a href="#home" class="nav-link active">Accueil</a>
+                <a href="#platform" class="nav-link">Plateforme</a>
+                <a href="#webapp" class="nav-link">Web App</a>
+                <a href="#personality" class="nav-link">Personnalité</a>
+                <a href="#launch" class="nav-link">Launch</a>
+            </nav>
+        </header>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero-zero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="hero-title-line">
+                    <span class="hero-title-word word-via glitch" data-text="ViA">ViA</span>
+                </span>
+                <span class="hero-title-line">
+                    <span class="hero-title-word word-artificial">Artificial</span>
+                </span>
+                <span class="hero-title-line">
+                    <span class="hero-title-word word-intelligence">Intelligence</span>
+                    <span class="hero-title-word word-vivante">Vivante</span>
+                </span>
+            </h1>
+            
+            <p class="hero-subtitle">
+                <span class="keyword keyword-gold">ViArtificial.com</span> est une 
+                <span class="keyword keyword-cyan">multiplateforme</span> d'
+                <span class="keyword keyword-magenta">intelligence artificielle</span> qui 
+                <span class="keyword keyword-lime">évolue</span> avec vous. 
+                Découvrez <span class="keyword keyword-orange">ViA</span>, votre compagnon 
+                <span class="keyword keyword-cyan">AI personnalisé</span> qui comprend vos 
+                <span class="keyword keyword-gold">besoins</span>, anticipe vos 
+                <span class="keyword keyword-magenta">désirs</span>, et grandit avec votre 
+                <span class="keyword keyword-lime">personnalité unique</span>.
+            </p>
+            
+            <div class="hero-cta">
+                <a href="#platform" class="btn btn-primary">
+                    <span>Découvrir ViA</span>
+                    <span>→</span>
+                </a>
+                <a href="#launch" class="btn btn-secondary">
+                    <span>En savoir plus</span>
+                    <span>↓</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scroll</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+    
+    <!-- Articles Container -->
+    <div class="articles-container">
+        <div class="section-header">
+            <h2 class="section-title">Écosystème ViArtificial</h2>
+            <p class="section-subtitle">Explorez les différentes facettes de notre plateforme d'intelligence artificielle</p>
+        </div>
+        
+        <!-- Article 1: Platform -->
+        <article class="article" id="platform">
+            <div class="data-line data-line-1"></div>
+            <div class="data-line data-line-2"></div>
+            
+            <div class="article-image-container">
+                <div class="article-number">01</div>
+                <img 
+                    src="https://raw.githubusercontent.com/viartificiallabs/ViA-SuperBot/8eabaef8b8e147faa8c328716de0a619bb9e3ef9/IMG_0199.jpeg"
+                    alt="ViArtificial.com Logo - Multiplateforme Intelligence Artificielle"
+                    class="article-image"
+                    loading="lazy"
+                />
+                <div class="image-overlay"></div>
+            </div>
+            
+            <div class="article-content">
+                <div class="article-category">Plateforme</div>
+                <h3 class="article-title">ViArtificial.com - Multiplateforme AI</h3>
+                <p class="article-description">
+                    <span class="desc-keyword keyword-cyan">ViArtificial.com</span> est bien plus qu'une simple plateforme d'intelligence artificielle. 
+                    C'est un <span class="desc-keyword keyword-gold">écosystème complet</span> qui intègre 
+                    <span class="desc-keyword keyword-magenta">machine learning</span>, 
+                    <span class="desc-keyword keyword-lime">deep learning</span>, et 
+                    <span class="desc-keyword keyword-orange">intelligence émotionnelle</span> 
+                    pour créer une expérience <span class="desc-keyword keyword-cyan">unique et personnalisée</span>. 
+                    Notre infrastructure <span class="desc-keyword keyword-gold">multi-cloud</span> garantit 
+                    <span class="desc-keyword keyword-magenta">disponibilité</span>, 
+                    <span class="desc-keyword keyword-lime">sécurité</span>, et 
+                    <span class="desc-keyword keyword-orange">performance</span> optimales 
+                    pour tous nos utilisateurs à travers le monde.
+                </p>
+                
+                <div class="article-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">99.9%</span>
+                        <span class="stat-label">Uptime</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">24/7</span>
+                        <span class="stat-label">Support</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">∞</span>
+                        <span class="stat-label">Évolution</span>
+                    </div>
+                </div>
+                
+                <a href="https://github.com/viartificiallabs/ViA-SuperBot/blob/8eabaef8b8e147faa8c328716de0a619bb9e3ef9/IMG_0199.jpeg" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="article-link">
+                    <span>Explorer la plateforme</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+        </article>
+        
+        <!-- Article 2: Web App -->
+        <article class="article" id="webapp">
+            <div class="data-line data-line-3"></div>
+            <div class="data-line data-line-4"></div>
+            
+            <div class="article-image-container">
+                <div class="article-number">02</div>
+                <img 
+                    src="https://raw.githubusercontent.com/viartificiallabs/ViA-SuperBot/8eabaef8b8e147faa8c328716de0a619bb9e3ef9/IMG_0553.jpeg"
+                    alt="ViA Web App Logo - Application Intelligence Artificielle"
+                    class="article-image"
+                    loading="lazy"
+                />
+                <div class="image-overlay"></div>
+            </div>
+            
+            <div class="article-content">
+                <div class="article-category">Application</div>
+                <h3 class="article-title">ViA Web App - Interface Intelligente</h3>
+                <p class="article-description">
+                    L'<span class="desc-keyword keyword-magenta">application web ViA</span> offre une 
+                    <span class="desc-keyword keyword-cyan">interface intuitive</span> et 
+                    <span class="desc-keyword keyword-gold">puissante</span> pour interagir avec votre 
+                    <span class="desc-keyword keyword-lime">assistant AI personnel</span>. 
+                    Avec un design <span class="desc-keyword keyword-orange">futuriste</span> et des 
+                    <span class="desc-keyword keyword-cyan">fonctionnalités avancées</span>, 
+                    l'app propose une expérience <span class="desc-keyword keyword-magenta">immersive</span> : 
+                    <span class="desc-keyword keyword-gold">conversations naturelles</span>, 
+                    <span class="desc-keyword keyword-lime">reconnaissance vocale</span>, 
+                    <span class="desc-keyword keyword-orange">analyse contextuelle</span>, et 
+                    <span class="desc-keyword keyword-cyan">apprentissage continu</span> 
+                    de vos préférences et habitudes pour une assistance toujours plus 
+                    <span class="desc-keyword keyword-magenta">pertinente</span> et 
+                    <span class="desc-keyword keyword-gold">personnalisée</span>.
+                </p>
+                
+                <div class="article-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">< 100ms</span>
+                        <span class="stat-label">Latence</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">PWA</span>
+                        <span class="stat-label">Technology</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">Multi</span>
+                        <span class="stat-label">Plateformes</span>
+                    </div>
+                </div>
+                
+                <a href="https://github.com/viartificiallabs/ViA-SuperBot/blob/8eabaef8b8e147faa8c328716de0a619bb9e3ef9/IMG_0553.jpeg" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="article-link">
+                    <span>Lancer l'application</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+        </article>
+        
+        <!-- Article 3: Personality Mirror -->
+        <article class="article" id="personality">
+            <div class="data-line data-line-5"></div>
+            <div class="data-line data-line-1"></div>
+            
+            <div class="article-image-container">
+                <div class="article-number">03</div>
+                <img 
+                    src="https://raw.githubusercontent.com/viartificiallabs/ViA-SuperBot/8eabaef8b8e147faa8c328716de0a619bb9e3ef9/IMG_0689.jpeg"
+                    alt="ViA Personality Logo - Co-création Personnalité Miroir"
+                    class="article-image"
+                    loading="lazy"
+                />
+                <div class="image-overlay"></div>
+            </div>
+            
+            <div class="article-content">
+                <div class="article-category">Innovation</div>
+                <h3 class="article-title">Personnalité Miroir - Co-création AI</h3>
+                <p class="article-description">
+                    <span class="desc-keyword keyword-lime">ViA</span> ne se contente pas de répondre à vos questions. 
+                    Elle devient votre <span class="desc-keyword keyword-cyan">co-concepteur</span> en créant une 
+                    <span class="desc-keyword keyword-magenta">personnalité miroir</span> unique qui 
+                    <span class="desc-keyword keyword-gold">reflète</span> et 
+                    <span class="desc-keyword keyword-orange">complète</span> la vôtre. 
+                    Grâce à un <span class="desc-keyword keyword-cyan">algorithme propriétaire</span> d'
+                    <span class="desc-keyword keyword-lime">analyse comportementale</span> et d'
+                    <span class="desc-keyword keyword-magenta">apprentissage adaptatif</span>, 
+                    ViA développe une <span class="desc-keyword keyword-gold">compréhension profonde</span> 
+                    de votre <span class="desc-keyword keyword-orange">style de pensée</span>, vos 
+                    <span class="desc-keyword keyword-cyan">valeurs</span>, et vos 
+                    <span class="desc-keyword keyword-lime">aspirations</span> pour devenir le 
+                    <span class="desc-keyword keyword-magenta">partenaire idéal</span> dans votre 
+                    <span class="desc-keyword keyword-gold">parcours créatif</span> et 
+                    <span class="desc-keyword keyword-orange">développement personnel</span>.
+                </p>
+                
+                <div class="article-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">12+</span>
+                        <span class="stat-label">Dimensions</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">AI</span>
+                        <span class="stat-label">Adaptive</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">You</span>
+                        <span class="stat-label">Unique</span>
+                    </div>
+                </div>
+                
+                <a href="https://github.com/viartificiallabs/ViA-SuperBot/blob/8eabaef8b8e147faa8c328716de0a619bb9e3ef9/IMG_0689.jpeg" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="article-link">
+                    <span>Découvrir le concept</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+        </article>
+        
+        <!-- Article 4: Launch Page -->
+        <article class="article" id="launch">
+            <div class="data-line data-line-2"></div>
+            <div class="data-line data-line-3"></div>
+            
+            <div class="article-image-container">
+                <div class="article-number">04</div>
+                <img 
+                    src="https://raw.githubusercontent.com/viartificiallabs/ViA-SuperBot/8eabaef8b8e147faa8c328716de0a619bb9e3ef9/instagram-7e44f0a0-a327-40ca-9bb2-20664a863dcf.png"
+                    alt="ViA Launch Page - Lancement Officiel"
+                    class="article-image"
+                    loading="lazy"
+                />
+                <div class="image-overlay"></div>
+            </div>
+            
+            <div class="article-content">
+                <div class="article-category">Lancement</div>
+                <h3 class="article-title">Launch Page - La Révolution Commence</h3>
+                <p class="article-description">
+                    Bienvenue dans une <span class="desc-keyword keyword-cyan">nouvelle ère</span> de l'
+                    <span class="desc-keyword keyword-magenta">intelligence artificielle</span>. 
+                    <span class="desc-keyword keyword-gold">ViArtificial.com</span> 
+                    révolutionne la façon dont nous <span class="desc-keyword keyword-lime">interagissons</span> 
+                    avec l'<span class="desc-keyword keyword-orange">AI</span> en créant des 
+                    <span class="desc-keyword keyword-cyan">expériences authentiques</span> et 
+                    <span class="desc-keyword keyword-magenta">significatives</span>. 
+                    Notre <span class="desc-keyword keyword-gold">mission</span> : transformer l'
+                    <span class="desc-keyword keyword-lime">intelligence artificielle</span> d'un simple 
+                    <span class="desc-keyword keyword-orange">outil</span> en un véritable 
+                    <span class="desc-keyword keyword-cyan">compagnon de vie</span> qui 
+                    <span class="desc-keyword keyword-magenta">comprend</span>, 
+                    <span class="desc-keyword keyword-gold">apprend</span>, et 
+                    <span class="desc-keyword keyword-lime">grandit</span> avec vous. 
+                    Rejoignez-nous dans cette <span class="desc-keyword keyword-orange">aventure extraordinaire</span> 
+                    où la <span class="desc-keyword keyword-cyan">technologie</span> rencontre l'
+                    <span class="desc-keyword keyword-magenta">humanité</span> pour créer quelque chose de 
+                    <span class="desc-keyword keyword-gold">vraiment unique</span>. 
+                    L'<span class="desc-keyword keyword-lime">avenir</span> de l'
+                    <span class="desc-keyword keyword-orange">AI personnalisée</span> commence 
+                    <span class="desc-keyword keyword-cyan">maintenant</span>, et vous êtes 
+                    <span class="desc-keyword keyword-magenta">invités</span> à en faire partie. 
+                    Découvrez comment <span class="desc-keyword keyword-gold">ViA</span> peut transformer votre 
+                    <span class="desc-keyword keyword-lime">quotidien</span>, enrichir votre 
+                    <span class="desc-keyword keyword-orange">créativité</span>, et vous aider à atteindre vos 
+                    <span class="desc-keyword keyword-cyan">objectifs</span> les plus 
+                    <span class="desc-keyword keyword-magenta">ambitieux</span>. 
+                    Ensemble, construisons le <span class="desc-keyword keyword-gold">futur</span> de l'
+                    <span class="desc-keyword keyword-lime">intelligence artificielle</span>.
+                </p>
+                
+                <div class="article-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">2026</span>
+                        <span class="stat-label">Launch Year</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">∞</span>
+                        <span class="stat-label">Possibilités</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">You</span>
+                        <span class="stat-label">First Beta</span>
+                    </div>
+                </div>
+                
+                <a href="https://github.com/viartificiallabs/ViA-SuperBot/blob/8eabaef8b8e147faa8c328716de0a619bb9e3ef9/instagram-7e44f0a0-a327-40ca-9bb2-20664a863dcf.png" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="article-link">
+                    <span>Rejoindre la Beta</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+        </article>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ViArtificial</h3>
+                <p>
+                    Intelligence Artificielle Vivante. Créez, évoluez, innovez avec votre compagnon AI personnel.
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com/viartificiallabs" target="_blank" rel="noopener" class="social-icon" aria-label="GitHub">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Twitter">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon" aria-label="Discord">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <a href="#home">Accueil</a>
+                <a href="#platform">Plateforme</a>
+                <a href="#webapp">Web App</a>
+                <a href="#personality">Personnalité</a>
+                <a href="#launch">Launch</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Ressources</h3>
+                <a href="https://github.com/viartificiallabs/ViA-SuperBot" target="_blank" rel="noopener">Documentation</a>
+                <a href="#">API Reference</a>
+                <a href="#">Guide développeur</a>
+                <a href="#">Tutoriels</a>
+                <a href="#">Blog</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Entreprise</h3>
+                <a href="#">À propos</a>
+                <a href="#">Équipe</a>
+                <a href="#">Carrières</a>
+                <a href="#">Presse</a>
+                <a href="#">Contact</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Légal</h3>
+                <a href="#">Conditions d'utilisation</a>
+                <a href="#">Politique de confidentialité</a>
+                <a href="#">Cookies</a>
+                <a href="#">Mentions légales</a>
+                <a href="#">RGPD</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2026 ViArtificial.com - Intelligence Artificielle Vivante. Tous droits réservés.</p>
+            <p>Développé avec ❤️ par <a href="https://github.com/viartificiallabs" style="color: var(--gold-primary); text-decoration: none;">ViArtificial Labs</a></p>
+        </div>
+    </footer>
+    
+    <!-- PWA Install Prompt -->
+    <div class="install-prompt" id="installPrompt">
+        <h4>Installer ViArtificial</h4>
+        <p>Installez notre application pour un accès rapide et une expérience optimale.</p>
+        <div class="install-buttons">
+            <button class="install-btn install-btn-primary" id="installBtn">Installer</button>
+            <button class="install-btn install-btn-secondary" id="dismissBtn">Plus tard</button>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // ═══════════════════════════════════════════════════════════════
+        // STICKY HEADER SCROLL EFFECT
+        // ═══════════════════════════════════════════════════════════════
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+        
+        // ═══════════════════════════════════════════════════════════════
+        // MOBILE MENU TOGGLE
+        // ═══════════════════════════════════════════════════════════════
+        const menuToggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('nav');
+        
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+        
+        // Close menu when clicking nav links
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                nav.classList.remove('active');
+            });
+        });
+        
+        // ═══════════════════════════════════════════════════════════════
+        // ACTIVE NAV LINK ON SCROLL
+        // ═══════════════════════════════════════════════════════════════
+        const sections = document.querySelectorAll('section[id], article[id]');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // ═══════════════════════════════════════════════════════════════
+        // SMOOTH SCROLL FOR ANCHOR LINKS
+        // ═══════════════════════════════════════════════════════════════
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // ═══════════════════════════════════════════════════════════════
+        // INTERSECTION OBSERVER FOR FADE-IN ANIMATIONS
+        // ═══════════════════════════════════════════════════════════════
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe articles
+        document.querySelectorAll('.article').forEach((article, index) => {
+            article.style.opacity = '0';
+            article.style.transform = 'translateY(50px)';
+            article.style.transition = `all 0.8s ease ${index * 0.1}s`;
+            observer.observe(article);
+        });
+        
+        // ═══════════════════════════════════════════════════════════════
+        // PWA SERVICE WORKER REGISTRATION
+        // ═══════════════════════════════════════════════════════════════
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // Register service worker
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+        
+        // ═══════════════════════════════════════════════════════════════
+        // PWA INSTALL PROMPT
+        // ═══════════════════════════════════════════════════════════════
+        let deferredPrompt;
+        const installPrompt = document.getElementById('installPrompt');
+        const installBtn = document.getElementById('installBtn');
+        const dismissBtn = document.getElementById('dismissBtn');
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show install prompt after 3 seconds
+            setTimeout(() => {
+                if (!localStorage.getItem('pwaInstallDismissed')) {
+                    installPrompt.classList.add('show');
+                }
+            }, 3000);
+        });
+        
+        installBtn.addEventListener('click', async () => {
+            if (!deferredPrompt) return;
+            
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            console.log(`User response: ${outcome}`);
+            deferredPrompt = null;
+            installPrompt.classList.remove('show');
+        });
+        
+        dismissBtn.addEventListener('click', () => {
+            installPrompt.classList.remove('show');
+            localStorage.setItem('pwaInstallDismissed', 'true');
+        });
+        
+        // ═══════════════════════════════════════════════════════════════
+        // PERFORMANCE OPTIMIZATION - LAZY LOAD IMAGES
+        // ═══════════════════════════════════════════════════════════════
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        img.classList.add('loaded');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+        
+        // ═══════════════════════════════════════════════════════════════
+        // PERFORMANCE MONITORING
+        // ═══════════════════════════════════════════════════════════════
+        window.addEventListener('load', () => {
+            if ('performance' in window) {
+                const perfData = window.performance.timing;
+                const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+                console.log(`Page load time: ${pageLoadTime}ms`);
+            }
+        });
+        
+        // ═══════════════════════════════════════════════════════════════
+        // MANIFEST.JSON INLINE (for PWA)
+        // ═══════════════════════════════════════════════════════════════
+        const manifestData = {
+            "name": "ViArtificial - Intelligence Artificielle Vivante",
+            "short_name": "ViArtificial",
+            "description": "Votre compagnon d'intelligence artificielle qui évolue avec vous",
+            "start_url": "/",
+            "display": "standalone",
+            "background_color": "#000000",
+            "theme_color": "#000000",
+            "orientation": "portrait-primary",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FFD700'/%3E%3Cstop offset='100%25' style='stop-color:%2300FFFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='192' height='192' fill='%23000'/%3E%3Ctext x='96' y='130' font-family='monospace' font-size='80' font-weight='bold' fill='url(%23g)' text-anchor='middle'%3EViA%3C/text%3E%3C/svg%3E",
+                    "sizes": "192x192",
+                    "type": "image/svg+xml",
+                    "purpose": "any maskable"
+                },
+                {
+                    "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FFD700'/%3E%3Cstop offset='100%25' style='stop-color:%2300FFFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' fill='%23000'/%3E%3Ctext x='256' y='340' font-family='monospace' font-size='200' font-weight='bold' fill='url(%23g)' text-anchor='middle'%3EViA%3C/text%3E%3C/svg%3E",
+                    "sizes": "512x512",
+                    "type": "image/svg+xml",
+                    "purpose": "any maskable"
+                }
+            ]
+        };
+        
+        // Create and append manifest
+        const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/json' });
+        const manifestURL = URL.createObjectURL(manifestBlob);
+        const manifestLink = document.createElement('link');
+        manifestLink.rel = 'manifest';
+        manifestLink.href = manifestURL;
+        document.head.appendChild(manifestLink);
+        
+        // ═══════════════════════════════════════════════════════════════
+        // CONSOLE EASTER EGG
+        // ═══════════════════════════════════════════════════════════════
+        console.log('%c  ViArtificial.com  ', 'background: linear-gradient(135deg, #FFD700, #00FFFF); color: #000; font-size: 24px; font-weight: bold; padding: 10px;');
+        console.log('%c  Intelligence Artificielle Vivante  ', 'background: #0a0a0a; color: #FFD700; font-size: 14px; padding: 5px;');
+        console.log('%c  Développé avec ❤️ par ViArtificial Labs  ', 'color: #00FFFF; font-size: 12px;');
+        console.log('%c  GitHub: https://github.com/viartificiallabs  ', 'color: #FF00FF; font-size: 10px;');
+    </script>
+</body>
+</html>
