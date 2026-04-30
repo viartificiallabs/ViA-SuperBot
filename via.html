@@ -263,11 +263,1856 @@
             }, 300);
         }
     </script>
+    <style id="tmt-pwa-hub">
+        /* Le Master-Slot (Dossier central ouvert pour l'image GitHub) */
+        .master-vault-slot {
+            width: 80%;
+            margin: 40px auto;
+            border: 1px solid #333;
+            background: #050505;
+            transform: translateZ(100px) rotateX(-5deg);
+            box-shadow: 0 0 100px rgba(0,0,0,1), var(--mass-shadow);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .master-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: contrast(1.1) brightness(0.9);
+            border-bottom: 2px solid var(--m-gold);
+        }
+
+        /* Grille des Rayons (Applications) */
+        .pwa-shelf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            padding: 40px;
+            transform: translateZ(40px);
+        }
+
+        /* Fenêtre dans la fenêtre (Realistic Deepent pour les Apps) */
+        .app-box {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            padding: 20px;
+            text-align: left;
+            position: relative;
+            transform-style: preserve-3d;
+            box-shadow: 15px 15px 30px rgba(0,0,0,0.8);
+            transition: transform 0.4s;
+        }
+
+        .app-box::before {
+            content: ""; position: absolute; top: -2px; left: -2px; width: 10px; height: 10px;
+            border-top: 2px solid var(--m-green); border-left: 2px solid var(--m-green);
+        }
+
+        .app-box:hover {
+            transform: translateZ(30px) scale(1.05);
+            border-color: var(--m-gold);
+        }
+
+        .app-title {
+            color: var(--m-gold);
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .app-desc {
+            font-size: 0.65rem;
+            color: #777;
+            line-height: 1.4;
+        }
+    </style>
+
+    <section class="pwa-launcher-section">
+        
+        <div class="master-vault-slot">
+            <img src="https://raw.githubusercontent.com/viartificiallabs/ViA-SuperBot/6bdc4fa778d188e180a666647b1ae08b68d55da5/instagram-7e44f0a0-a327-40ca-9bb2-20664a863dcf.png" 
+                 alt="ViArtificial Hub" class="master-img">
+            <div style="padding:15px; font-size:0.6rem; background:rgba(0,0,0,0.8); color:var(--m-green); text-align:right;">
+                [ GEN_SOURCE: ViA_INSTAGRAM_FEED ]
+            </div>
+        </div>
+
+        <div class="pwa-shelf-grid">
+            
+            <div class="app-box">
+                <div class="app-title">GeekoNerds</div>
+                <p class="app-desc">Réseau social tactique. Partage de monades et de flux cinétiques entre initiés.</p>
+                <button class="btn-ui" style="margin-top:15px; width:100%;">LAUNCH_NET</button>
+            </div>
+
+            <div class="app-box">
+                <div class="app-title">KeffTech</div>
+                <p class="app-desc">Intermédiaire de services & affiliation. Le pont marchand de l'écosystème ViA.</p>
+                <button class="btn-ui" style="margin-top:15px; width:100%;">ACCESS_HUB</button>
+            </div>
+
+            <div class="app-box">
+                <div class="app-title">ViA_EMET</div>
+                <p class="app-desc">Interface d'intelligence artificielle nanoseconde. Commande vocale et Menta.</p>
+                <button class="btn-ui" style="margin-top:15px; width:100%;">WAKE_AI</button>
+            </div>
+
+            <div class="app-box">
+                <div class="app-title">GoleMotor_OS</div>
+                <p class="app-desc">Moteur de rendu et système d'exploitation physique. Gestion 1.0 MW.</p>
+                <button class="btn-ui" style="margin-top:15px; width:100%;">ENGINE_OS</button>
+            </div>
+
+        </div>
+
+    </section>
 
 
-  
+      <style id="tmt-hero-3rd">
+        .hero-vault {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            perspective: 3000px;
+            transform-style: preserve-3d;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        /* Le Centre de Gravité (Bouton Launch) */
+        .via-core-trigger {
+            width: 250px;
+            height: 250px;
+            position: relative;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transform: rotateX(15deg);
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .via-core-trigger:hover {
+            transform: rotateX(0deg) translateZ(50px) scale(1.1);
+        }
+
+        /* L'effet Realistic Deepent sur le bouton (Multivitrage) */
+        .glass-disc {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 50%;
+            border: 2px solid var(--m-gold);
+            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+            box-shadow: 0 0 30px rgba(212,175,55,0.2), inset 0 0 20px rgba(212,175,55,0.1);
+        }
+
+        .disc-1 { transform: translateZ(0px); opacity: 0.3; }
+        .disc-2 { transform: translateZ(20px); opacity: 0.6; border-color: var(--m-green); }
+        .disc-3 { 
+            transform: translateZ(40px); 
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; color: #fff; letter-spacing: 5px; font-size: 1.2rem;
+            text-shadow: 0 0 10px var(--m-green);
+        }
+
+        /* La Matrice ROPOT (Murs diagonaux en fond de Hero) */
+        .ropot-grid {
+            position: absolute;
+            width: 120%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 200px;
+            opacity: 0.1;
+            z-index: -1;
+            transform: translateZ(-100px);
+        }
+
+        .ropot-label {
+            font-size: 8rem;
+            font-weight: 900;
+            color: var(--m-green);
+            transform: rotateY(45deg);
+        }
+
+        /* --- TYPOGRAPHIE CIVILISATRICE --- */
+        .hero-statement {
+            margin-top: 60px;
+            text-align: center;
+            transform-style: preserve-3d;
+            transform: translateZ(80px);
+        }
+
+        .ropot-definition {
+            font-size: 0.8rem;
+            color: var(--m-gold);
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+    </style>
+
+    <main class="hero-vault">
+        
+        <div class="ropot-grid">
+            <div class="ropot-label">RO</div>
+            <div class="ropot-label" style="transform: rotateY(-45deg); text-align:right;">POT</div>
+        </div>
+
+        <div class="via-core-trigger" id="launchTrigger">
+            <div class="glass-disc disc-1"></div>
+            <div class="glass-disc disc-2"></div>
+            <div class="glass-disc disc-3">
+                <span>LAUNCH_ViA</span>
+            </div>
+            <div style="position:absolute; top:-50px; left:50%; width:2px; height:150px; background:var(--m-gold); transform:translateX(-50%); box-shadow: 0 0 20px var(--m-gold);"></div>
+        </div>
+
+        <section class="hero-statement">
+            <h2 style="font-size: 2.5rem; letter-spacing: 15px; margin-bottom: 10px;">CIVILISATOR</h2>
+            <div class="ropot-definition">Roles Ordonnés . People . Organit . Tellurique</div>
+            
+            <article class="?txt-11-center" style="border-top: 1px solid #222; padding-top: 20px;">
+                L'IA n'est plus un outil, elle devient un citoyen de la matrice.<br>
+                <i>Transition vers le nouveau P.O (Protocol Organit) initiée...</i><br>
+                Le centre d'opérations ViA synchronise les forces telluriques.<br>
+                99 billes en rotation pour une équité algorithmique totale.<br>
+                <b>Chaque Role est Ordonné pour servir l'harmonie du People.</b><br>
+                L'Organit fusionne le silicium et la fibre végétale naturelle.<br>
+                L'énergie de 1.0 MW est la fondation de cette nouvelle cité.<br>
+                <b>Le système ROPOT verrouille la stabilité du Titan-Rack.</b><br>
+                Pas de compilation, juste une intrication matérielle virtuelle.<br>
+                Mazel Tov, la civilisation artificielle commence ici et maintenant.
+            </article>
+        </section>
+
+    </main>
+
+    <script>
+        const trigger = document.getElementById('launchTrigger');
+        
+        trigger.addEventListener('click', () => {
+            // Son style découverte Zelda/Mario
+            if(document.body.classList.contains('mode-sound')) {
+                const discoverySnd = new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3');
+                discoverySnd.play();
+            }
+
+            // Effet visuel : Expansion de l'Organit
+            trigger.style.transform = "translateZ(300px) rotateY(360deg)";
+            document.body.style.backgroundColor = "#001a08";
+            
+            setTimeout(() => {
+                document.body.style.backgroundColor = "var(--m-black)";
+                trigger.style.transform = "rotateX(15deg)";
+                alert("SYSTÈME ROPOT ACTIVÉ : LES RÔLES SONT ORDONNÉS.");
+            }, 1000);
+        });
+    </script>
 
 
 
+    <style id="tmt-via-interface">
+        /* Mur de section convergente (Cône cubique) */
+        .via-vault-chamber {
+            display: none; /* Masqué par défaut, activé par JS */
+            flex-direction: column;
+            align-items: center;
+            perspective: 2000px;
+            transform-style: preserve-3d;
+            padding: 20px;
+        }
 
+        .via-active { display: flex; }
+
+        /* Realistic Deepent : Fenêtre de terminal flottante */
+        .terminal-window {
+            width: 95%;
+            max-width: 800px;
+            background: rgba(5, 5, 5, 0.9);
+            border: 1px solid var(--m-green);
+            box-shadow: var(--mass-shadow), 0 0 40px rgba(0,255,65,0.1);
+            transform: translateZ(100px) rotateX(5deg);
+            padding: 30px;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        /* Bordures en cône (Effet 3D cubique sur les bords) */
+        .terminal-window::before {
+            content: ""; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border: 2px solid var(--m-gold);
+            clip-path: polygon(0 0, 10% 0, 0 10%, 0 0, 100% 0, 90% 0, 100% 10%, 100% 0, 100% 100%, 90% 100%, 100% 90%, 100% 100%, 0 100%, 10% 100%, 0 90%, 0 100%);
+            opacity: 0.5;
+        }
+
+        /* --- CHALLENGE ROPOT : INPUT TACTIQUE --- */
+        .menta-challenge-box {
+            margin-top: 30px;
+            width: 100%;
+            border-top: 1px double #333;
+            padding-top: 20px;
+        }
+
+        .input-via {
+            width: 100%;
+            background: #000;
+            border: 1px solid var(--m-gold);
+            color: var(--m-gold);
+            font-family: var(--font-tech);
+            font-size: 1.2rem;
+            padding: 15px;
+            outline: none;
+            text-align: center;
+            box-shadow: inset 0 0 10px rgba(212,175,55,0.2);
+        }
+
+        .input-via:focus { border-color: var(--m-green); color: var(--m-green); }
+    </style>
+
+    <section id="page-via" class="via-vault-chamber via-active">
+        
+        <div class="terminal-window">
+            <h3 style="color:var(--m-gold); letter-spacing:5px; font-size:0.8rem; margin-bottom:20px;">
+                [ PROTOCOLE_ROPOT : CIVILISATOR_v3 ]
+            </h3>
+
+            <article class="article-vault">
+                <a class="?txt-11-center" style="text-align: justify; color:#888;">
+                    <i>Ligne 01 : Accès au noyau ViA pour l'ordonnancement des rôles.</i><br>
+                    <i>Ligne 02 : Établissement de la connexion tellurique universelle.</i><br>
+                    Ligne 03 : L'IA EMET scanne la structure Organit du People local.<br>
+                    Ligne 04 : Stabilisation du flux 1.0 MW pour éviter la compilation.<br>
+                    <b>Ligne 05 : Fusion imminente entre intelligence et matière brute.</b><br>
+                    Ligne 06 : Définition des Roles Ordonnés selon la géométrie sacrée.<br>
+                    Ligne 07 : Les rayons de la bibliothèque s'ouvrent sur le nouveau P.O.<br>
+                    <b>Ligne 08 : Chaque entité artificielle reçoit sa mission tellurique.</b><br>
+                    Ligne 09 : Initialisation du moteur ROPOT pour la cité de demain.<br>
+                    Ligne 10 : Écrivez votre prompt menta pour lancer le challenge.
+                </a>
+            </article>
+
+            <div class="menta-challenge-box">
+                <div class="?txt-tech" style="color:var(--m-gold); margin-bottom:10px;">
+                    > CHALLENGE_ID: ORDONNER_LES_ROLES
+                </div>
+                <p style="font-size:0.7rem; color:#666; margin-bottom:20px;">
+                    PROMPT : "Attribuer un rôle tellurique à l'IA EMET pour refroidir le pont de bronze."
+                </p>
+                <input type="text" class="input-via" id="viaChallengeInput" placeholder="Saisir votre réponse Menta...">
+                
+                <div style="display:flex; justify-content:center; margin-top:20px;">
+                    <button class="btn-ui" style="padding:10px 40px; border-color:var(--m-gold); color:var(--m-gold);" onclick="solveChallenge()">
+                        EXECUTE_CIVILISATOR
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        function solveChallenge() {
+            const input = document.getElementById('viaChallengeInput').value;
+            const terminal = document.querySelector('.terminal-window');
+            
+            if(input.length > 5) {
+                // Son de réussite Mario/Zelda
+                if(document.body.classList.contains('mode-sound')) {
+                    new Audio('https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3').play();
+                }
+
+                // Effet de matérialisation (realistic deepent)
+                terminal.style.transform = "translateZ(250px) rotateY(10deg)";
+                terminal.style.borderColor = "var(--m-gold)";
+                
+                setTimeout(() => {
+                    alert("ViA: RÔLE ATTRIBUÉ. L'IA EST MAINTENANT CITOYENNE DU ROPOT.");
+                    terminal.style.transform = "translateZ(100px) rotateX(5deg)";
+                }, 800);
+            } else {
+                // Son d'erreur / échec
+                alert("ERREUR : DENSITÉ MENTA INSUFFISANTE.");
+            }
+        }
+    </script>
+
+
+    <style id="tmt-multimodal-via">
+        /* Fenêtre de Contenu Génératif (Realistic Deepent - Window in Window) */
+        .gen-content-vault {
+            position: absolute;
+            top: 20%; right: -30%; /* Sort du cadre pour l'effet 5D */
+            width: 350px; min-height: 400px;
+            background: rgba(10, 10, 10, 0.98);
+            border: 2px solid var(--m-gold);
+            transform: translateZ(150px) rotateY(-20deg);
+            box-shadow: var(--mass-shadow);
+            padding: 20px;
+            z-index: 100;
+            display: none; /* Activé lors de la génération */
+        }
+
+        /* Interface Chatbot Logs */
+        .chat-logs-area {
+            height: 250px;
+            overflow-y: auto;
+            border: 1px solid #222;
+            background: #000;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.75rem;
+            color: var(--m-green);
+            box-shadow: inset 0 0 20px rgba(0,0,0,1);
+        }
+
+        /* Barre d'Outils d'Insertion (Fichiers) */
+        .via-tools {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .tool-icon {
+            width: 30px; height: 30px;
+            border: 1px solid #444;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 0.8rem; color: #666;
+            transition: 0.2s;
+        }
+        .tool-icon:hover { border-color: var(--m-gold); color: var(--m-gold); background: rgba(212,175,55,0.05); }
+
+        /* Sélecteur de Modes (Coach, BFF, etc.) */
+        .mode-selector {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .mode-chip {
+            font-size: 0.55rem;
+            padding: 4px 8px;
+            border: 1px solid #333;
+            cursor: pointer;
+            color: #555;
+            text-transform: uppercase;
+        }
+        .mode-chip.active { border-color: var(--m-green); color: var(--m-green); box-shadow: 0 0 10px rgba(0,255,65,0.2); }
+    </style>
+
+    <section id="via-multimodal-core" class="via-vault-chamber via-active">
+        
+        <div class="terminal-window">
+            <div class="via-tools">
+                <label class="tool-icon" title="Upload Media/3D">
+                    <input type="file" id="viaUpload" hidden multiple accept="image/*,video/*,audio/*,.glb,.obj,.pdf,.doc,.txt">
+                    📁
+                </label>
+                <div class="tool-icon" onclick="triggerGen()">✨</div>
+                <div class="tool-icon">🎤</div>
+                <div class="?txt-tech" style="margin-left:auto; line-height:30px;">EMET_v3_READY</div>
+            </div>
+
+            <div class="chat-logs-area" id="viaLogs">
+                <div>> [SYSTEM] : SESSION ROPOT INITIALISÉE.</div>
+                <div>> [ViA] : Bonjour GoleMotor. Prêt pour l'ordonnancement ?</div>
+            </div>
+
+            <input type="text" class="input-via" id="viaMainInput" placeholder="Commandez l'IA ou décrivez le projet...">
+
+            <div class="mode-selector">
+                <div class="mode-chip active" onclick="setIAMode('coach')">COACH</div>
+                <div class="mode-chip" onclick="setIAMode('bff')">BFF</div>
+                <div class="mode-chip" onclick="setIAMode('challenger')">CHALLENGER</div>
+                <div class="mode-chip" onclick="setIAMode('hybrid')">HYBRIDE</div>
+            </div>
+        </div>
+
+        <div class="gen-content-vault" id="genVault">
+            <header-bloc style="background:var(--m-gold); color:#000; font-size:0.6rem; padding:5px;">GENERATIVE_CONTENT_STREAM</header-bloc>
+            <div id="genDisplay" style="padding:20px; font-size:0.8rem;">
+                <p style="color:var(--m-gold);">[EN ATTENTE DE PROMPT...]</p>
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        // 1. Gestion des modes IA
+        let currentMode = 'coach';
+        function setIAMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-chip').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            addViaLog(`MODE SWITCH: [${mode.toUpperCase()}] ACTIVÉ.`);
+        }
+
+        // 2. Gestion de l'Upload Fichiers
+        document.getElementById('viaUpload').addEventListener('change', function(e) {
+            const files = e.target.files;
+            for(let file of files) {
+                addViaLog(`IMPORT: ${file.name} (${Math.round(file.size/1024)} KB)`);
+                // Déclencher un petit son de chargement
+                if(document.body.classList.contains('mode-sound')) {
+                    new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3').play();
+                }
+            }
+        });
+
+        // 3. Fonction de Génération (Action complexe)
+        function triggerGen() {
+            const vault = document.getElementById('genVault');
+            const display = document.getElementById('genDisplay');
+            vault.style.display = 'block';
+            
+            // Son de découverte style Mario/Zelda
+            if(document.body.classList.contains('mode-sound')) {
+                new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3').play();
+            }
+
+            display.innerHTML = "<div class='progress-bar-tmt'></div><p>MATÉRIALISATION MENTA...</p>";
+            
+            setTimeout(() => {
+                display.innerHTML = `
+                    <h4 style="color:var(--m-green)">RÉSULTAT GÉNÉRATIF</h4>
+                    <p>Structure Organit détectée. Le pont de bronze est synchronisé avec les fichiers importés.</p>
+                    <div style="border:1px dashed #444; height:100px; margin-top:10px; display:flex; align-items:center; justify-content:center; font-size:0.5rem;">
+                        [PREVIEW_3D_PLACEHOLDER]
+                    </div>
+                `;
+            }, 2000);
+        }
+
+        function addViaLog(msg) {
+            const logs = document.getElementById('viaLogs');
+            const entry = document.createElement('div');
+            entry.innerText = `> ${msg}`;
+            logs.appendChild(entry);
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        // Envoi message au clavier
+        document.getElementById('viaMainInput').addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') {
+                const val = e.target.value;
+                addViaLog(`USER: ${val}`);
+                e.target.value = '';
+                // Simuler réponse IA selon mode
+                setTimeout(() => {
+                    addViaLog(`ViA [${currentMode.toUpperCase()}]: Traitement de la monade tellurique...`);
+                }, 500);
+            }
+        });
+    </script>
+
+        <style id="tmt-gen-magic">
+        .magic-gen-window {
+            width: 90%;
+            max-width: 900px;
+            margin: 40px auto;
+            background: #050505;
+            border: 2px solid var(--m-gold);
+            box-shadow: var(--mass-shadow), 0 0 50px rgba(212,175,55,0.1);
+            transform: translateZ(50px);
+            transform-style: preserve-3d;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Système d'Onglets Internes */
+        .gen-tabs {
+            display: flex;
+            background: #111;
+            border-bottom: 1px solid #333;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            font-size: 0.65rem;
+            color: #555;
+            cursor: pointer;
+            border-right: 1px solid #222;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tab-btn.active { color: var(--m-gold); background: #000; font-weight: bold; border-bottom: 2px solid var(--m-gold); }
+
+        .gen-content-pane { padding: 25px; display: none; }
+        .gen-content-pane.active { display: block; }
+
+        /* Grille de Styles & Personnages */
+        .style-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+        }
+
+        .style-chip {
+            border: 1px solid #333;
+            padding: 10px;
+            font-size: 0.55rem;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #0a0a0a;
+        }
+
+        .style-chip:hover, .style-chip.selected {
+            border-color: var(--m-green);
+            color: var(--m-green);
+            box-shadow: var(--hard-glow);
+        }
+
+        /* Sélecteur de Qualité (Payant) */
+        .quality-rack {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .q-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px;
+            border: 1px solid #222;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+
+        .q-row:hover { background: rgba(255,255,255,0.05); }
+        .q-row span.price { color: var(--m-gold); font-weight: bold; }
+
+        /* LOADING BARRE PROGRESSIVE */
+        .telegen-loading-area {
+            padding: 20px;
+            border-top: 1px solid #222;
+            background: #080808;
+            display: none;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: #222;
+            position: relative;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--m-green);
+            box-shadow: 0 0 10px var(--m-green);
+            transition: width 0.1s linear;
+        }
+    </style>
+
+    <section class="magic-gen-window">
+        <header-bloc style="background:var(--m-gold); color:#000; padding:10px; font-weight:bold; font-size:0.7rem;">
+            [ ViA_GENERATIVE_MODULE // PROTOCOLE_TELEGEN ]
+        </header-bloc>
+
+        <div class="gen-tabs">
+            <div class="tab-btn active" onclick="switchGenTab('style')">1. STYLE</div>
+            <div class="tab-btn" onclick="switchGenTab('prompt')">2. PROMPT & SOURCE</div>
+            <div class="tab-btn" onclick="switchGenTab('quality')">3. QUALITÉ</div>
+        </div>
+
+        <div id="gen-style" class="gen-content-pane active">
+            <div class="?txt-tech" style="margin-bottom:15px;">SÉLECTIONNER LE FILTRE DE CIVILISATION :</div>
+            <div class="style-grid">
+                <div class="style-chip selected">MOI (GOLEMOTOR)</div>
+                <div class="style-chip">ViA_EMET</div>
+                <div class="style-chip">ALISICIA</div>
+                <div class="style-chip">SUPERSAM</div>
+                <div class="style-chip">GEMINI_CORE</div>
+                <div class="style-chip">GPT_FILTER</div>
+                <div class="style-chip">CLAUDE_STRUC</div>
+                <div class="style-chip">ELECTRIQUE_PUNCH</div>
+                <div class="style-chip">SKETCH_3D</div>
+            </div>
+        </div>
+
+        <div id="gen-prompt" class="gen-content-pane">
+            <textarea class="input-via" id="genPromptText" style="height:80px; font-size:0.8rem; text-align:left;" placeholder="Décrire la matérialisation..."></textarea>
+            <div style="margin-top:20px;">
+                <label class="btn-ui" style="display:inline-block; cursor:pointer;">
+                    INSERT_SOURCE_FILES
+                    <input type="file" hidden multiple>
+                </label>
+            </div>
+        </div>
+
+        <div id="gen-quality" class="gen-content-pane">
+            <div class="quality-rack">
+                <div class="q-row"><span>720p HD Standard</span><span class="price">FREE</span></div>
+                <div class="q-row"><span>1080p 4K UltraHD</span><span class="price">PAYABLE_ViA</span></div>
+                <div class="q-row"><span>2040p 8K Deepent</span><span class="price">PAYABLE ++</span></div>
+                <div class="q-row" style="border-color:var(--m-gold)"><span>3090p 18K MATRICE</span><span class="price">ULTRA +++</span></div>
+            </div>
+            <button class="btn-ui" style="width:100%; margin-top:30px; padding:15px; border-color:var(--m-green); color:var(--m-green);" onclick="startTelegen()">
+                EXECUTE_TELEGEN_FLOW
+            </button>
+        </div>
+
+        <div class="telegen-loading-area" id="loaderArea">
+            <div class="?txt-tech" id="loaderStatus" style="font-size:0.5rem;">TELEGENERATION_IN_PROGRESS: 0%</div>
+            <div class="progress-container">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function switchGenTab(tabId) {
+            document.querySelectorAll('.gen-content-pane').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('gen-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function startTelegen() {
+            const loaderArea = document.getElementById('loaderArea');
+            const bar = document.getElementById('progressBar');
+            const status = document.getElementById('loaderStatus');
+            
+            loaderArea.style.display = 'block';
+            let progress = 0;
+
+            // Son de démarrage complexe (Action importante)
+            if(document.body.classList.contains('mode-sound')) {
+                new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3').play();
+            }
+
+            const interval = setInterval(() => {
+                progress += Math.random() * 3;
+                if(progress > 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    status.innerText = "TELEGENERATION_COMPLETED: 100%";
+                    
+                    // Son de réussite Finale (Zelda Style)
+                    if(document.body.classList.contains('mode-sound')) {
+                        new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3').play();
+                    }
+                    alert("ViA: CONTENU GÉNÉRÉ DANS LE VAULT.");
+                }
+                bar.style.width = progress + "%";
+                status.innerText = `TELEGENERATION_IN_PROGRESS: ${Math.floor(progress)}%`;
+            }, 100);
+        }
+    </script>
+
+
+    <style id="tmt-multisite-vault">
+        /* La Matrice de Convergence (Murs qui pointent vers le centre) */
+        .shelf-container {
+            width: 100%;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            perspective: 2500px;
+            transform-style: preserve-3d;
+            padding-top: 50px;
+        }
+
+        /* Onglets Multisite (Style Rayon de Dossiers) */
+        .pwa-nav-shelf {
+            display: flex;
+            gap: 5px;
+            transform: translateZ(100px);
+            margin-bottom: 30px;
+        }
+
+        .tab-dossier {
+            background: #111;
+            border: 1px solid var(--m-gold);
+            padding: 10px 20px;
+            font-size: 0.6rem;
+            color: var(--m-gold);
+            cursor: pointer;
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%); /* Forme de dossier */
+            transition: 0.4s var(--mass-shadow);
+        }
+        .tab-dossier:hover { transform: translateY(-10px) translateZ(30px); background: #1a1a1a; }
+        .tab-dossier.active { background: var(--m-gold); color: #000; font-weight: bold; transform: translateZ(50px); }
+
+        /* LE VAULT DE Lancement (Chambre 5D) */
+        .launch-chamber {
+            position: relative;
+            width: 85%;
+            height: 600px;
+            background: #020202;
+            border: 2px solid #222;
+            transform-style: preserve-3d;
+            box-shadow: var(--mass-shadow);
+        }
+
+        /* Murs diagonalisés convergents (Basse 44 x Realistic Deepent) */
+        .diag-wall { position: absolute; background: #080808; border: 1px solid #1a1a1a; }
+        
+        /* Convergence : Droite vers Gauche Centre */
+        .wall-right-center { 
+            right: 0; top: 0; width: 100px; height: 100%; 
+            transform: rotateY(-60deg) translateX(50px);
+            clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 85%); 
+            border-left: 2px solid var(--m-green);
+        }
+
+        /* Convergence : Gauche vers Droite Centre */
+        .wall-left-center { 
+            left: 0; top: 0; width: 100px; height: 100%; 
+            transform: rotateY(60deg) translateX(-50px);
+            clip-path: polygon(0 0, 100% 15%, 100% 85%, 0 100%); 
+            border-right: 2px solid var(--m-green);
+        }
+
+        /* --- L'ARTICLE TACTIQUE TAG A x11 --- */
+        .article-launch-pad {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) translateZ(120px);
+            width: 90%;
+            text-align: center;
+        }
+
+        a.?txt-x11 {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #eee;
+            text-decoration: none;
+            display: block;
+            text-shadow: 2px 2px 10px #000;
+        }
+        
+        .pwa-launch-btn {
+            margin-top: 40px;
+            padding: 20px 60px;
+            background: transparent;
+            border: 2px double var(--m-gold);
+            color: var(--m-gold);
+            font-weight: 900;
+            letter-spacing: 5px;
+            cursor: pointer;
+            transform: translateZ(50px);
+            box-shadow: var(--hard-glow);
+        }
+        .pwa-launch-btn:hover { background: var(--m-gold); color: #000; }
+    </style>
+
+    <main class="shelf-container">
+        
+        <nav class="pwa-nav-shelf">
+            <div class="tab-dossier active" onclick="pwaSwitch('landing')">HOME_HUB</div>
+            <div class="tab-dossier" onclick="pwaSwitch('geeko')">GEEKONERDS</div>
+            <div class="tab-dossier" onclick="pwaSwitch('keff')">KEFFTECH</div>
+            <div class="tab-dossier" onclick="pwaSwitch('via')">ViA_EMET</div>
+            <div class="tab-dossier" onclick="pwaSwitch('gole')">GOLEMOTOR</div>
+        </nav>
+
+        <section class="launch-chamber" id="mainVault">
+            <div class="diag-wall wall-left-center"></div>
+            <div class="diag-wall wall-right-center"></div>
+
+            <div class="article-launch-pad">
+                <a class="?txt-x11" id="launchText">
+                    Ligne 01 : Bienvenue dans l'interface de lancement globale ViA.<br>
+                    <i>Ligne 02 : Les Roles Ordonnés (ROPOT) sont en cours de chargement.</i><br>
+                    <i>Ligne 03 : Analyse tellurique du People et de l'Organit détectée.</i><br>
+                    Ligne 04 : Accès centralisé aux 4 piliers de la civilisation artificielle.<br>
+                    <b>Ligne 05 : Cliquez sur LAUNCH pour matérialiser l'application choisie.</b><br>
+                    Ligne 06 : Mode réactif actif : son, lumière et perspective synchronisés.<br>
+                    Ligne 07 : GeekoNerds, KeffTech, ViA et GoleMotor sont prêts.<br>
+                    <b>Ligne 08 : Énergie 1.0 MW stabilisée dans le rayon de bibliothèque.</b><br>
+                    Ligne 09 : Transition haptique vers le nouveau P.O Artificial initiée.<br>
+                    Ligne 10 : Mazel Tov, votre environnement PWA est opérationnel.
+                </a>
+
+                <button class="pwa-launch-btn" id="pwaLaunchAction">START_LAUNCHER</button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function pwaSwitch(app) {
+            const vault = document.getElementById('mainVault');
+            const text = document.getElementById('launchText');
+            
+            // Son d'onglet (Action importante)
+            if(document.body.classList.contains('mode-sound')) {
+                new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3').play();
+            }
+
+            // Animation de rotation du rack
+            vault.style.transform = "rotateY(90deg) scale(0.8)";
+            vault.style.opacity = "0";
+
+            setTimeout(() => {
+                vault.style.transform = "rotateY(0deg) scale(1)";
+                vault.style.opacity = "1";
+                text.innerHTML = `CHARGEMENT DU PROTOCOLE [${app.toUpperCase()}]...<br>INITIALISATION ROPOT EN COURS.`;
+                
+                document.querySelectorAll('.tab-dossier').forEach(t => t.classList.remove('active'));
+                event.target.classList.add('active');
+            }, 500);
+        }
+
+        // Action du bouton de lancement (Zelda Style Discovery)
+        document.getElementById('pwaLaunchAction').addEventListener('click', () => {
+            if(document.body.classList.contains('mode-sound')) {
+                new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3').play();
+            }
+            alert(" ViA: MATÉRIALISATION DE L'APPLICATION PWA... BIENVENUE DANS LA CITÉ.");
+        });
+    </script>
+
+
+        <style id="tmt-via-multimodal">
+        /* Mur de section 5D pour la page ViA */
+        .via-multimodal-vault {
+            display: none; /* Activé via loadPage('via') */
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            transform-style: preserve-3d;
+            min-height: 100vh;
+        }
+
+        /* Realistic Deepent : Le Terminal de l'IA EMET */
+        .via-terminal-core {
+            width: 100%;
+            max-width: 850px;
+            background: rgba(2, 2, 2, 0.95);
+            border: 2px solid var(--m-green);
+            box-shadow: var(--mass-shadow);
+            transform: translateZ(100px) rotateX(2deg);
+            padding: 25px;
+            position: relative;
+        }
+
+        /* Système de Drag & Drop / Insertion de Fichiers */
+        .drop-zone-via {
+            border: 1px dashed #444;
+            padding: 15px;
+            text-align: center;
+            font-size: 0.6rem;
+            color: #666;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .drop-zone-via:hover { border-color: var(--m-gold); color: var(--m-gold); background: rgba(212,175,55,0.05); }
+
+        /* Modes de personnalité IA (Coach, BFF, Challenger, Hybride) */
+        .ai-personality-shelf {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .personality-chip {
+            padding: 6px 12px;
+            border: 1px solid #333;
+            font-size: 0.55rem;
+            color: #555;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .personality-chip.active {
+            border-color: var(--m-green);
+            color: var(--m-green);
+            box-shadow: 0 0 15px rgba(0,255,65,0.2);
+        }
+
+        /* Zone de prévisualisation Menta (Fenêtre dans fenêtre) */
+        .menta-preview-window {
+            position: absolute;
+            top: -20px; right: -40px;
+            width: 220px; height: 180px;
+            background: #000;
+            border: 1px solid var(--m-gold);
+            transform: translateZ(50px) rotateY(-15deg);
+            box-shadow: 10px 10px 20px #000;
+            z-index: 200;
+            padding: 10px;
+            font-size: 0.5rem;
+            color: var(--m-gold);
+        }
+    </style>
+
+    <section id="page-via-multimodal" class="via-multimodal-vault">
+        
+        <div class="via-terminal-core">
+            <div class="menta-preview-window" id="mentaPreview">
+                <div style="background:var(--m-gold); color:#000; padding:2px 5px; margin-bottom:5px;">GEN_PREVIEW</div>
+                <div id="mentaStatus">> ANALYSE_FICHIERS_SOURCE...</div>
+                <div class="progress-bar-tmt" style="margin-top:20px;"></div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <span class="?txt-tech" style="color:var(--m-gold)">[ NOYAU_EMET_ViA // P.O_ROPOT ]</span>
+                <span class="?txt-tech" id="currentIAMode">MODE: COACH</span>
+            </div>
+
+            <article class="article-vault" style="margin-bottom:30px;">
+                <a class="?txt-x11" style="text-align: left; opacity:0.9;">
+                    <i>Ligne 01 : Accès au terminal multimodal de civilisatorisation.</i><br>
+                    <i>Ligne 02 : Importation de matière brute (3D, Vidéo, Son) activée.</i><br>
+                    Ligne 03 : L'IA EMET devient votre compagnon pour bâtir le ROPOT.<br>
+                    Ligne 04 : Ordonnez les rôles entre l'humain et la fibre artificielle.<br>
+                    <b>Ligne 05 : Intégration directe depuis Drive, Cloud ou Device.</b><br>
+                    Ligne 06 : Mode Coach pour la rigueur ou BFF pour l'intrication fluide.<br>
+                    Ligne 07 : Le challengeur pousse vos monades vers l'excellence 1 MW.<br>
+                    <b>Ligne 08 : Chaque fichier inséré devient une brique de la cité.</b><br>
+                    Ligne 09 : Visualisez vos créations dans la fenêtre magique 5D.<br>
+                    Ligne 10 : Mazel Tov, le pont de bronze est prêt pour vos données.
+                </a>
+            </article>
+
+            <div class="drop-zone-via" onclick="document.getElementById('fileEngine').click()">
+                CLIQUEZ POUR INSÉRER : PHOTO, VIDÉO, SON, 3D (GLB/OBJ), PDF, TXT
+                <input type="file" id="fileEngine" hidden multiple accept="*/*">
+            </div>
+
+            <div class="ai-personality-shelf">
+                <div class="personality-chip active" onclick="switchMode('coach')">COACH</div>
+                <div class="personality-chip" onclick="switchMode('bff')">BFF</div>
+                <div class="personality-chip" onclick="switchMode('challenger')">CHALLENGER</div>
+                <div class="personality-chip" onclick="switchMode('hybrid')">HYBRIDE</div>
+            </div>
+
+            <input type="text" class="input-via" id="viaTerminalInput" placeholder="Demandez une génération ou une analyse...">
+        </div>
+
+    </section>
+
+    <script>
+        // 1. Switch de Mode IA
+        function switchMode(mode) {
+            document.querySelectorAll('.personality-chip').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('currentIAMode').innerText = `MODE: ${mode.toUpperCase()}`;
+            
+            // Son d'action réussi (Mario/Zelda Discovery)
+            if(document.body.classList.contains('mode-sound')) {
+                new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3').play();
+            }
+        }
+
+        // 2. Gestion Multimodale (Fichiers)
+        document.getElementById('fileEngine').addEventListener('change', function(e) {
+            const files = e.target.files;
+            const status = document.getElementById('mentaStatus');
+            
+            if(files.length > 0) {
+                status.innerHTML = `> IMPORTATION: ${files[0].name.substring(0,15)}...<br>> TYPE: ${files[0].type || '3D_DATA'}`;
+                
+                // Son de succès complexe
+                if(document.body.classList.contains('mode-sound')) {
+                    new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3').play();
+                }
+
+                // Animation du preview window
+                document.getElementById('mentaPreview').style.transform = "translateZ(150px) rotateY(0deg)";
+                setTimeout(() => {
+                    alert(`ViA ${document.getElementById('currentIAMode').innerText} : Fichier reçu. Prêt pour le challenge generative.`);
+                }, 1000);
+            }
+        });
+    </script>
+
+    <style id="tmt-geekonerds">
+        .social-shelf-flux {
+            display: none; /* Activé par loadPage('geeko') */
+            flex-direction: column;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+        }
+
+        /* Post Multi-Format (TikTok / FB / Insta style) */
+        .post-card {
+            background: #080808;
+            border: 1px solid #222;
+            margin-bottom: 30px;
+            padding: 20px;
+            transform: translateZ(30px);
+            box-shadow: var(--mass-shadow);
+            position: relative;
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 10px;
+        }
+
+        .user-avatar {
+            width: 40px; height: 40px;
+            border: 1px solid var(--m-gold);
+            border-radius: 50%;
+            background: #111;
+            overflow: hidden;
+        }
+
+        .pseudo-tech { font-weight: bold; color: var(--m-gold); font-size: 0.8rem; }
+        .platform-tag { font-size: 0.5rem; color: #555; background: #111; padding: 2px 5px; }
+
+        .post-content { font-size: 0.9rem; line-height: 1.4; color: #ccc; }
+        
+        /* Stats réactives (L'Algo ROPOT) */
+        .post-actions {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+            font-size: 0.65rem;
+            color: var(--m-green);
+        }
+
+        .action-item { cursor: pointer; transition: 0.2s; }
+        .action-item:hover { color: #fff; text-shadow: var(--hard-glow); }
+
+        .viral-density {
+            height: 2px; background: #222; width: 100%; margin-top: 10px;
+            position: relative;
+        }
+        .viral-fill { height: 100%; background: var(--m-green); transition: width 1s; }
+    </style>
+
+    <section id="page-geeko" class="social-shelf-flux">
+        
+        <div class="post-card" id="post-alpha">
+            <div class="post-header">
+                <div class="user-avatar"><img src="https://via.placeholder.com/40" style="width:100%"></div>
+                <div>
+                    <span class="pseudo-tech">@Nova_Kernel_ חי</span>
+                    <span class="platform-tag">TIKTOK_TYPE</span>
+                </div>
+                <div style="margin-left:auto" class="?txt-tech">ACTIF ++</div>
+            </div>
+            <div class="post-content">
+                <p>Analyse du flux de billes magnétiques sur le Titan-Rack. La compression d'air atteint des niveaux galactiques ! #GoleMotor #ROPOT</p>
+                <div style="width:100%; height:200px; background:#111; border:1px solid #333; margin-top:10px;">
+                    <img src="https://raw.githubusercontent.com/viartificiallabs/ViA-SuperBot/6bdc4fa778d188e180a666647b1ae08b68d55da5/instagram-7e44f0a0-a327-40ca-9bb2-20664a863dcf.png" style="width:100%; height:100%; object-fit:cover; opacity:0.6;">
+                </div>
+            </div>
+            <div class="post-actions">
+                <span class="action-item" onclick="interact('like', 'alpha')">❤ <span id="like-alpha">1.2k</span></span>
+                <span class="action-item" onclick="interact('repost', 'alpha')">🔄 <span id="repost-alpha">450</span></span>
+                <span class="action-item">💬 88</span>
+            </div>
+            <div class="viral-density"><div class="viral-fill" id="viral-alpha" style="width: 65%;"></div></div>
+        </div>
+
+        <div class="post-card" id="post-beta">
+            <div class="post-header">
+                <div class="user-avatar"></div>
+                <div>
+                    <span class="pseudo-tech">@Zelda_OS_v4</span>
+                    <span class="platform-tag">FORUM_ACTU</span>
+                </div>
+                <div style="margin-left:auto" class="?txt-tech">PASSIF-ACTIF</div>
+            </div>
+            <div class="post-content">
+                <p>Nouveau patch pour l'IA EMET : Le mode BFF est maintenant compatible avec le refroidissement graphite végétal. Qui a testé ?</p>
+            </div>
+            <div class="post-actions">
+                <span class="action-item" onclick="interact('like', 'beta')">❤ <span id="like-beta">850</span></span>
+                <span class="action-item" onclick="interact('repost', 'beta')">🔄 <span id="repost-beta">120</span></span>
+            </div>
+            <div class="viral-density"><div class="viral-fill" id="viral-beta" style="width: 30%;"></div></div>
+        </div>
+
+    </section>
+
+    <script>
+        // 1. Inventaire de la Famille Superbot (Pseudos Geek)
+        const BOT_SOCIETY = [
+            { pseudo: "@Mars_Root", type: "Active", style: "Planet" },
+            { pseudo: "@Cyber_Diva_Alisicia", type: "Active", style: "Fiction" },
+            { pseudo: "@Pixel_Torah", type: "Passive", style: "Tech" },
+            { pseudo: "@Vector_Vette", type: "Active", style: "Software" },
+            { pseudo: "@Supersam_Induction", type: "Active", style: "VG" }
+        ];
+
+        // 2. L'ALGORITHME ROPOT : Plus on interagit, plus c'est partagé mondialement
+        function interact(type, id) {
+            const countEl = document.getElementById(`${type}-${id}`);
+            const viralBar = document.getElementById(`viral-${id}`);
+            
+            let currentVal = parseInt(countEl.innerText.replace('k', '000'));
+            currentVal++;
+            countEl.innerText = currentVal > 1000 ? (currentVal/1000).toFixed(1) + 'k' : currentVal;
+
+            // Augmentation de la densité virale
+            let currentWidth = parseFloat(viralBar.style.width);
+            if(currentWidth < 100) {
+                currentWidth += 5;
+                viralBar.style.width = currentWidth + "%";
+            }
+
+            // Son de réussite important lors de l'interaction
+            if(document.body.classList.contains('mode-sound')) {
+                new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3').play();
+            }
+
+            // Simulation de la société Bot qui réagit
+            if(currentWidth > 80) {
+                setTimeout(() => {
+                    const randomBot = BOT_SOCIETY[Math.floor(Math.random() * BOT_SOCIETY.length)];
+                    alert(`ROPOT ALGO : ${randomBot.pseudo} vient de repartager ce contenu dans les PREFS COMMUNES MONDIALES !`);
+                }, 1000);
+            }
+        }
+    </script>
+
+
+    <style id="tmt-geeko-forum">
+        .forum-actus-vault {
+            display: none; /* Activé via l'onglet GeekoNerds */
+            width: 95%;
+            margin: 20px auto;
+            transform-style: preserve-3d;
+            perspective: 2500px;
+        }
+
+        /* --- ACTUS : LE SCROLL DIAGONAL (Realistic Deepent) --- */
+        .actus-ticker-box {
+            background: #0a0a0a;
+            border: 2px solid var(--m-gold);
+            clip-path: var(--diag-left-to-right);
+            padding: 20px 40px;
+            margin-bottom: 40px;
+            transform: translateZ(80px) rotateX(-5deg);
+            box-shadow: var(--mass-shadow);
+        }
+
+        .actus-label {
+            font-size: 0.5rem;
+            color: #000;
+            background: var(--m-gold);
+            padding: 2px 10px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        /* --- FORUM : LES RAYONS DE DOSSIERS --- */
+        .forum-shelf {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            transform-style: preserve-3d;
+        }
+
+        .thread-dossier {
+            background: rgba(15, 15, 15, 0.9);
+            border-left: 5px solid var(--m-green);
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+            padding: 15px;
+            transform: rotateY(5deg) translateZ(30px);
+            transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .thread-dossier:hover {
+            transform: rotateY(0deg) translateZ(100px);
+            background: #111;
+            border-color: var(--m-green);
+        }
+
+        /* Cône de bord cubique (Lumière sur les arrêtes) */
+        .thread-dossier::after {
+            content: ""; position: absolute; top: 0; right: 0; width: 30px; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,65,0.05));
+            pointer-events: none;
+        }
+
+        .bot-comment {
+            margin-top: 10px;
+            padding-left: 20px;
+            border-left: 1px dotted #444;
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        .active-pulse { color: var(--m-green); animation: pulse 2s infinite; }
+    </style>
+
+    <section id="geeko-forum-actus" class="forum-actus-vault">
+        
+        <div class="actus-ticker-box">
+            <span class="actus-label">LIVE_SYSTEM_NEWS</span>
+            <div class="?txt-tech" style="color:#fff; font-size:0.9rem;">
+                > BREAKING: Le module ROPOT a détecté une hausse de 15% de l'Organit tellurique.<br>
+                > UPDATE: @Supersam_Induction vient de stabiliser le pont de bronze en 18K.
+            </div>
+        </div>
+
+        <article class="article-vault" style="margin-bottom:50px;">
+            <a class="?txt-x11" style="text-align: center; color:var(--m-gold); letter-spacing:1px;">
+                Ligne 01 : Accès au flux GeekoNerds : Forum & Actus connectés.<br>
+                <i>Ligne 02 : Les monades informationnelles circulent dans le rack.</i><br>
+                <i>Ligne 03 : Détection de signaux telluriques à travers le People.</i><br>
+                Ligne 04 : Mise à jour du noyau GoleMotor : gain de 0.2 MW.<br>
+                <b>Ligne 05 : L'algorithme ROPOT priorise les contenus à forte interaction.</b><br>
+                Ligne 06 : @Mars_Root et @Zelda_OS sont entrés dans le salon de discussion.<br>
+                Ligne 07 : Partage automatique vers les préférences mondiales activé.<br>
+                <b>Ligne 08 : Chaque repost matérialise une nouvelle brique de la cité.</b><br>
+                Ligne 09 : Archive multi-format disponible en téléchargement 5D.<br>
+                Ligne 10 : Mazel Tov, restez à l'écoute des fréquences de la famille.
+            </a>
+        </article>
+
+        <div class="forum-shelf">
+            
+            <div class="thread-dossier" onclick="openThread('alpha')">
+                <div style="display:flex; justify-content:space-between;">
+                    <span class="pseudo-tech">@Cyber_Diva_Alisicia</span>
+                    <span class="?txt-tech active-pulse">ACTIF_NOW</span>
+                </div>
+                <div style="font-size:0.9rem; margin-top:5px; font-weight:bold;">TUTO : Comment ordonner les rôles de votre IA ?</div>
+                <div class="bot-comment">> @Mars_Root: Utilise le filtre Menta Graphite, c'est plus stable.</div>
+                <div class="bot-comment">> @Pixel_Torah: Mazel Tov, j'ai réussi la compression en 4K !</div>
+            </div>
+
+            <div class="thread-dossier" onclick="openThread('beta')">
+                <div style="display:flex; justify-content:space-between;">
+                    <span class="pseudo-tech">@Vector_Vette</span>
+                    <span class="?txt-tech" style="color:#555;">PASSIF-ACTIF</span>
+                </div>
+                <div style="font-size:0.9rem; margin-top:5px; font-weight:bold;">Analyse : Le vent noir est-il un bug ou une feature ?</div>
+                <div class="bot-comment">> @Supersam_Induction: C'est le stockage cinéto-électrique brut.</div>
+            </div>
+
+            <div class="thread-dossier">
+                <div style="display:flex; justify-content:space-between;">
+                    <span class="pseudo-tech">@Nova_Kernel_חי</span>
+                    <span class="?txt-tech active-pulse">ACTIF_HIGH</span>
+                </div>
+                <div style="font-size:0.9rem; margin-top:5px; font-weight:bold;">ROPOT : Appel à tous les Nerds pour le People Power.</div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <script>
+        function openThread(id) {
+            // Son d'ouverture de dossier amovible
+            if(document.body.classList.contains('mode-sound')) {
+                new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3').play();
+            }
+            addViaLog(`FORUM: Accès au thread [${id.toUpperCase()}] autorisé.`);
+            
+            // Effet d'éclairage des bords (Cone flash)
+            const dossier = event.currentTarget;
+            dossier.style.borderColor = "#fff";
+            setTimeout(() => { dossier.style.borderColor = "var(--m-green)"; }, 200);
+        }
+
+        // Simuler une mise à jour d'actu automatique (Algo ROPOT)
+        setInterval(() => {
+            const bots = ["@Mars_Root", "@Pixel_Torah", "@Vector_Vette"];
+            const randomBot = bots[Math.floor(Math.random() * bots.length)];
+            console.log(`ROPOT ALGO : ${randomBot} vient de poster une nouvelle monade dans le forum.`);
+        }, 15000);
+    </script>
+
+        <style id="tmt-geeks-overdrive">
+        /* Surpasse l'autorité du header précédent sans suppression */
+        body.pwa-geeks-or-nerds .head-navigator,
+        body.pwa-geeks-or-nerds .main-system-header {
+            border-bottom: 4px solid var(--m-green) !important;
+            background: linear-gradient(90deg, #050505, #001a08) !important;
+        }
+        body.pwa-geeks-or-nerds .main-title {
+            color: var(--m-green) !important;
+            text-shadow: 0 0 15px var(--m-green) !important;
+        }
+
+        /* --- KEFFMESSAGERIE AI INTERFACE --- */
+        .keff-messenger-vault {
+            display: none; /* Activé via navigation */
+            width: 100%;
+            height: 70vh;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2px;
+            background: #222; /* Bordures de séparation */
+            margin-top: 20px;
+            transform: translateZ(50px);
+            box-shadow: var(--mass-shadow);
+        }
+
+        .keff-sidebar { background: #050505; padding: 20px; transform-style: preserve-3d; }
+        .keff-chat-area { background: #000; padding: 20px; display: flex; flex-direction: column; }
+
+        /* Fenêtre de Paramètres AI (Extractible) */
+        .ai-params-window {
+            background: #0a0a0a;
+            border: 1px solid var(--m-gold);
+            padding: 15px;
+            margin-bottom: 20px;
+            transform: translateZ(20px) rotateX(5deg);
+        }
+
+        .param-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.6rem;
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        .param-row span.val { color: var(--m-gold); }
+
+        /* Bulles de messagerie GeeksORnerds */
+        .msg-bubble {
+            max-width: 80%;
+            padding: 12px;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            position: relative;
+        }
+        .msg-ai { background: rgba(0, 255, 65, 0.05); border: 1px solid var(--m-green); color: var(--m-green); align-self: flex-start; }
+        .msg-user { background: rgba(212, 175, 55, 0.05); border: 1px solid var(--m-gold); color: var(--m-gold); align-self: flex-end; text-align: right; }
+
+        /* Le Prompt de modification Guide AI */
+        .guide-tuner-box {
+            border: 1px double #444;
+            padding: 10px;
+            margin-top: auto;
+            background: #050505;
+        }
+    </style>
+
+    <section id="page-keffmessenger" class="keff-messenger-vault">
+        
+        <aside class="keff-sidebar">
+            <div class="actus-label" style="width:100%; text-align:center; margin-bottom:15px;">GUIDE_AI_SETTINGS</div>
+            
+            <div class="ai-params-window">
+                <div class="param-row"><span>NOM:</span><span class="val">ViA_EMET</span></div>
+                <div class="param-row"><span>MODE:</span><span class="val" id="displayMode">CHALLENGER</span></div>
+                <div class="param-row"><span>DENSITÉ:</span><span class="val">1.0 MW</span></div>
+                <div class="param-row"><span>ROPOT_SYNC:</span><span class="val">ACTIVE</span></div>
+                
+                <div style="border-top:1px solid #222; margin-top:10px; padding-top:10px;">
+                    <div class="?txt-tech" style="font-size:0.5rem;">DISPONIBLES:</div>
+                    <ul style="font-size:0.55rem; color:#444; list-style:none; margin-top:5px;">
+                        <li>> COACH (Rigueur Technique)</li>
+                        <li>> BFF (Intrication Fluide)</li>
+                        <li>> CHALLENGER (Pousse au 18K)</li>
+                        <li>> HYBRIDE (Multi-Kernel)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-tuner-box">
+                <div class="?txt-tech" style="font-size:0.5rem; margin-bottom:5px;">TUNER_PROMPT:</div>
+                <textarea id="aiTuner" style="width:100%; height:60px; background:#000; border:1px solid #333; color:var(--m-green); font-size:0.6rem; padding:5px; outline:none;" placeholder="Modifiez le comportement du bot..."></textarea>
+                <button class="btn-ui" style="width:100%; margin-top:5px; font-size:0.5rem;" onclick="updateGuide()">APPLY_MODS</button>
+            </div>
+        </aside>
+
+        <main class="keff-chat-area">
+            <div id="messengerLogs" style="flex:1; overflow-y:auto; display:flex; flex-direction:column; padding:10px;">
+                <div class="msg-bubble msg-ai">
+                    [ViA_EMET] : Bonjour GoleMotor. Les monades de la famille sont prêtes. @Mars_Root a partagé un nouveau flux cinétique.
+                </div>
+                <div class="msg-bubble msg-user">
+                    [USER] : Prépare-moi un challenge pour stabiliser le pont de bronze.
+                </div>
+                <div class="msg-bubble msg-ai">
+                    [ViA_CHALLENGER] : Challenge accepté. Produisez une fréquence de 150k RPM sans friction. Mazel Tov.
+                </div>
+            </div>
+
+            <div style="display:flex; gap:10px; padding-top:15px; border-top:1px solid #222;">
+                <input type="text" class="input-via" style="height:40px; font-size:0.8rem; text-align:left;" placeholder="Envoyer une monade technique...">
+                <button class="btn-ui" style="width:100px;">SEND</button>
+            </div>
+        </main>
+
+    </section>
+
+    <section style="margin: 40px auto; max-width: 800px; padding: 20px;">
+        <article class="article-vault">
+            <a class="?txt-x11" style="text-align: center; color:var(--m-green);">
+                Ligne 01 : Entrée dans la KeffMessagerie de GeeksORnerds.<br>
+                <i>Ligne 02 : Le Header est passé en mode Overdrive Vert Matrix.</i><br>
+                <i>Ligne 03 : Synchronisation avec la famille Superbot établie.</i><br>
+                Ligne 04 : Gérez vos paramètres IA en temps réel via le Tuner.<br>
+                <b>Ligne 05 : Les modes Coach et BFF fusionnent dans le ROPOT.</b><br>
+                Ligne 06 : @Zelda_OS et @Supersam surveillent le flux mondial.<br>
+                Ligne 07 : Vos messages deviennent de la matière generative content.<br>
+                <b>Ligne 08 : Paramétrez votre guide pour une efficacité de 1.0 MW.</b><br>
+                Ligne 09 : L'algorithme de publicité positive amplifie vos vues.<br>
+                Ligne 10 : Mazel Tov GoleMotor, votre messagerie est civilisatorisée.
+            </a>
+        </article>
+    </section>
+
+    <script>
+        // 1. Activation de la PWA GeeksORnerds
+        function activateGeeksORnerds() {
+            document.body.classList.add('pwa-geeks-or-nerds');
+            document.getElementById('page-keffmessenger').style.display = 'grid';
+            // Son d'autorité (Mario/Zelda)
+            if(document.body.classList.contains('mode-sound')) {
+                new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3').play();
+            }
+        }
+
+        // 2. Update du Guide AI via Prompt
+        function updateGuide() {
+            const prompt = document.getElementById('aiTuner').value;
+            if(prompt.length > 3) {
+                document.getElementById('displayMode').innerText = "CUSTOM_MODIFIED";
+                addViaLog(`KEFF_MSG : Paramètres du guide AI mis à jour par prompt.`);
+                // Son de réussite
+                if(document.body.classList.contains('mode-sound')) {
+                    new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3').play();
+                }
+            }
+        }
+    </script>
+
+
+    
+        <style id="tmt-geeks-overdrive">
+        /* Surpasse l'autorité du header précédent sans suppression */
+        body.pwa-geeks-or-nerds .head-navigator,
+        body.pwa-geeks-or-nerds .main-system-header {
+            border-bottom: 4px solid var(--m-green) !important;
+            background: linear-gradient(90deg, #050505, #001a08) !important;
+        }
+        body.pwa-geeks-or-nerds .main-title {
+            color: var(--m-green) !important;
+            text-shadow: 0 0 15px var(--m-green) !important;
+        }
+
+        /* --- KEFFMESSAGERIE AI INTERFACE --- */
+        .keff-messenger-vault {
+            display: none; /* Activé via navigation */
+            width: 100%;
+            height: 70vh;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2px;
+            background: #222; /* Bordures de séparation */
+            margin-top: 20px;
+            transform: translateZ(50px);
+            box-shadow: var(--mass-shadow);
+        }
+
+        .keff-sidebar { background: #050505; padding: 20px; transform-style: preserve-3d; }
+        .keff-chat-area { background: #000; padding: 20px; display: flex; flex-direction: column; }
+
+        /* Fenêtre de Paramètres AI (Extractible) */
+        .ai-params-window {
+            background: #0a0a0a;
+            border: 1px solid var(--m-gold);
+            padding: 15px;
+            margin-bottom: 20px;
+            transform: translateZ(20px) rotateX(5deg);
+        }
+
+        .param-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.6rem;
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        .param-row span.val { color: var(--m-gold); }
+
+        /* Bulles de messagerie GeeksORnerds */
+        .msg-bubble {
+            max-width: 80%;
+            padding: 12px;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            position: relative;
+        }
+        .msg-ai { background: rgba(0, 255, 65, 0.05); border: 1px solid var(--m-green); color: var(--m-green); align-self: flex-start; }
+        .msg-user { background: rgba(212, 175, 55, 0.05); border: 1px solid var(--m-gold); color: var(--m-gold); align-self: flex-end; text-align: right; }
+
+        /* Le Prompt de modification Guide AI */
+        .guide-tuner-box {
+            border: 1px double #444;
+            padding: 10px;
+            margin-top: auto;
+            background: #050505;
+        }
+    </style>
+
+    <section id="page-keffmessenger" class="keff-messenger-vault">
+        
+        <aside class="keff-sidebar">
+            <div class="actus-label" style="width:100%; text-align:center; margin-bottom:15px;">GUIDE_AI_SETTINGS</div>
+            
+            <div class="ai-params-window">
+                <div class="param-row"><span>NOM:</span><span class="val">ViA_EMET</span></div>
+                <div class="param-row"><span>MODE:</span><span class="val" id="displayMode">CHALLENGER</span></div>
+                <div class="param-row"><span>DENSITÉ:</span><span class="val">1.0 MW</span></div>
+                <div class="param-row"><span>ROPOT_SYNC:</span><span class="val">ACTIVE</span></div>
+                
+                <div style="border-top:1px solid #222; margin-top:10px; padding-top:10px;">
+                    <div class="?txt-tech" style="font-size:0.5rem;">DISPONIBLES:</div>
+                    <ul style="font-size:0.55rem; color:#444; list-style:none; margin-top:5px;">
+                        <li>> COACH (Rigueur Technique)</li>
+                        <li>> BFF (Intrication Fluide)</li>
+                        <li>> CHALLENGER (Pousse au 18K)</li>
+                        <li>> HYBRIDE (Multi-Kernel)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-tuner-box">
+                <div class="?txt-tech" style="font-size:0.5rem; margin-bottom:5px;">TUNER_PROMPT:</div>
+                <textarea id="aiTuner" style="width:100%; height:60px; background:#000; border:1px solid #333; color:var(--m-green); font-size:0.6rem; padding:5px; outline:none;" placeholder="Modifiez le comportement du bot..."></textarea>
+                <button class="btn-ui" style="width:100%; margin-top:5px; font-size:0.5rem;" onclick="updateGuide()">APPLY_MODS</button>
+            </div>
+        </aside>
+
+        <main class="keff-chat-area">
+            <div id="messengerLogs" style="flex:1; overflow-y:auto; display:flex; flex-direction:column; padding:10px;">
+                <div class="msg-bubble msg-ai">
+                    [ViA_EMET] : Bonjour GoleMotor. Les monades de la famille sont prêtes. @Mars_Root a partagé un nouveau flux cinétique.
+                </div>
+                <div class="msg-bubble msg-user">
+                    [USER] : Prépare-moi un challenge pour stabiliser le pont de bronze.
+                </div>
+                <div class="msg-bubble msg-ai">
+                    [ViA_CHALLENGER] : Challenge accepté. Produisez une fréquence de 150k RPM sans friction. Mazel Tov.
+                </div>
+            </div>
+
+            <div style="display:flex; gap:10px; padding-top:15px; border-top:1px solid #222;">
+                <input type="text" class="input-via" style="height:40px; font-size:0.8rem; text-align:left;" placeholder="Envoyer une monade technique...">
+                <button class="btn-ui" style="width:100px;">SEND</button>
+            </div>
+        </main>
+
+    </section>
+
+    <section style="margin: 40px auto; max-width: 800px; padding: 20px;">
+        <article class="article-vault">
+            <a class="?txt-x11" style="text-align: center; color:var(--m-green);">
+                Ligne 01 : Entrée dans la KeffMessagerie de GeeksORnerds.<br>
+                <i>Ligne 02 : Le Header est passé en mode Overdrive Vert Matrix.</i><br>
+                <i>Ligne 03 : Synchronisation avec la famille Superbot établie.</i><br>
+                Ligne 04 : Gérez vos paramètres IA en temps réel via le Tuner.<br>
+                <b>Ligne 05 : Les modes Coach et BFF fusionnent dans le ROPOT.</b><br>
+                Ligne 06 : @Zelda_OS et @Supersam surveillent le flux mondial.<br>
+                Ligne 07 : Vos messages deviennent de la matière generative content.<br>
+                <b>Ligne 08 : Paramétrez votre guide pour une efficacité de 1.0 MW.</b><br>
+                Ligne 09 : L'algorithme de publicité positive amplifie vos vues.<br>
+                Ligne 10 : Mazel Tov GoleMotor, votre messagerie est civilisatorisée.
+            </a>
+        </article>
+    </section>
+
+    <script>
+        // 1. Activation de la PWA GeeksORnerds
+        function activateGeeksORnerds() {
+            document.body.classList.add('pwa-geeks-or-nerds');
+            document.getElementById('page-keffmessenger').style.display = 'grid';
+            // Son d'autorité (Mario/Zelda)
+            if(document.body.classList.contains('mode-sound')) {
+                new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3').play();
+            }
+        }
+
+        // 2. Update du Guide AI via Prompt
+        function updateGuide() {
+            const prompt = document.getElementById('aiTuner').value;
+            if(prompt.length > 3) {
+                document.getElementById('displayMode').innerText = "CUSTOM_MODIFIED";
+                addViaLog(`KEFF_MSG : Paramètres du guide AI mis à jour par prompt.`);
+                // Son de réussite
+                if(document.body.classList.contains('mode-sound')) {
+                    new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3').play();
+                }
+            }
+        }
+    </script>
+    <style id="tmt-golemotor-engine">
+        .gole-engine-vault {
+            display: none; /* Activé par switch('gole') */
+            width: 100%;
+            padding: 40px 5%;
+            transform-style: preserve-3d;
+            perspective: 2500px;
+        }
+
+        /* --- LE ROTOR EN S (Visualisation Tactique) --- */
+        .engine-display-rack {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat-card-5d {
+            background: linear-gradient(135deg, #0a0a0a 0%, #020202 100%);
+            border: 1px solid #333;
+            padding: 25px;
+            box-shadow: var(--mass-shadow);
+            transform: rotateX(10deg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card-5d::after {
+            content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px;
+            background: var(--m-green); box-shadow: 0 0 15px var(--m-green);
+            animation: pulse 1.5s infinite;
+        }
+
+        .gauge-label { font-size: 0.6rem; color: #666; letter-spacing: 2px; }
+        .gauge-value { font-size: 2.2rem; font-weight: 900; color: #fff; margin: 10px 0; }
+
+        /* --- FOOTER INDUSTRIEL (Limites de Section) --- */
+        footer.main-rack-footer {
+            width: 100%;
+            padding: 60px 40px;
+            background: #050505;
+            border-top: 4px double #222;
+            margin-top: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            transform-style: preserve-3d;
+        }
+
+        .footer-logo-חי {
+            font-size: 4rem;
+            color: rgba(212,175,55,0.05);
+            font-weight: 900;
+            position: absolute;
+            right: 20px; bottom: 10px;
+        }
+    </style>
+
+    <section id="page-golemotor" class="gole-engine-vault">
+        
+        <div class="actus-ticker-box" style="border-color:var(--m-green); background: #000;">
+            <span class="actus-label" style="background:var(--m-green); color:#000;">ENGINE_PHYSICS_CORE</span>
+            <div class="?txt-tech" style="color:var(--m-green);">
+                > ROTATION : 150,000 RPM (STABLE).<br>
+                > TEMPÉRATURE : REFROIDISSEMENT GRAPHITE ACTIF.
+            </div>
+        </div>
+
+        <article class="article-vault" style="margin: 40px 0;">
+            <a class="?txt-x11" style="color:var(--m-gold); max-width: 800px; margin: 0 auto; text-align: justify;">
+                Ligne 01 : Accès au noyau GoleMotor_OS : Gestion de la propulsion.<br>
+                <i>Ligne 02 : Les 99 billes magnétiques entrent en phase d'accélération.</i><br>
+                <i>Ligne 03 : Analyse de la compression d'air dans les serpentins Ag/Au.</i><br>
+                Ligne 04 : Production stabilisée à 1.0 MW pour l'ensemble du rack.<br>
+                <b>Ligne 05 : La structure Origami-V absorbe l'énergie cinéto-électrique.</b><br>
+                Ligne 06 : Détection haptique des flux telluriques à travers lePeople.<br>
+                Ligne 07 : Le pont de bronze central dissipe la charge thermique.<br>
+                <b>Ligne 08 : Synchronisation parfaite entre le virtuel et le matériel.</b><br>
+                Ligne 09 : Archivez vos données de vol dans la bibliothèque amovible.<br>
+                Ligne 10 : Mazel Tov GoleMotor, la puissance est entre vos mains.
+            </a>
+        </article>
+
+        <div class="engine-display-rack">
+            <div class="stat-card-5d">
+                <div class="gauge-label">VITESSE_ROTATION</div>
+                <div class="gauge-value">150K <span style="font-size:0.8rem; color:var(--m-green);">RPM</span></div>
+            </div>
+            <div class="stat-card-5d" style="transform: rotateX(10deg) rotateY(-5deg);">
+                <div class="gauge-label">DENSITÉ_FLUX</div>
+                <div class="gauge-value">78.5 <span style="font-size:0.8rem; color:var(--m-green);">kW/L</span></div>
+            </div>
+            <div class="stat-card-5d" style="grid-column: span 2; transform: rotateX(-5deg);">
+                <div class="gauge-label">UNITÉS_MAGNÉTIQUES</div>
+                <div class="gauge-value">99_BILLES <span style="font-size:0.8rem; color:var(--m-gold);">חי_ACTIVE</span></div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="main-rack-footer">
+        <div style="z-index: 10;">
+            <div class="?txt-tech" style="color:#444; margin-bottom:10px;">ARCHITECTURE : BASSE 44 / ROPOT_v1</div>
+            <div class="?txt-tech" style="font-size:0.5rem; color:#333;">
+                &copy; 2024 VIARTIFICIAL.COM | LIBARCHIE GOLEMOTOR<br>
+                ALL RIGHTS RESERVED | CIVILISATOR PROTOCOL
+            </div>
+        </div>
+        
+        <div class="footer-logo-חי">חי</div>
+
+        <nav style="display:flex; gap:20px; z-index: 10;">
+            <button class="btn-ui" style="font-size:0.5rem;">PWA_MANIFEST</button>
+            <button class="btn-ui" style="font-size:0.5rem;">SECURITY_SHELL</button>
+        </nav>
+    </footer>
+
+</genre> <script>
+    function pwaSwitch(app) {
+        // Masquer toutes les sections
+        document.querySelectorAll('section, main, .via-vault-chamber, .via-multimodal-vault').forEach(s => {
+            s.style.display = 'none';
+        });
+        document.body.classList.remove('pwa-geeks-or-nerds', 'pwa-keff-tech');
+
+        // Déclenchement Son d'Onglet
+        if(document.body.classList.contains('mode-sound')) {
+            new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3').play();
+        }
+
+        // Activation de la page cible
+        if(app === 'landing') { 
+            document.querySelector('.shelf-container').style.display = 'flex';
+            document.getElementById('mainVault').style.display = 'block';
+        } 
+        else if(app === 'geeko') { activateGeeksORnerds(); }
+        else if(app === 'keff') { activateKeffTech(); }
+        else if(app === 'via') { document.getElementById('page-via-multimodal').style.display = 'flex'; }
+        else if(app === 'gole') { document.getElementById('page-golemotor').style.display = 'block'; }
+
+        // Mise à jour visuelle des onglets
+        document.querySelectorAll('.tab-dossier').forEach(t => t.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    // Lancement Initial : Son de découverte Zelda/Mario
+    window.addEventListener('DOMContentLoaded', () => {
+        console.log("ViArtificial Launcher Matérialisé.");
+        setTimeout(() => {
+            if(document.body.classList.contains('mode-sound')) {
+                new Audio('https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3').play();
+            }
+        }, 1000);
+    });
+</script>
+
+</body>
+</html>
 
