@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBH - SuperBot Haï Interface | משפחת האי</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Heebo:wght@300;500;700;900&display=swap');
+        
+        :root {
+            /* Cyber Dark Theme - Couleurs gradients par lobe */
+            --lobe-historien: linear-gradient(135deg, #FF6B00 0%, #FF4500 100%);
+            --lobe-rabbin: linear-gradient(135deg, #4A90E2 0%, #0066CC 100%);
+            --lobe-linguiste: linear-gradient(135deg, #00D4FF 0%, #0099CC 100%);
+            --lobe-scientifique: linear-gradient(135deg, #B8FF00 0%, #7ACC00 100%);
+            --point-z: linear-gradient(135deg, #FF00FF 0%, #9900FF 100%);
+            
+            /* Interface colors */
+            --bg-primary: #0A0E1A;
+            --bg-secondary: #131829;
+            --bg-tertiary: #1C2333;
+            --border-color: #2A3447;
+            --text-primary: #E8EAED;
+            --text-secondary: #9BA1B0;
+            --accent-cyan: #00D4FF;
+            --accent-orange: #FF4D00;
+            --accent-green: #B8FF00;
+            
+            /* Shadows */
+            --shadow-glow: 0 0 20px rgba(0, 212, 255, 0.3);
+            --shadow-deep: 0 10px 40px rgba(0, 0, 0, 0.6);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        /* Header Bar */
+        .header-bar {
+            height: 60px;
+            background: linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1000;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            font-family: 'Heebo', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+        
+        .hebrew-subtitle {
+            font-family: 'Heebo', sans-serif;
+            font-size: 14px;
+            color: var(--text-secondary);
+            direction: rtl;
+        }
+        
+        .status-indicators {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-dot.online { background: var(--accent-green); }
+        .status-dot.warning { background: var(--accent-orange); }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 10px currentColor; }
+            50% { opacity: 0.6; box-shadow: 0 0 20px currentColor; }
+        }
+        
+        /* Main Container */
+        .main-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            height: calc(100vh - 60px);
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            background: var(--bg-secondary);
+            border-right: 2px solid var(--border-color);
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+        
+        .sidebar-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .nav-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-item:hover {
+            background: var(--bg-tertiary);
+            border-left-color: var(--accent-cyan);
+            transform: translateX(5px);
+        }
+        
+        .nav-item.active {
+            background: var(--bg-tertiary);
+            border-left-color: var(--accent-cyan);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .nav-icon {
+            font-size: 18px;
+        }
+        
+        /* Content Area avec système d'onglets */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-primary);
+        }
+        
+        /* Tabs Container - Premier niveau */
+        .tabs-container {
+            background: var(--bg-secondary);
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 5px;
+            overflow-x: auto;
+            height: 50px;
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s ease;
+            font-size: 13px;
+            font-weight: 600;
+            position: relative;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid transparent;
+        }
+        
+        .tab:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: var(--accent-cyan);
+        }
+        
+        .tab.active {
+            background: var(--bg-primary);
+            border-color: var(--border-color);
+            border-bottom-color: var(--bg-primary);
+        }
+        
+        .tab-close {
+            margin-left: 8px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 16px;
+        }
+        
+        .tab:hover .tab-close {
+            opacity: 1;
+        }
+        
+        .tab-close:hover {
+            color: var(--accent-orange);
+        }
+        
+        /* Sub-tabs - Deuxième niveau (onglets imbriqués) */
+        .subtabs-container {
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            padding: 0 20px;
+            gap: 3px;
+            height: 40px;
+            align-items: center;
+        }
+        
+        .subtab {
+            padding: 8px 15px;
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 6px 6px 0 0;
+            transition: all 0.2s ease;
+            opacity: 0.7;
+        }
+        
+        .subtab:hover {
+            opacity: 1;
+            background: rgba(184, 255, 0, 0.1);
+        }
+        
+        .subtab.active {
+            opacity: 1;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+        }
+        
+        /* Window Panes - Fenêtres imbriquées */
+        .window-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            height: calc(100vh - 60px - 50px - 40px);
+            overflow-y: auto;
+        }
+        
+        .window-pane {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-deep);
+            display: flex;
+            flex-direction: column;
+            min-height: 400px;
+        }
+        
+        .window-header {
+            padding: 12px 15px;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .window-title {
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .window-control-btn {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .window-control-btn.minimize { background: var(--accent-orange); }
+        .window-control-btn.maximize { background: var(--accent-green); }
+        .window-control-btn.close { background: #FF4444; }
+        
+        .window-control-btn:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px currentColor;
+        }
+        
+        .window-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        /* Iframe Container pour vitrines */
+        .vitrine-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        /* Bot Status Cards */
+        .bot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .bot-card {
+            padding: 20px;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .bot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .bot-card.historien { border-color: #FF6B00; }
+        .bot-card.rabbin { border-color: #4A90E2; }
+        .bot-card.linguiste { border-color: #00D4FF; }
+        .bot-card.scientifique { border-color: #B8FF00; }
+        
+        .bot-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .bot-status {
+            font-size: 12px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Terminal Window */
+        .terminal {
+            background: #000;
+            color: var(--accent-green);
+            padding: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            border-radius: 8px;
+            height: 300px;
+            overflow-y: auto;
+        }
+        
+        .terminal-line {
+            margin-bottom: 5px;
+        }
+        
+        .terminal-prompt {
+            color: var(--accent-cyan);
+        }
+        
+        /* Metrics Display */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .metric-card {
+            background: var(--bg-tertiary);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-cyan);
+        }
+        
+        .metric-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-cyan);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: none;
+            }
+            .window-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Bar -->
+    <div class="header-bar">
+        <div class="logo-section">
+            <div class="logo">SBH CONTROL</div>
+            <div class="hebrew-subtitle">משפחת סופרבוט חי</div>
+        </div>
+        <div class="status-indicators">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 12px; color: var(--text-secondary);">Supabase</span>
+                <div class="status-dot online"></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 12px; color: var(--text-secondary);">API Gateway</span>
+                <div class="status-dot online"></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 12px; color: var(--text-secondary);">Bots</span>
+                <div class="status-dot online"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">🎨 Vitrines</div>
+                <div class="nav-item active" data-view="vitrines">
+                    <span class="nav-icon">🪟</span> Multi-Vitrines
+                </div>
+                <div class="nav-item" data-view="nextjs">
+                    <span class="nav-icon">▲</span> Next.js
+                </div>
+                <div class="nav-item" data-view="react-router">
+                    <span class="nav-icon">⚛️</span> React Router
+                </div>
+                <div class="nav-item" data-view="tanstack">
+                    <span class="nav-icon">🔺</span> TanStack
+                </div>
+                <div class="nav-item" data-view="vue">
+                    <span class="nav-icon">🟢</span> Vue
+                </div>
+                <div class="nav-item" data-view="nuxt">
+                    <span class="nav-icon">🟩</span> Nuxt
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">🤖 Famille Bots</div>
+                <div class="nav-item" data-view="bots">
+                    <span class="nav-icon">👨‍👩‍👧‍👦</span> Vue d'ensemble
+                </div>
+                <div class="nav-item" data-view="historien">
+                    <span class="nav-icon">📜</span> Historien
+                </div>
+                <div class="nav-item" data-view="rabbin">
+                    <span class="nav-icon">📖</span> Rabbin
+                </div>
+                <div class="nav-item" data-view="linguiste">
+                    <span class="nav-icon">🗣️</span> Linguiste
+                </div>
+                <div class="nav-item" data-view="scientifique">
+                    <span class="nav-icon">🔬</span> Scientifique
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">⚙️ Système</div>
+                <div class="nav-item" data-view="monitoring">
+                    <span class="nav-icon">📊</span> Monitoring
+                </div>
+                <div class="nav-item" data-view="logs">
+                    <span class="nav-icon">📝</span> Logs SVH
+                </div>
+                <div class="nav-item" data-view="terminal">
+                    <span class="nav-icon">💻</span> Terminal
+                </div>
+                <div class="nav-item" data-view="database">
+                    <span class="nav-icon">🗄️</span> Database
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Premier niveau - Tabs principales -->
+            <div class="tabs-container">
+                <div class="tab active" data-tab="vitrines">
+                    <span>🪟</span> Multi-Vitrines
+                    <span class="tab-close">✕</span>
+                </div>
+                <div class="tab" data-tab="bots">
+                    <span>🤖</span> Bots Haï
+                    <span class="tab-close">✕</span>
+                </div>
+                <div class="tab" data-tab="monitoring">
+                    <span>📊</span> Monitoring
+                    <span class="tab-close">✕</span>
+                </div>
+            </div>
+
+            <!-- Deuxième niveau - Sub-tabs imbriqués -->
+            <div class="subtabs-container">
+                <div class="subtab active" data-subtab="nextjs">Next.js</div>
+                <div class="subtab" data-subtab="react-router">React Router</div>
+                <div class="subtab" data-subtab="tanstack">TanStack</div>
+                <div class="subtab" data-subtab="vue">Vue</div>
+                <div class="subtab" data-subtab="nuxt">Nuxt</div>
+            </div>
+
+            <!-- Troisième niveau - Window Grid (fenêtres imbriquées) -->
+            <div class="window-grid" id="windowGrid">
+                <!-- Les fenêtres seront injectées ici dynamiquement -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+        // 🚀 SUPERBOT HAÏ FAMILY - CONTROL INTERFACE
+        
+        // Configuration Supabase (À remplir avec tes vraies credentials)
+        const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+        
+        // Initialiser Supabase client
+        let supabase;
+        if (SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+        
+        // État global de l'application
+        const appState = {
+            activeTab: 'vitrines',
+            activeSubtab: 'nextjs',
+            openWindows: [],
+            botStatuses: {
+                historien: { active: true, requests: 142, avgResponse: '2.3s' },
+                rabbin: { active: true, requests: 98, avgResponse: '1.8s' },
+                linguiste: { active: true, requests: 231, avgResponse: '1.5s' },
+                scientifique: { active: false, requests: 0, avgResponse: 'N/A' }
+            },
+            vitrines: {
+                nextjs: { url: 'http://localhost:3100', status: 'online' },
+                'react-router': { url: 'http://localhost:3101', status: 'online' },
+                tanstack: { url: 'http://localhost:3102', status: 'online' },
+                vue: { url: 'http://localhost:3104', status: 'online' },
+                nuxt: { url: 'http://localhost:3105', status: 'online' }
+            }
+        };
+        
+        // 🎨 Templates de contenu pour différentes vues
+        const contentTemplates = {
+            vitrines: () => `
+                <div class="fade-in">
+                    <h2 style="font-size: 24px; margin-bottom: 20px; font-weight: 700;">
+                        🪟 Multi-Vitrines SuperBot Haï
+                    </h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 30px;">
+                        Gérez toutes vos vitrines Supabase depuis un seul endroit
+                    </p>
+                    ${Object.entries(appState.vitrines).map(([name, config]) => `
+                        <div class="window-pane" style="margin-bottom: 15px;">
+                            <div class="window-header">
+                                <div class="window-title">
+                                    <span style="font-size: 16px;">${getVitrineIcon(name)}</span>
+                                    ${name.toUpperCase()}
+                                </div>
+                                <div class="window-controls">
+                                    <button class="window-control-btn minimize"></button>
+                                    <button class="window-control-btn maximize"></button>
+                                    <button class="window-control-btn close"></button>
+                                </div>
+                            </div>
+                            <div class="window-content" style="padding: 0; height: 500px;">
+                                <iframe 
+                                    src="${config.url}" 
+                                    class="vitrine-iframe"
+                                    title="${name} vitrine"
+                                ></iframe>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `,
+            
+            bots: () => `
+                <div class="fade-in">
+                    <h2 style="font-size: 24px; margin-bottom: 20px; font-weight: 700;">
+                        🤖 Famille SuperBot Haï
+                    </h2>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">${Object.values(appState.botStatuses).reduce((sum, bot) => sum + bot.requests, 0)}</div>
+                            <div class="metric-label">Total Requêtes</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">${Object.values(appState.botStatuses).filter(b => b.active).length}/4</div>
+                            <div class="metric-label">Bots Actifs</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">1.9s</div>
+                            <div class="metric-label">Temps Moyen</div>
+                        </div>
+                    </div>
+                    <div class="bot-grid">
+                        ${['historien', 'rabbin', 'linguiste', 'scientifique'].map(bot => `
+                            <div class="bot-card ${bot}">
+                                <div class="bot-name">${getBotIcon(bot)} ${bot.charAt(0).toUpperCase() + bot.slice(1)}</div>
+                                <div class="bot-status">
+                                    <div class="status-dot ${appState.botStatuses[bot].active ? 'online' : 'warning'}"></div>
+                                    ${appState.botStatuses[bot].active ? 'En ligne' : 'Hors ligne'}
+                                </div>
+                                <div style="margin-top: 15px; font-size: 12px; color: var(--text-secondary);">
+                                    <div>📊 Requêtes: ${appState.botStatuses[bot].requests}</div>
+                                    <div>⚡ Réponse: ${appState.botStatuses[bot].avgResponse}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `,
+            
+            monitoring: () => `
+                <div class="fade-in">
+                    <h2 style="font-size: 24px; margin-bottom: 20px; font-weight: 700;">
+                        📊 Monitoring Système
+                    </h2>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">99.9%</div>
+                            <div class="metric-label">Uptime</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">2.3k</div>
+                            <div class="metric-label">Req/min</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">156ms</div>
+                            <div class="metric-label">Latence avg</div>
+                        </div>
+                    </div>
+                    <div class="window-pane">
+                        <div class="window-header">
+                            <div class="window-title">📈 Métriques en temps réel</div>
+                        </div>
+                        <div class="window-content">
+                            <p style="color: var(--text-secondary);">Graphiques de performance à venir...</p>
+                        </div>
+                    </div>
+                </div>
+            `,
+            
+            terminal: () => `
+                <div class="fade-in">
+                    <h2 style="font-size: 24px; margin-bottom: 20px; font-weight: 700;">
+                        💻 Terminal SVH
+                    </h2>
+                    <div class="terminal">
+                        <div class="terminal-line"><span class="terminal-prompt">superbot-hai@sbh:~$</span> systemctl status all</div>
+                        <div class="terminal-line">✓ supabase.service - active (running)</div>
+                        <div class="terminal-line">✓ api-gateway.service - active (running)</div>
+                        <div class="terminal-line">✓ bot-historien.service - active (running)</div>
+                        <div class="terminal-line">✓ bot-rabbin.service - active (running)</div>
+                        <div class="terminal-line">✓ bot-linguiste.service - active (running)</div>
+                        <div class="terminal-line" style="color: var(--accent-orange);">○ bot-scientifique.service - inactive (dead)</div>
+                        <div class="terminal-line"><span class="terminal-prompt">superbot-hai@sbh:~$</span> <span style="animation: blink 1s infinite;">_</span></div>
+                    </div>
+                </div>
+            `
+        };
+        
+        // Helper functions
+        function getVitrineIcon(name) {
+            const icons = {
+                nextjs: '▲',
+                'react-router': '⚛️',
+                tanstack: '🔺',
+                vue: '🟢',
+                nuxt: '🟩'
+            };
+            return icons[name] || '🪟';
+        }
+        
+        function getBotIcon(bot) {
+            const icons = {
+                historien: '📜',
+                rabbin: '📖',
+                linguiste: '🗣️',
+                scientifique: '🔬'
+            };
+            return icons[bot] || '🤖';
+        }
+        
+        // 🎯 Fonction de rendu du contenu
+        function renderContent(view) {
+            const windowGrid = document.getElementById('windowGrid');
+            const template = contentTemplates[view];
+            if (template) {
+                windowGrid.innerHTML = template();
+            }
+        }
+        
+        // 📌 Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Navigation sidebar
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    const view = item.dataset.view;
+                    renderContent(view);
+                });
+            });
+            
+            // Tabs principales
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('tab-close')) {
+                        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        const view = tab.dataset.tab;
+                        appState.activeTab = view;
+                        renderContent(view);
+                    }
+                });
+            });
+            
+            // Sub-tabs
+            document.querySelectorAll('.subtab').forEach(subtab => {
+                subtab.addEventListener('click', () => {
+                    document.querySelectorAll('.subtab').forEach(s => s.classList.remove('active'));
+                    subtab.classList.add('active');
+                    appState.activeSubtab = subtab.dataset.subtab;
+                });
+            });
+            
+            // Initial render
+            renderContent('vitrines');
+        });
+        
+        // Animation du cursor dans le terminal
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes blink {
+                0%, 49% { opacity: 1; }
+                50%, 100% { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
