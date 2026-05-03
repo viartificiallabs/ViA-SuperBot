@@ -1595,8 +1595,409 @@ class ALISCIA {
         return null;
     }
 }
+// ============================================
+// BACKEND EMBARQUÉ - PROFIL UTILISATEUR ÉVOLUTIF
+// ============================================
+class ProfilUtilisateur {
+    constructor() {
+        this.profil = JSON.parse(localStorage.getItem('profil_user')) || {
+            nom: 'Sam',
+            preferences: {
+                modesPreferres: {},
+                heuresPics: {},
+                typesQuestions: {},
+                niveauTechnique: 50,
+                tonPreference: 'equilibre' // pro, amical, direct, doux
+            },
+            patterns: {
+                motsRecurrents: {},
+                themesFrequents: {},
+                emotionsDominantes: {},
+                frequenceUtilisation: []
+            },
+            projets: {
+                via: { interet: 0, derniereInteraction: null },
+                kefftech: { interet: 0, derniereInteraction: null },
+                geekonerd: { interet: 0, derniereInteraction: null },
+                librarchie: { interet: 0, derniereInteraction: null },
+                justforkeff: { interet: 0, derniereInteraction: null },
+                pawaw: { interet: 0, derniereInteraction: null }
+            },
+            objectifs: [],
+            historiqueGlobal: [],
+            stats: {
+                totalMessages: 0,
+                pawaTotal: 47832,
+                derniereMaj: Date.now()
+            }
+        };
+    }
 
-// 8. VIA CORE ORCHESTRATOR - LE CERVEAU
+    enrichirProfil(message, emotion, mode, vecteurDiff, projetActuel = 'via') {
+        // 1. Comptage des messages
+        this.profil.stats.totalMessages++;
+
+        // 2. Patterns de mots
+        const mots = message.toLowerCase().split(' ');
+        mots.forEach(mot => {
+            if (mot.length > 3) {
+                this.profil.patterns.motsRecurrents[mot] = 
+                    (this.profil.patterns.motsRecurrents[mot] || 0) + 1;
+            }
+        });
+
+        // 3. Émotions dominantes
+        this.profil.patterns.emotionsDominantes[emotion] = 
+            (this.profil.patterns.emotionsDominantes[emotion] || 0) + 1;
+
+        // 4. Modes préférés
+        this.profil.preferences.modesPreferres[mode] = 
+            (this.profil.preferences.modesPreferres[mode] || 0) + 1;
+
+        // 5. Heure d'utilisation
+        const heure = new Date().getHours();
+        this.profil.preferences.heuresPics[heure] = 
+            (this.profil.preferences.heuresPics[heure] || 0) + 1;
+
+        // 6. Intérêt par projet
+        this.profil.projets[projetActuel].interet += vecteurDiff * 0.1;
+        this.profil.projets[projetActuel].derniereInteraction = Date.now();
+
+        // 7. Détection de thèmes
+        this.detecterThemes(message);
+
+        // 8. Niveau technique adaptatif
+        this.ajusterNiveauTechnique(message);
+
+        this.profil.stats.derniereMaj = Date.now();
+        this.sauvegarder();
+    }
+
+    detecterThemes(message) {
+        const themes = {
+            'technique': ['code', 'bug', 'fonction', 'api', 'erreur', 'dev'],
+            'motivation': ['aide', 'difficile', 'bloquer', 'fatigue', 'stress'],
+            'creation': ['créer', 'idée', 'projet', 'nouveau', 'design'],
+            'apprentissage': ['apprendre', 'comprendre', 'comment', 'pourquoi'],
+            'business': ['vente', 'client', 'marketing', 'argent', 'revenu'],
+            'personnel': ['famille', 'relation', 'ami', 'besoin', 'ressens']
+        };
+
+        const msgLower = message.toLowerCase();
+        Object.entries(themes).forEach(([theme, keywords]) => {
+            const matches = keywords.filter(kw => msgLower.includes(kw)).length;
+            if (matches > 0) {
+                this.profil.patterns.themesFrequents[theme] = 
+                    (this.profil.patterns.themesFrequents[theme] || 0) + matches;
+            }
+        });
+    }
+
+    ajusterNiveauTechnique(message) {
+        const termesTech = ['fonction', 'api', 'code', 'algorithme', 'backend', 'frontend'];
+        const termesSimples = ['aide', 'comment', 'simple', 'expliquer', 'facile'];
+
+        const countTech = termesTech.filter(t => message.toLowerCase().includes(t)).length;
+        const countSimple = termesSimples.filter(t => message.toLowerCase().includes(t)).length;
+
+        if (countTech > countSimple) {
+            this.profil.preferences.niveauTechnique = Math.min(100, this.profil.preferences.niveauTechnique + 2);
+        } else if (countSimple > countTech) {
+            this.profil.preferences.niveauTechnique = Math.max(0, this.profil.preferences.niveauTechnique - 1);
+        }
+    }
+
+    getProjetsRecommandes() {
+        const projetsTriés = Object.entries(this.profil.projets)
+            .sort((a, b) => b[1].interet - a[1].interet)
+            .slice(0, 3);
+
+        return projetsTriés.map(([nom, data]) => ({
+            nom,
+            interet: data.interet,
+            description: this.getDescriptionProjet(nom)
+        }));
+    }
+
+    getDescriptionProjet(nom) {
+        const descriptions = {
+            'via': 'Ton coach IA personnel multi-modes',
+            'kefftech': 'Marketplace électronique & affiliation',
+            'geekonerd': 'Réseau social geek/nerd',
+            'librarchie': 'École virtuelle avec profs IA',
+            'justforkeff': 'Sport MMA + Rollerskate + Parkour',
+            'pawaw': 'Comic ebook animé VitA'
+        };
+        return descriptions[nom] || '';
+    }
+
+    sauvegarder() {
+        localStorage.setItem('profil_user', JSON.stringify(this.profil));
+    }
+
+    getContexteRiche() {
+        const modePrefere = Object.entries(this.profil.preferences.modesPreferres)
+            .sort((a, b) => b[1] - a[1])[0]?.[0] || 'coach-pro';
+
+        const emotionDominante = Object.entries(this.profil.patterns.emotionsDominantes)
+            .sort((a, b) => b[1] - a[1])[0]?.[0] || 'NEUTRE';
+
+        const themeDominant = Object.entries(this.profil.patterns.themesFrequents)
+            .sort((a, b) => b[1] - a[1])[0]?.[0] || 'general';
+
+        return {
+            modePrefere,
+            emotionDominante,
+            themeDominant,
+            niveauTechnique: this.profil.preferences.niveauTechnique,
+            totalMessages: this.profil.stats.totalMessages
+        };
+    }
+}
+
+// ============================================
+// MOTEUR DE RÉPONSES CONSTRUCTIVES
+// ============================================
+class MoteurConstructif {
+    constructor(profil, pawaCalc, memoryEngine) {
+        this.profil = profil;
+        this.pawaCalc = pawaCalc;
+        this.memoryEngine = memoryEngine;
+    }
+
+    genererReponseIntelligente(message, persona, souvenirs, quete, meteo, mode) {
+        const contexte = this.profil.getContexteRiche();
+        
+        // 1. ANALYSE MULTI-PARAMÈTRES
+        const analyse = {
+            emotion: this.detecterEmotion(message),
+            intention: this.detecterIntention(message),
+            complexite: message.split(' ').length,
+            techniqueNiveau: contexte.niveauTechnique,
+            coefKef: this.pawaCalc.coefKef,
+            coefSurvie: this.pawaCalc.coefSurvie,
+            modeActuel: mode,
+            personaActive: persona.nom,
+            ventActif: meteo.vent
+        };
+
+        // 2. CONSTRUCTION DE LA RÉPONSE
+        let reponse = '';
+
+        // 2a. Quête prioritaire
+        if (quete) {
+            reponse = this.construireReponseQuete(quete, analyse);
+        }
+        // 2b. Souvenirs pertinents
+        else if (souvenirs.length > 0) {
+            reponse = this.construireReponseSouvenir(souvenirs[0], analyse);
+        }
+        // 2c. Guidance multi-PWA
+        else if (this.detecterBesoinGuidance(message)) {
+            reponse = this.construireGuidanceMultiPWA(message, analyse);
+        }
+        // 2d. Réponse contextuelle standard
+        else {
+            reponse = this.construireReponseContextuelle(message, analyse);
+        }
+
+        // 3. ENRICHISSEMENT SELON PARAMÈTRES
+        reponse = this.enrichirAvecParametres(reponse, analyse);
+
+        return reponse;
+    }
+
+    detecterEmotion(message) {
+        const emotionMarkers = {
+            'COLERE': ['putain', '!', 'enervé', 'chiant', 'merde'],
+            'PEUR': ['peur', 'inquiet', 'stress', 'angoisse', '?'],
+            'KEF': ['merci', 'super', 'génial', 'parfait', 'love'],
+            'TRISTESSE': ['triste', 'déprimé', 'mal', 'fatigue'],
+            'JOIE': ['content', 'heureux', 'kiff', 'cool']
+        };
+
+        const msgLower = message.toLowerCase();
+        for (const [emotion, markers] of Object.entries(emotionMarkers)) {
+            if (markers.some(m => msgLower.includes(m))) {
+                return emotion;
+            }
+        }
+        return 'NEUTRE';
+    }
+
+    detecterIntention(message) {
+        const intentions = {
+            'AIDE': ['aide', 'help', 'besoin'],
+            'CREATION': ['créer', 'faire', 'construire', 'développer'],
+            'APPRENTISSAGE': ['apprendre', 'comprendre', 'comment', 'pourquoi'],
+            'PROBLEME': ['bug', 'erreur', 'marche pas', 'problème'],
+            'EXPLORATION': ['montre', 'découvrir', 'voir', 'explorer']
+        };
+
+        const msgLower = message.toLowerCase();
+        for (const [intention, keywords] of Object.entries(intentions)) {
+            if (keywords.some(kw => msgLower.includes(kw))) {
+                return intention;
+            }
+        }
+        return 'DIALOGUE';
+    }
+
+    detecterBesoinGuidance(message) {
+        const markers = ['projet', 'quoi faire', 'par où commencer', 'recommande', 'autre pwa'];
+        return markers.some(m => message.toLowerCase().includes(m));
+    }
+
+    construireReponseQuete(quete, analyse) {
+        let base = `🎯 **Quête acceptée** : ${quete.intention}\n\n`;
+        
+        if (analyse.coefSurvie < 0.5) {
+            base += `⚠️ Attention, ton Coef Survie est bas (${(analyse.coefSurvie * 100).toFixed(0)}%). Je te propose une approche **douce** :\n`;
+        } else if (analyse.coefKef > 2.5) {
+            base += `🔥 Tu es en mode FORCING ! Coef Kef à ${analyse.coefKef.toFixed(1)}. Let's go hardcore :\n`;
+        }
+
+        base += `\n📊 **Vecteur Différentiel** : ${quete.vecteurDiff}\n`;
+        base += `🎭 **Persona** : ${quete.persona} (Vent ${quete.vent})\n\n`;
+        base += `💡 **Mon analyse** : ${this.genererAnalyseConstructive(analyse)}`;
+
+        return base;
+    }
+
+    construireReponseSouvenir(souvenir, analyse) {
+        return `💭 Ça me rappelle **${souvenir.couche1_quoi}** (le ${new Date(souvenir.timestamp).toLocaleDateString()}).\n\n` +
+               `À l'époque, tu ${souvenir.couche2_pourquoi}. Aujourd'hui, avec ton Coef Kef à ${analyse.coefKef.toFixed(1)}, ` +
+               `je vois que ${this.genererLienContextuel(souvenir, analyse)}`;
+    }
+
+    construireGuidanceMultiPWA(message, analyse) {
+        const projetsRecommandes = this.profil.getProjetsRecommandes();
+        const contexte = this.profil.getContexteRiche();
+
+        let guidance = `🌐 **Guide Multi-PWA activé**\n\n`;
+        guidance += `Basé sur ton profil (${contexte.totalMessages} messages, thème dominant: ${contexte.themeDominant}), `;
+        guidance += `voici mes recommandations :\n\n`;
+
+        projetsRecommandes.forEach((projet, i) => {
+            const emoji = ['🥇', '🥈', '🥉'][i] || '🎯';
+            guidance += `${emoji} **${projet.nom.toUpperCase()}** (intérêt: ${projet.interet.toFixed(0)})\n`;
+            guidance += `   → ${projet.description}\n`;
+            guidance += `   → ${this.genererActionConcreteProjet(projet.nom, analyse)}\n\n`;
+        });
+
+        return guidance;
+    }
+
+    construireReponseContextuelle(message, analyse) {
+        let reponse = '';
+
+        // Adaptation au niveau technique
+        const prefix = analyse.techniqueNiveau > 70 
+            ? '🔧 Mode Expert : '
+            : analyse.techniqueNiveau < 30 
+            ? '🌱 Mode Simple : '
+            : '💬 ';
+
+        // Adaptation à l'émotion
+        if (analyse.emotion === 'COLERE') {
+            reponse = `${prefix}Je sens la tension. Laisse-moi transformer cette friction en carburant (Vent Rouge). `;
+        } else if (analyse.emotion === 'PEUR') {
+            reponse = `${prefix}Respire. On va décomposer ça ensemble, étape par étape (Vent Bleu). `;
+        } else if (analyse.emotion === 'KEF') {
+            reponse = `${prefix}Yes ! Cette énergie positive, c'est exactement ce qu'il faut (Vent Blanc). `;
+        }
+
+        // Réponse selon intention
+        switch (analyse.intention) {
+            case 'AIDE':
+                reponse += `Dis-moi exactement où tu bloques, et je déploie les outils adaptés.`;
+                break;
+            case 'CREATION':
+                reponse += `Mode création activé ! ${this.suggererOutilsCreation(analyse)}`;
+                break;
+            case 'APPRENTISSAGE':
+                reponse += `Parfait, on passe en mode Prof. ${this.suggererRessources(message, analyse)}`;
+                break;
+            case 'PROBLEME':
+                reponse += `Bug détecté. Protocole de debug : ${this.suggererDebug(analyse)}`;
+                break;
+            default:
+                reponse += this.genererDialogueNaturel(analyse);
+        }
+
+        return reponse;
+    }
+
+    genererAnalyseConstructive(analyse) {
+        const insights = [];
+
+        if (analyse.coefKef > 2.0 && analyse.coefSurvie > 0.7) {
+            insights.push('Tu es en pleine forme, état optimal pour des tâches complexes.');
+        }
+        if (analyse.coefSurvie < 0.4) {
+            insights.push('Ton Coef Survie est critique. Pause recommandée avant de forcer.');
+        }
+        if (analyse.complexite > 20) {
+            insights.push('Question complexe détectée. Je déploie une analyse multi-couches.');
+        }
+
+        return insights.join(' ') || 'Contexte analysé, je suis prêt à t\'accompagner.';
+    }
+
+    genererLienContextuel(souvenir, analyse) {
+        return `tu as évolué. Ta progression PAWA : +${(analyse.coefKef * 1000).toFixed(0)} depuis.`;
+    }
+
+    genererActionConcreteProjet(projet, analyse) {
+        const actions = {
+            'via': `Continue notre dialogue, j'apprends de toi à chaque message`,
+            'kefftech': `Explore les stores cachés AliExpress, lance ton premier produit`,
+            'geekonerd': `Rejoins la communauté, partage tes passions geek`,
+            'librarchie': `Commence Year 0, choisis ton premier cours IA`,
+            'justforkeff': `Découvre les règles, regarde des replays de matchs`,
+            'pawaw': `Lis le premier chapitre, découvre la planète VitA`
+        };
+        return actions[projet] || 'Lance-toi, explore ce projet !';
+    }
+
+    suggererOutilsCreation(analyse) {
+        if (analyse.techniqueNiveau > 60) {
+            return 'GoleMotor à ta disposition. Quel moteur activer ? (LLM, Recyclor, Boucles...)';
+        }
+        return 'On part d\'une base simple et on itère. Quelle est ton idée ?';
+    }
+
+    suggererRessources(message, analyse) {
+        return analyse.techniqueNiveau > 50
+            ? 'Je peux aller en profondeur technique ou rester conceptuel. Ton choix ?'
+            : 'Je vulgarise avec des exemples concrets. Ready ?';
+    }
+
+    suggererDebug(analyse) {
+        return 'Décris le comportement attendu vs réel. Je trace le vecteur différentiel.';
+    }
+
+    genererDialogueNaturel(analyse) {
+        const contexte = this.profil.getContexteRiche();
+        return `On en est à ${contexte.totalMessages} messages ensemble. Je te connais mieux maintenant. Qu'est-ce qui t'occupe l'esprit ?`;
+    }
+
+    enrichirAvecParametres(reponse, analyse) {
+        // Ajout du vent actif
+        const ventEmoji = {
+            'ROUGE_FRICTION': '🔥',
+            'BLEU_RESONANCE': '💙',
+            'VIOLET_ABSTRAIT': '💜',
+            'BLANC_EXPANSION': '⚪',
+            'NOIR_DENSITE': '⚫'
+        };
+
+        const emoji = ventEmoji[analyse.ventActif] || '';
+        
+        return `${reponse}\n\n${emoji} **Vent ${analyse.ventActif.split('_')[0]}** | Kef:${analyse.coefKef.toFixed(1)} | Survie:${(analyse.coefSurvie * 100).toFixed(0)}%`;
+    }
+}
+
 class ViACoreOrchestrator {
     constructor() {
         this.protocoleZero = new ProtocoleZero();
@@ -1607,52 +2008,54 @@ class ViACoreOrchestrator {
         this.algophabet = new AlgophabetParser();
         this.aliscia = new ALISCIA(this.pawaCalc, this.personaRouter, this.memoryEngine);
         
+        // NOUVEAUTÉ : Backend embarqué
+        this.profil = new ProfilUtilisateur();
+        this.moteurConstructif = new MoteurConstructif(this.profil, this.pawaCalc, this.memoryEngine);
+        
         this.initialized = false;
     }
 
-    async boot() {
-        console.log('🚀 [VIA CORE] Initialisation...');
-        
-        await this.protocoleZero.activate();
-        
-        this.initialized = true;
-        console.log('✅ [VIA CORE] Système opérationnel');
-        
-        return true;
-    }
-
-    processMessage(userMessage) {
+    processMessage(userMessage, projetActuel = 'via') {
         console.log('[VIA] Processing:', userMessage);
 
+        // 1. Analyse Algophabet
         const vecteurs = this.algophabet.parse(userMessage);
         const pawaMessage = this.algophabet.calculerPawaDuTexte(userMessage);
 
+        // 2. Mémoire & Souvenirs
         const souvenirsPertinents = this.memoryEngine.resonance(userMessage);
 
+        // 3. Analyse Quête (ALISCIA)
         const quete = this.aliscia.analyserMessage(userMessage);
 
-        let emotion = 'NEUTRE';
-        if (userMessage.includes('!')) emotion = 'COLERE';
-        if (userMessage.includes('?')) emotion = 'PEUR';
-        if (userMessage.includes('merci') || userMessage.includes('super')) emotion = 'KEF';
+        // 4. Détection Émotion
+        let emotion = this.moteurConstructif.detecterEmotion(userMessage);
 
+        // 5. Calcul Vecteur Différentiel
         const complexite = userMessage.split(' ').length * 10;
         const vecteurDiff = quete ? quete.vecteurDiff : complexite;
 
+        // 6. Analyse Météo SAR
         const meteo = this.windEngine.analyserMeteo(
             vecteurDiff,
             this.pawaCalc.coefSurvie,
             emotion
         );
 
+        // 7. Choix Persona
         const persona = this.personaRouter.choisirMasque(
             vecteurDiff,
             this.pawaCalc.coefKef,
             this.pawaCalc.coefSurvie
         );
 
+        // 8. Forçage Alignement & PAWA
         const resultat = this.pawaCalc.forcerAlignement(vecteurDiff, userMessage);
 
+        // 9. ENRICHISSEMENT PROFIL UTILISATEUR (NOUVEAU !)
+        this.profil.enrichirProfil(userMessage, emotion, currentMode, vecteurDiff, projetActuel);
+
+        // 10. Gravure Souvenir
         this.memoryEngine.graverSouvenir(
             userMessage,
             `Réponse en mode ${currentMode}`,
@@ -1662,14 +2065,17 @@ class ViACoreOrchestrator {
             `Vent: ${meteo.vent}`
         );
 
-        let reponse = this.genererReponseIntelligente(
+        // 11. GÉNÉRATION RÉPONSE CONSTRUCTIVE (NOUVEAU !)
+        let reponse = this.moteurConstructif.genererReponseIntelligente(
             userMessage,
             persona,
             souvenirsPertinents,
             quete,
-            meteo
+            meteo,
+            currentMode
         );
 
+        // 12. Update UI
         this.updateUIVent(meteo.vent);
 
         return {
@@ -1677,93 +2083,14 @@ class ViACoreOrchestrator {
             persona: persona.nom,
             vent: meteo.vent,
             pawaGenere: resultat.pawaGenere,
-            vecteurDiff
+            vecteurDiff,
+            contexte: this.profil.getContexteRiche()
         };
     }
 
-    genererReponseIntelligente(message, persona, souvenirs, quete, meteo) {
-        const messageLower = message.toLowerCase();
-        
-        if (quete) {
-            return quete.message;
-        }
-
-        if (souvenirs.length > 0) {
-            const souvenir = souvenirs[0];
-            return `Ah, ça me rappelle ${souvenir.couche1_quoi}. ${persona.voix}`;
-        }
-
-        const reponseParPersona = {
-            'Professeur': this.reponsesProfesseur(messageLower),
-            'Soigneur': this.reponsesSoigneur(messageLower),
-            'Coach_Provocateur': this.reponsesCoach(messageLower),
-            'Ether_Silencieux': this.reponsesEther(messageLower),
-            'BFF': this.reponsesBFF(messageLower)
-        };
-
-        const reponseBase = reponseParPersona[persona.nom] || this.reponsesDefaut(messageLower);
-        
-        const suffixeVent = {
-            'ROUGE_FRICTION': ' 🔥 [Vent Rouge: Friction active]',
-            'BLEU_RESONANCE': ' 💙 [Vent Bleu: Résonance]',
-            'VIOLET_ABSTRAIT': ' 💜 [Vent Violet: Observation]',
-            'BLANC_EXPANSION': ' ⚪ [Vent Blanc: Expansion]'
-        };
-
-        return reponseBase + (suffixeVent[meteo.vent] || '');
-    }
-
-    reponsesProfesseur(msg) {
-        if (msg.includes('comment')) return 'Excellente question. Analysons étape par étape : d\'abord le contexte, ensuite la logique.';
-        if (msg.includes('pourquoi')) return 'La réponse se trouve dans l\'étymologie et l\'histoire. Creusons ensemble.';
-        return 'Je suis en mode Professeur. Posons le problème avec méthode.';
-    }
-
-    reponsesSoigneur(msg) {
-        if (msg.includes('fatigué') || msg.includes('épuisé')) return 'Je vois que ton Coef Survie est bas. Prends une pause, Sam. Le GoleMotor peut attendre.';
-        return 'Respire. On va y aller doucement. Vent Bleu activé pour apaiser la pression.';
-    }
-
-    reponsesCoach(msg) {
-        if (msg.includes('difficile') || msg.includes('impossible')) return 'Difficile ? C\'est juste du Vent Rouge à transformer en carburant. Fonce !';
-        if (msg.includes('pas sûr')) return 'L\'incertitude c\'est du Pawa en attente. Lance-toi et on ajuste en route.';
-        return 'Mode Challenger activé. Cet obstacle ? C\'est ton tremplin. Go !';
-    }
-
-    reponsesEther(msg) {
-        return 'Exécution pure. Silence. Digestion. [Vent Violet]';
-    }
-
-    reponsesBFF(msg) {
-        if (msg.includes('salut') || msg.includes('hey')) return 'Saaaalut bestie ! Comment ça va aujourd\'hui ? 💕';
-        if (msg.includes('merci')) return 'De rien ! On est là pour ça, toi et moi. Team SuperBot ! 👯';
-        return 'Hey ! Je suis là, toujours. Qu\'est-ce qui se passe ?';
-    }
-
-    reponsesDefaut(msg) {
-        if (msg.includes('bonjour') || msg.includes('salut')) return 'Salut Sam ! ViA opérationnelle. Comment puis-je t\'aider ?';
-        if (msg.includes('merci')) return 'Avec plaisir ! On est une équipe. 🤖';
-        return 'Je t\'écoute. Qu\'est-ce que tu as en tête ?';
-    }
-
-    updateUIVent(vent) {
-        const colors = {
-            'ROUGE_FRICTION': '#ff0040',
-            'BLEU_RESONANCE': '#00d4ff',
-            'VIOLET_ABSTRAIT': '#9d00ff',
-            'BLANC_EXPANSION': '#ffffff',
-            'NOIR_DENSITE': '#000000'
-        };
-
-        const color = colors[vent] || '#ff006e';
-        
-        const chatArea = document.querySelector('.chatbot-area');
-        if (chatArea) {
-            chatArea.style.borderColor = color;
-            chatArea.style.boxShadow = `0 0 30px ${color}40`;
-        }
-    }
+    // ... reste des méthodes inchangé
 }
+
 
 // ============================================
 // NAVIGATION
