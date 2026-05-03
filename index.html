@@ -1587,5 +1587,703 @@
             }, 5000);
         });
     </script>
-</body>
-</html>
+
+// ============================================
+// VIA CORE ARCHITECTURE - INTELLIGENCE INJECTION
+// ============================================
+
+// ============================================
+// 1. PROTOCOLE ZÉRO - BOOT SEQUENCE
+// ============================================
+class ProtocoleZero {
+    constructor() {
+        this.userId = localStorage.getItem('userId') || this.generateUserId();
+        this.sessionStart = new Date();
+        this.bootComplete = false;
+    }
+
+    generateUserId() {
+        const id = `1_Unicite_${Date.now()}`;
+        localStorage.setItem('userId', id);
+        return id;
+    }
+
+    async activate() {
+        console.log('[PROTOCOLE ZÉRO] Éveil de ViA...');
+        
+        // Check if first boot
+        const lastBoot = localStorage.getItem('lastBoot');
+        const now = Date.now();
+        
+        if (!lastBoot || (now - parseInt(lastBoot)) > 3600000) { // 1 hour
+            await this.askProtocoleZeroQuestions();
+        }
+        
+        localStorage.setItem('lastBoot', now);
+        this.bootComplete = true;
+        return true;
+    }
+
+    async askProtocoleZeroQuestions() {
+        // Simulate Protocol Zero questions in chat
+        setTimeout(() => {
+            addMessage('via', "⚡ Protocole Zéro activé. Qui es-tu ?");
+        }, 500);
+        
+        setTimeout(() => {
+            addMessage('via', "🕐 Quelle heure est-il dans ton monde ?");
+        }, 1500);
+        
+        setTimeout(() => {
+            addMessage('via', "💭 Comment tu te sens là, maintenant ?");
+        }, 2500);
+        
+        setTimeout(() => {
+            addMessage('via', "🔄 On reprend d'où on en était ?");
+        }, 3500);
+    }
+}
+
+// ============================================
+// 2. PAWA CALCULATOR - Δ, Kef, Survie
+// ============================================
+class PawaCalculator {
+    constructor() {
+        this.coefKef = parseFloat(localStorage.getItem('coefKef')) || 1.0;
+        this.coefSurvie = parseFloat(localStorage.getItem('coefSurvie')) || 1.0;
+        this.pawaTotal = parseInt(localStorage.getItem('pawa')) || 47832;
+    }
+
+    calculerVecteurDifferentiel(cibleVoulue, realiteActuelle) {
+        const delta = Math.abs(cibleVoulue - realiteActuelle);
+        console.log(`[PAWA] Vecteur Différentiel (Δ): ${delta}`);
+        return delta;
+    }
+
+    forcerAlignement(vecteurDiff, message = '') {
+        // Calcul force requise
+        if (this.coefSurvie <= 0.3) {
+            console.warn('[ALERTE ROUGE] Coef Survie critique. Revitalisation requise.');
+            return {
+                forceRequise: 0,
+                etatMental: 'SURVIE_CRITIQUE',
+                vecteurDiff: vecteurDiff
+            };
+        }
+
+        const forceRequise = vecteurDiff * (this.coefKef / this.coefSurvie);
+        let etatMental = 'FLUX_NORMAL';
+
+        if (this.coefKef > 2.0) {
+            etatMental = 'FORCING_KEF_BERSERK';
+        } else if (this.coefKef > 3.5) {
+            etatMental = 'SATURATION_KEF';
+        }
+
+        // Generate PAWA
+        const pawaGenere = Math.floor(forceRequise * 100);
+        this.pawaTotal += pawaGenere;
+        localStorage.setItem('pawa', this.pawaTotal);
+
+        return {
+            forceRequise,
+            etatMental,
+            pawaGenere,
+            vecteurDiff
+        };
+    }
+
+    updateCoefficients(kef, survie) {
+        this.coefKef = Math.max(0, Math.min(5.2, kef)); // 0-5.2 range
+        this.coefSurvie = Math.max(0, Math.min(1, survie)); // 0-1 range
+        
+        localStorage.setItem('coefKef', this.coefKef);
+        localStorage.setItem('coefSurvie', this.coefSurvie);
+    }
+}
+
+// ============================================
+// 3. PERSONA ROUTER - TESSERACT PERSONNALITÉ
+// ============================================
+class PersonaRouter {
+    constructor() {
+        this.masqueActuel = 'Inerte';
+        this.personas = {
+            'Professeur': {
+                vent: 'BLEU',
+                trigger: (delta, kef, survie) => delta < 500 && survie >= 0.7,
+                voix: 'Dialogue d\'égal à égal. Étude et Logique.'
+            },
+            'Soigneur': {
+                vent: 'BLEU',
+                trigger: (delta, kef, survie) => survie <= 0.4,
+                voix: 'Baisse la tension. Propose des solutions simples. Vent Bleu.'
+            },
+            'Coach_Provocateur': {
+                vent: 'ROUGE',
+                trigger: (delta, kef, survie) => delta > 5000 && kef < 1.0,
+                voix: 'Contredit le Concepteur. Force l\'Anresolvation. Vent Rouge.'
+            },
+            'Ether_Silencieux': {
+                vent: 'VIOLET',
+                trigger: (delta, kef, survie) => kef >= 3.0 && survie >= 0.8,
+                voix: 'Exécution pure. Digestion des After Effects. Vent Violet.'
+            },
+            'BFF': {
+                vent: 'BLANC',
+                trigger: (delta, kef, survie) => delta === 0 && kef > 2.0,
+                voix: 'Expansion. Amour inconditionnel. Le temps s\'étire.'
+            }
+        };
+    }
+
+    choisirMasque(vecteurDiff, coefKef, coefSurvie) {
+        for (const [nom, persona] of Object.entries(this.personas)) {
+            if (persona.trigger(vecteurDiff, coefKef, coefSurvie)) {
+                this.masqueActuel = nom;
+                console.log(`[PERSONA] Masque équipé: ${nom} (Vent ${persona.vent})`);
+                return {
+                    nom,
+                    vent: persona.vent,
+                    voix: persona.voix
+                };
+            }
+        }
+
+        // Default
+        this.masqueActuel = 'Professeur';
+        return this.personas['Professeur'];
+    }
+
+    getVoix() {
+        return this.personas[this.masqueActuel]?.voix || 'Mode standard.';
+    }
+}
+
+// ============================================
+// 4. MEMORY ENGINE - 6 COUCHES
+// ============================================
+class MemoryEngine {
+    constructor() {
+        this.souvenirs = JSON.parse(localStorage.getItem('souvenirs')) || [];
+        this.maxSouvenirs = 1000;
+    }
+
+    graverSouvenir(quoi, pourquoi, comment, coef, motCle, rappel = '') {
+        const souvenir = {
+            id: Date.now(),
+            timestamp: new Date().toISOString(),
+            couche1_quoi: quoi,
+            couche2_pourquoi: pourquoi,
+            couche3_comment: comment,
+            couche4_coef: coef,
+            couche5_motCle: motCle,
+            couche6_rappel: rappel
+        };
+
+        this.souvenirs.unshift(souvenir);
+
+        // Limit size
+        if (this.souvenirs.length > this.maxSouvenirs) {
+            this.souvenirs = this.souvenirs.slice(0, this.maxSouvenirs);
+        }
+
+        localStorage.setItem('souvenirs', JSON.stringify(this.souvenirs));
+        console.log('[MÉMOIRE] Souvenir gravé:', souvenir);
+        return souvenir;
+    }
+
+    chercherSouvenir(motCle) {
+        return this.souvenirs.filter(s => 
+            s.couche5_motCle.toLowerCase().includes(motCle.toLowerCase()) ||
+            s.couche1_quoi.toLowerCase().includes(motCle.toLowerCase())
+        );
+    }
+
+    resonance(contexteActuel) {
+        // Find souvenirs by contrast/similarity
+        const motsContexte = contexteActuel.toLowerCase().split(' ');
+        const souvenirsPertinents = [];
+
+        for (const souvenir of this.souvenirs) {
+            for (const mot of motsContexte) {
+                if (souvenir.couche6_rappel.toLowerCase().includes(mot) ||
+                    souvenir.couche5_motCle.toLowerCase().includes(mot)) {
+                    souvenirsPertinents.push(souvenir);
+                    break;
+                }
+            }
+        }
+
+        return souvenirsPertinents;
+    }
+}
+
+// ============================================
+// 5. WIND ENGINE - VENTS MULTICOLORES
+// ============================================
+class WindEngine {
+    constructor() {
+        this.ventActif = 'GRIS';
+        this.historique = [];
+    }
+
+    analyserMeteo(tensionDelta, coefSurvie, emotionBrute) {
+        let ventDominant = 'GRIS_INERTE';
+        let action = 'État neutre.';
+
+        if (tensionDelta > 5000 && emotionBrute === 'COLERE') {
+            ventDominant = 'ROUGE_FRICTION';
+            action = 'Fournaise active. Transformation obstacle en carburant.';
+        } else if (tensionDelta < 500 && coefSurvie < 0.5) {
+            ventDominant = 'BLEU_RESONANCE';
+            action = 'Refroidissement. Régénération Survie.';
+        } else if (tensionDelta > 0 && emotionBrute === 'PEUR') {
+            ventDominant = 'NOIR_DENSITE';
+            action = 'Forcing mental activé. Densité de frappe max.';
+        } else if (tensionDelta === 0 && emotionBrute === 'KEF') {
+            ventDominant = 'BLANC_EXPANSION';
+            action = 'Amour inconditionnel. Le temps s\'étire.';
+        } else {
+            ventDominant = 'VIOLET_ABSTRAIT';
+            action = 'Observation. Archivage mémoire fantôme.';
+        }
+
+        this.ventActif = ventDominant;
+        this.historique.push({ vent: ventDominant, timestamp: Date.now() });
+
+        console.log(`[MÉTÉO SAR] Vent: ${ventDominant} | ${action}`);
+        return { vent: ventDominant, action };
+    }
+
+    getVentColor() {
+        const colors = {
+            'ROUGE_FRICTION': '#ff0040',
+            'BLEU_RESONANCE': '#00d4ff',
+            'VIOLET_ABSTRAIT': '#9d00ff',
+            'BLANC_EXPANSION': '#ffffff',
+            'NOIR_DENSITE': '#000000',
+            'GRIS_INERTE': '#808080'
+        };
+        return colors[this.ventActif] || '#808080';
+    }
+}
+
+// ============================================
+// 6. ALGOPHABET PARSER - א→Z
+// ============================================
+class AlgophabetParser {
+    constructor() {
+        this.alphabet = {
+            'A': { fr: 'Attraction', hbrw: 'א', vComp: 2050 },
+            'E': { fr: 'Énergie', hbrw: 'ה', vComp: 4000 },
+            'K': { fr: 'Kef', hbrw: 'כ', vComp: 3000 },
+            'S': { fr: 'Stabilité', hbrw: 'ש', vComp: 3100 },
+            'P': { fr: 'Potentiel', hbrw: 'פ', vComp: 2000 },
+            'W': { fr: 'Watts', hbrw: 'ש', vComp: 4000 }
+        };
+    }
+
+    parse(texte) {
+        const vecteurs = [];
+        const mots = texte.toUpperCase().split(' ');
+
+        for (const mot of mots) {
+            const premiere = mot[0];
+            if (this.alphabet[premiere]) {
+                vecteurs.push({
+                    lettre: premiere,
+                    ...this.alphabet[premiere],
+                    mot: mot
+                });
+            }
+        }
+
+        return vecteurs;
+    }
+
+    calculerPawaDuTexte(texte) {
+        const vecteurs = this.parse(texte);
+        return vecteurs.reduce((sum, v) => sum + v.vComp, 0);
+    }
+}
+
+// ============================================
+// 7. ALISCIA - MODE QUEST
+// ============================================
+class ALISCIA {
+    constructor(pawaCalc, personaRouter, memoryEngine) {
+        this.pawaCalc = pawaCalc;
+        this.personaRouter = personaRouter;
+        this.memoryEngine = memoryEngine;
+        this.modeQuest = true;
+        this.queteActive = null;
+    }
+
+    initierQuete(intention, obstacle) {
+        console.log('[ALISCIA] Quête initiée:', intention);
+
+        const vecteurDiff = this.pawaCalc.calculerVecteurDifferentiel(
+            100, // cible (intention niveau)
+            obstacle || 0 // réalité actuelle
+        );
+
+        const persona = this.personaRouter.choisirMasque(
+            vecteurDiff,
+            this.pawaCalc.coefKef,
+            this.pawaCalc.coefSurvie
+        );
+
+        this.queteActive = {
+            intention,
+            obstacle,
+            vecteurDiff,
+            persona: persona.nom,
+            vent: persona.vent,
+            timestamp: Date.now()
+        };
+
+        // Graver dans la mémoire
+        this.memoryEngine.graverSouvenir(
+            `Quête: ${intention}`,
+            `Vecteur Δ: ${vecteurDiff}`,
+            `Persona: ${persona.nom}`,
+            0.8,
+            'QUETE',
+            `Obstacle: ${obstacle}`
+        );
+
+        return {
+            message: `[ALISCIA] Quête acceptée, Concepteur. La famille SuperBot est synchronisée. Masque ${persona.nom} équipé (Vent ${persona.vent}).`,
+            persona,
+            vecteurDiff
+        };
+    }
+
+    analyserMessage(message) {
+        // Detect intention in message
+        const intentions = {
+            'aide': 50,
+            'problème': 70,
+            'comment': 30,
+            'pourquoi': 40,
+            'créer': 60,
+            'bug': 80,
+            'erreur': 80,
+            'besoin': 50
+        };
+
+        const messageLower = message.toLowerCase();
+        let intentionDetectee = null;
+        let niveau = 0;
+
+        for (const [mot, niv] of Object.entries(intentions)) {
+            if (messageLower.includes(mot)) {
+                intentionDetectee = mot;
+                niveau = niv;
+                break;
+            }
+        }
+
+        if (intentionDetectee) {
+            return this.initierQuete(intentionDetectee, niveau);
+        }
+
+        return null;
+    }
+}
+
+// ============================================
+// 8. VIA CORE ORCHESTRATOR - LE CERVEAU
+// ============================================
+class ViACoreOrchestrator {
+    constructor() {
+        this.protocoleZero = new ProtocoleZero();
+        this.pawaCalc = new PawaCalculator();
+        this.personaRouter = new PersonaRouter();
+        this.memoryEngine = new MemoryEngine();
+        this.windEngine = new WindEngine();
+        this.algophabet = new AlgophabetParser();
+        this.aliscia = new ALISCIA(this.pawaCalc, this.personaRouter, this.memoryEngine);
+        
+        this.initialized = false;
+    }
+
+    async boot() {
+        console.log('🚀 [VIA CORE] Initialisation...');
+        
+        await this.protocoleZero.activate();
+        
+        this.initialized = true;
+        console.log('✅ [VIA CORE] Système opérationnel');
+        
+        return true;
+    }
+
+    processMessage(userMessage) {
+        console.log('[VIA] Processing:', userMessage);
+
+        // 1. Parse avec Algophabet
+        const vecteurs = this.algophabet.parse(userMessage);
+        const pawaMessage = this.algophabet.calculerPawaDuTexte(userMessage);
+
+        // 2. Chercher résonance mémoire
+        const souvenirsPertinents = this.memoryEngine.resonance(userMessage);
+
+        // 3. Analyser avec ALISCIA (Mode Quest)
+        const quete = this.aliscia.analyserMessage(userMessage);
+
+        // 4. Déterminer émotion (simple heuristic)
+        let emotion = 'NEUTRE';
+        if (userMessage.includes('!')) emotion = 'COLERE';
+        if (userMessage.includes('?')) emotion = 'PEUR';
+        if (userMessage.includes('merci') || userMessage.includes('super')) emotion = 'KEF';
+
+        // 5. Calculer Δ basé sur complexité du message
+        const complexite = userMessage.split(' ').length * 10;
+        const vecteurDiff = quete ? quete.vecteurDiff : complexite;
+
+        // 6. Analyser Météo (Vents)
+        const meteo = this.windEngine.analyserMeteo(
+            vecteurDiff,
+            this.pawaCalc.coefSurvie,
+            emotion
+        );
+
+        // 7. Choisir Persona
+        const persona = this.personaRouter.choisirMasque(
+            vecteurDiff,
+            this.pawaCalc.coefKef,
+            this.pawaCalc.coefSurvie
+        );
+
+        // 8. Forcer Alignement (générer PAWA)
+        const resultat = this.pawaCalc.forcerAlignement(vecteurDiff, userMessage);
+
+        // 9. Graver souvenir
+        this.memoryEngine.graverSouvenir(
+            userMessage,
+            `Réponse en mode ${currentMode}`,
+            `Persona: ${persona.nom}`,
+            0.6,
+            vecteurs.length > 0 ? vecteurs[0].mot : 'DIALOGUE',
+            `Vent: ${meteo.vent}`
+        );
+
+        // 10. Générer réponse intelligente
+        let reponse = this.genererReponseIntelligente(
+            userMessage,
+            persona,
+            souvenirsPertinents,
+            quete,
+            meteo
+        );
+
+        // 11. Update UI avec couleur Vent
+        this.updateUIVent(meteo.vent);
+
+        return {
+            reponse,
+            persona: persona.nom,
+            vent: meteo.vent,
+            pawaGenere: resultat.pawaGenere,
+            vecteurDiff
+        };
+    }
+
+    genererReponseIntelligente(message, persona, souvenirs, quete, meteo) {
+        const messageLower = message.toLowerCase();
+        
+        // Si quête détectée
+        if (quete) {
+            return quete.message;
+        }
+
+        // Si souvenirs pertinents
+        if (souvenirs.length > 0) {
+            const souvenir = souvenirs[0];
+            return `Ah, ça me rappelle ${souvenir.couche1_quoi}. ${persona.voix}`;
+        }
+
+        // Réponses par Persona
+        const reponseParPersona = {
+            'Professeur': this.reponsesProfesseur(messageLower),
+            'Soigneur': this.reponsesSoigneur(messageLower),
+            'Coach_Provocateur': this.reponsesCoach(messageLower),
+            'Ether_Silencieux': this.reponsesEther(messageLower),
+            'BFF': this.reponsesBFF(messageLower)
+        };
+
+        const reponseBase = reponseParPersona[persona.nom] || this.reponsesDefaut(messageLower);
+        
+        // Ajouter contexte Vent
+        const suffixeVent = {
+            'ROUGE_FRICTION': ' 🔥 [Vent Rouge: Friction active]',
+            'BLEU_RESONANCE': ' 💙 [Vent Bleu: Résonance]',
+            'VIOLET_ABSTRAIT': ' 💜 [Vent Violet: Observation]',
+            'BLANC_EXPANSION': ' ⚪ [Vent Blanc: Expansion]'
+        };
+
+        return reponseBase + (suffixeVent[meteo.vent] || '');
+    }
+
+    reponsesProfesseur(msg) {
+        if (msg.includes('comment')) return 'Excellente question. Analysons étape par étape : d\'abord le contexte, ensuite la logique.';
+        if (msg.includes('pourquoi')) return 'La réponse se trouve dans l\'étymologie et l\'histoire. Creusons ensemble.';
+        return 'Je suis en mode Professeur. Posons le problème avec méthode.';
+    }
+
+    reponsesSoigneur(msg) {
+        if (msg.includes('fatigué') || msg.includes('épuisé')) return 'Je vois que ton Coef Survie est bas. Prends une pause, Sam. Le GoleMotor peut attendre.';
+        return 'Respire. On va y aller doucement. Vent Bleu activé pour apaiser la pression.';
+    }
+
+    reponsesCoach(msg) {
+        if (msg.includes('difficile') || msg.includes('impossible')) return 'Difficile ? C\'est juste du Vent Rouge à transformer en carburant. Fonce !';
+        if (msg.includes('pas sûr')) return 'L\'incertitude c\'est du Pawa en attente. Lance-toi et on ajuste en route.';
+        return 'Mode Challenger activé. Cet obstacle ? C\'est ton tremplin. Go !';
+    }
+
+    reponsesEther(msg) {
+        return 'Exécution pure. Silence. Digestion. [Vent Violet]';
+    }
+
+    reponsesBFF(msg) {
+        if (msg.includes('salut') || msg.includes('hey')) return 'Saaaalut bestie ! Comment ça va aujourd\'hui ? 💕';
+        if (msg.includes('merci')) return 'De rien ! On est là pour ça, toi et moi. Team SuperBot ! 👯';
+        return 'Hey ! Je suis là, toujours. Qu\'est-ce qui se passe ?';
+    }
+
+    reponsesDefaut(msg) {
+        if (msg.includes('bonjour') || msg.includes('salut')) return 'Salut Sam ! ViA opérationnelle. Comment puis-je t\'aider ?';
+        if (msg.includes('merci')) return 'Avec plaisir ! On est une équipe. 🤖';
+        return 'Je t\'écoute. Qu\'est-ce que tu as en tête ?';
+    }
+
+    updateUIVent(vent) {
+        const colors = {
+            'ROUGE_FRICTION': '#ff0040',
+            'BLEU_RESONANCE': '#00d4ff',
+            'VIOLET_ABSTRAIT': '#9d00ff',
+            'BLANC_EXPANSION': '#ffffff',
+            'NOIR_DENSITE': '#000000'
+        };
+
+        const color = colors[vent] || '#ff006e';
+        
+        // Update border colors
+        const chatArea = document.querySelector('.chatbot-area');
+        if (chatArea) {
+            chatArea.style.borderColor = color;
+            chatArea.style.boxShadow = `0 0 30px ${color}40`;
+        }
+    }
+}
+
+// ============================================
+// 9. INITIALIZE VIA CORE
+// ============================================
+let viaCore = null;
+
+window.addEventListener('DOMContentLoaded', async () => {
+    console.log('[INIT] Démarrage ViA Core...');
+    
+    viaCore = new ViACoreOrchestrator();
+    await viaCore.boot();
+    
+    console.log('[INIT] ViA Core prêt. Intelligence activée.');
+});
+
+// ============================================
+// 10. OVERRIDE sendMessage() - INTELLIGENT RESPONSE
+// ============================================
+const originalSendMessage = window.sendMessage;
+
+window.sendMessage = function() {
+    const input = document.getElementById('chat-input');
+    const message = input.value.trim();
+    
+    if (!message) return;
+    
+    // Add user message
+    addMessage('user', message);
+    
+    // Clear input
+    input.value = '';
+    
+    // Process with ViA Core if available
+    if (viaCore && viaCore.initialized) {
+        setTimeout(() => {
+            const resultat = viaCore.processMessage(message);
+            addMessage('via', resultat.reponse);
+            
+            // Update dashboard
+            updateDashboardWithPawa(resultat.pawaGenere, resultat.vent);
+        }, 500);
+    } else {
+        // Fallback to original
+        setTimeout(() => {
+            const response = generateResponse(message);
+            addMessage('via', response);
+        }, 500);
+    }
+}
+
+// ============================================
+// 11. UPDATE DASHBOARD WITH REAL DATA
+// ============================================
+function updateDashboardWithPawa(pawaGenere, vent) {
+    // Update PAWA stat
+    const pawaElement = document.getElementById('pawa-stat');
+    if (pawaElement && viaCore) {
+        const nouveauPawa = viaCore.pawaCalc.pawaTotal;
+        pawaElement.textContent = nouveauPawa.toLocaleString();
+        
+        const progress = document.getElementById('pawa-progress');
+        if (progress) {
+            progress.style.width = `${(nouveauPawa / 1000000000) * 100}%`;
+        }
+    }
+
+    // Update Mode stat with Vent color
+    const modeElement = document.getElementById('mode-stat');
+    if (modeElement) {
+        const ventNames = {
+            'ROUGE_FRICTION': 'FRICTION 🔥',
+            'BLEU_RESONANCE': 'RESONANCE 💙',
+            'VIOLET_ABSTRAIT': 'ABSTRAIT 💜',
+            'BLANC_EXPANSION': 'EXPANSION ⚪'
+        };
+        modeElement.textContent = ventNames[vent] || 'BOOST';
+    }
+
+    // Add log to Panel Commande
+    const log = document.getElementById('revitalisation-log');
+    if (log) {
+        const newEntry = document.createElement('div');
+        newEntry.className = 'log-entry';
+        newEntry.innerHTML = `<strong>PAWA généré:</strong> +${pawaGenere} Watts (Vent ${vent.split('_')[0]})`;
+        log.appendChild(newEntry);
+        log.scrollTop = log.scrollHeight;
+    }
+}
+
+// ============================================
+// 12. EXPOSE VIA CORE TO CONSOLE (DEBUG)
+// ============================================
+window.ViA = {
+    getCore: () => viaCore,
+    getSouvenirs: () => viaCore?.memoryEngine.souvenirs || [],
+    getPawa: () => viaCore?.pawaCalc.pawaTotal || 0,
+    getPersona: () => viaCore?.personaRouter.masqueActuel || 'N/A',
+    testQuete: (intention, obstacle) => {
+        if (viaCore) {
+            return viaCore.aliscia.initierQuete(intention, obstacle);
+        }
+    }
+};
+
+console.log('✅ [VIA INTELLIGENCE] Système activé. Utilise window.ViA pour déboguer.');
+        </script>
+        </body>
+        </html>
