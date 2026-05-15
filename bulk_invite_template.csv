@@ -1,0 +1,4 @@
+email,role
+example@company.com,viewer
+user2@company.com,editor
+user3@company.com,admin
