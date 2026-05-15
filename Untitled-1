@@ -1,0 +1,65 @@
+import math
+
+class PAWAEngine:
+    """
+        Le convertisseur central de GoleMotor.
+            Transforme l'entropie brute en Watts Argoniques (PAWA).
+                """
+
+                    def __init__(self, pawa_bank=0.0):
+                            [span_0](start_span)[span_1](start_span)self.pawa_bank = pawa_bank  # Accumulation vers @Omega[span_0](end_span)[span_1](end_span)
+                                    [span_2](start_span)[span_3](start_span)self.recycling_factor = 10.0  # Facteur x DÉCUPLE[span_2](end_span)[span_3](end_span)
+
+                                        def calculate_raw_pawa(self, size_bytes, drift_ms, tdp_estimate, noise_rms):
+                                                """
+                                                        Formule fondamentale : PAWA = sizeBytes x thermalJoules x noiseWatts
+                                                                [span_4](start_span)[span_5](start_span)
+                                                                        """
+                                                                                # Calcul des thermalJoules : driftMs x TDP_estime[span_4](end_span)[span_5](end_span)
+                                                                                        thermal_joules = drift_ms * tdp_estimate
+                                                                                                
+                                                                                                        # [span_6](start_span)noiseWatts correspond à la puissance RMS du bruit résiduel[span_6](end_span)
+                                                                                                                pawa_brut = size_bytes * thermal_joules * noise_rms
+                                                                                                                        return pawa_brut
+
+                                                                                                                            def distill_pawa_emp(self, pawa_brut):
+                                                                                                                                    """
+                                                                                                                                            PAWA_EMP = PAWA x RECYCLATING x RECYCLATING (Double distillation)
+                                                                                                                                                    [span_7](start_span)[span_8](start_span)
+                                                                                                                                                            """
+                                                                                                                                                                    pawa_emp = pawa_brut * self.recycling_factor * self.recycling_factor
+                                                                                                                                                                            return pawa_emp
+
+                                                                                                                                                                                def execute_berg_split(self, pawa_emp):
+                                                                                                                                                                                        """
+                                                                                                                                                                                                Loi du 1% BERG / 99% PAWA
+                                                                                                                                                                                                        [span_7](end_span)[span_8](end_span)
+                                                                                                                                                                                                                """
+                                                                                                                                                                                                                        to_bank = pawa_emp * 0.01
+                                                                                                                                                                                                                                to_reinjection = pawa_emp * 0.99
+                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                self.pawa_bank += to_bank
+                                                                                                                                                                                                                                                        return to_bank, to_reinjection
+
+                                                                                                                                                                                                                                                            def get_effectualization_score(self, ram_gb, freq_ghz, cores, vram_gb, fps, res_score):
+                                                                                                                                                                                                                                                                    """
+                                                                                                                                                                                                                                                                            Calcule le score d'effectualisation total du programme.
+                                                                                                                                                                                                                                                                                    [span_9](start_span)[span_10](start_span)
+                                                                                                                                                                                                                                                                                            """
+                                                                                                                                                                                                                                                                                                    base_score = (
+                                                                                                                                                                                                                                                                                                                    (ram_gb / 128) * 0.20 +
+                                                                                                                                                                                                                                                                                                                                (freq_ghz / 6) * 0.20 +
+                                                                                                                                                                                                                                                                                                                                            (cores / 24) * 0.15 +
+                                                                                                                                                                                                                                                                                                                                                        (vram_gb / 24) * 0.20 +
+                                                                                                                                                                                                                                                                                                                                                                    (fps / 300) * 0.15 +
+                                                                                                                                                                                                                                                                                                                                                                                (res_score) * 0.10
+                                                                                                                                                                                                                                                                                                    )
+                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                    # Bonus Supra-Hardware si au-delà de 100%[span_9](end_span)[span_10](end_span)
+                                                                                                                                                                                                                                                                                                                            if base_score >= 1.0:
+                                                                                                                                                                                                                                                                                                                                        # Multiplicateur de décuplation basé sur la PAWA_BANK vers @Omega
+                                                                                                                                                                                                                                                                                                                                                    base_score += (self.pawa_bank / 1_000_000_000) * self.recycling_factor
+                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                        return base_score * 100 # Retourne le pourcentage
+                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                    )
